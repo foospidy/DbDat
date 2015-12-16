@@ -13,4 +13,4 @@ pymssql
 
 Add a connection profile in etc/dbdat.conf
 
-run: 'python dbdat.py -p <profie name>'
+run: `python dbdat.py -p <profie name>`
