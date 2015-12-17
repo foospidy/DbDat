@@ -4,10 +4,13 @@ Db Database Assessment Tool
 better instructions to come, but for now:
 
 ## Dependencies
-MySQLdb
-psycopg2
-cx_Oracle
-pymssql
+MySQL support: `pip install MySQL-python`
+
+PostgreSQL support: `pip install psycopg2`
+
+Oracle support: `pip install cx_Oracle`
+
+MS SQL support: `pip install pymssql`
 
 ## Running DbDat
 
