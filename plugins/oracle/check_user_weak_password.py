@@ -18,8 +18,6 @@ class check_user_weak_password():
 	TYPE     = 'sql'
 	SQL      = '' # set on init
 	
-	verbose   = False
-	skip	  = False
 	result    = {}
 	appuser   = None
 	dbcurs    = None
