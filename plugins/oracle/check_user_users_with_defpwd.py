@@ -7,6 +7,7 @@ class check_user_users_with_defpwd():
 	"""
 	# References:
 	# http://docs.oracle.com/cd/B28359_01/server.111/b28320/statviews_5074.htm
+    # https://www.sans.org/reading-room/whitepapers/analyst/oracle-database-security-secure-34885
 
 	TITLE    = 'Users With Default Passowrds'
 	CATEGORY = 'User'
@@ -23,12 +24,16 @@ class check_user_users_with_defpwd():
 		output               = ''
 		self.result['level'] = 'GREEN'
 		
-		for row in rows:
-			for r in row:
-				self.result['level'] = 'RED'
-				output += r[0] + '\n'
+		if self.dbversion >= 11:
+			for row in rows:
+				for r in row:
+					self.result['level'] = 'RED'
+					output += r[0] + '\n'
 
-		self.result['output'] = output
+			self.result['output'] = output
+		else:
+			self.result['level'] = 'GRAY'
+			output = 'This check only applies to Oracle versions 11 and above'
 			
 		return self.result
 	
