@@ -5,6 +5,7 @@ class check_privilege_public_dangerous_packages():
 	"""
 	# References:
 	# http://www.red-database-security.com/wp/sentrigo_webinar.pdf
+    # http://blog.opensecurityresearch.com/2012/03/top-10-oracle-steps-to-secure-oracle.html
 
 	TITLE    = 'PUBLIC Dangerous Packages'
 	CATEGORY = 'Privilege'
