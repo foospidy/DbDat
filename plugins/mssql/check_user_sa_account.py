@@ -4,7 +4,7 @@ class check_user_sa_account():
 	Rename and disable the SA account if your applications allow it.
 	"""
 	# References:
-	# https://www.mssqltips.com/sqlservertip/3159/sql-server-security-checklist/
+	# https://www.mssqltips.com/sqlservertip/2006/secure-and-disable-the-sql-server-sa-account/
 
 	TITLE    = 'SA Account'
 	CATEGORY = 'Configuration'
