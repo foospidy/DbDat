@@ -19,7 +19,7 @@ class check_privileges_public_role():
 		output = 'No privileges granted to public'
 		
 		for row in rows:
-			self.result['level'] = 'Yellow'
+			self.result['level'] = 'YELLOW'
 			output = 'Privileges granted to public'
 		
 		self.result['output'] = output
