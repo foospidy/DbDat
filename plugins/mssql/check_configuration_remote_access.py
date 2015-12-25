@@ -1,29 +1,30 @@
-class check_configuration_xp_cmdshell():
+class check_configuration_remote_access():
 	"""
-	Determine current database version
+	check_configuration_remote_access
 	"""
 	# References:
 	# http://sqltidbits.com/scripts/check-if-xpcmdshell-enabled-across-multiple-servers
 
-	TITLE    = 'Xp Cmdshell Enabled'
+	TITLE    = 'Remote Access'
 	CATEGORY = 'Configuration'
 	TYPE     = 'sql'
-	SQL    	 = "SELECT name, CAST(value as int) as value_configured, CAST(value_in_use as int) as value_in_use FROM  master.sys.configurations WHERE  name = 'xp_cmdshell'"
+	SQL    	 = "SELECT name, CAST(value as int) as value_configured, CAST(value_in_use as int) as value_in_use FROM sys.configurations WHERE name='Remote access'"
+	
 	
 	verbose = False
 	skip	= False
 	result  = {}
 	
 	def do_check(self, *rows):
-		output         = ''
+		output = ''
 		
 		for row in rows:
 			if 0 == row[0][1]:
 				self.result['level'] = 'GREEN'
-				output = 'xp_cmdshell not enabled.'
+				output = 'Remote access not enabled.'
 			else:
 				self.result['level'] = 'RED'
-				output = 'xp_cmdshell is enabled.'
+				output = 'Remote access is enabled.'
 		
 		self.result['output'] = output
 		

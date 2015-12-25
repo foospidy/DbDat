@@ -17,8 +17,7 @@ class check_privileges_explicit_grants():
 	def do_check(self, *rows):
 		self.result['level'] = 'GREEN'
 		output = 'No explicit privileges granted to user'
-		print len(rows)
-		print rows
+
 		for row in rows:
 			self.result['level'] = 'YELLOW'
 			output = 'Privileges explicitly granted to user'

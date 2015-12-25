@@ -1,14 +1,15 @@
-class check_configuration_xp_cmdshell():
+class check_configuration_clr():
 	"""
 	Determine current database version
 	"""
 	# References:
 	# http://sqltidbits.com/scripts/check-if-xpcmdshell-enabled-across-multiple-servers
 
-	TITLE    = 'Xp Cmdshell Enabled'
+	TITLE    = 'CLR Enabled'
 	CATEGORY = 'Configuration'
 	TYPE     = 'sql'
-	SQL    	 = "SELECT name, CAST(value as int) as value_configured, CAST(value_in_use as int) as value_in_use FROM  master.sys.configurations WHERE  name = 'xp_cmdshell'"
+	SQL    	 = "SELECT name, CAST(value as int) as value_configured, CAST(value_in_use as int) as value_in_use FROM sys.configurations WHERE name='clr enabled'"
+	
 	
 	verbose = False
 	skip	= False
@@ -20,10 +21,10 @@ class check_configuration_xp_cmdshell():
 		for row in rows:
 			if 0 == row[0][1]:
 				self.result['level'] = 'GREEN'
-				output = 'xp_cmdshell not enabled.'
+				output = 'CLR not enabled.'
 			else:
 				self.result['level'] = 'RED'
-				output = 'xp_cmdshell is enabled.'
+				output = 'CLR is enabled.'
 		
 		self.result['output'] = output
 		

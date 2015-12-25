@@ -1,29 +1,30 @@
-class check_configuration_xp_cmdshell():
+class check_configuration_scan_startup_procs():
 	"""
-	Determine current database version
+	check_configuration_scan_startup_procs
 	"""
 	# References:
 	# http://sqltidbits.com/scripts/check-if-xpcmdshell-enabled-across-multiple-servers
 
-	TITLE    = 'Xp Cmdshell Enabled'
+	TITLE    = 'Scan For Startup Procs'
 	CATEGORY = 'Configuration'
 	TYPE     = 'sql'
-	SQL    	 = "SELECT name, CAST(value as int) as value_configured, CAST(value_in_use as int) as value_in_use FROM  master.sys.configurations WHERE  name = 'xp_cmdshell'"
+	SQL    	 = "SELECT name, CAST(value as int) as value_configured, CAST(value_in_use as int) as value_in_use FROM sys.configurations WHERE name='Scan for startup procs'"
+	
 	
 	verbose = False
 	skip	= False
 	result  = {}
 	
 	def do_check(self, *rows):
-		output         = ''
-		
+		output = ''
+				
 		for row in rows:
 			if 0 == row[0][1]:
 				self.result['level'] = 'GREEN'
-				output = 'xp_cmdshell not enabled.'
+				output = 'Remote admin connections not enabled.'
 			else:
 				self.result['level'] = 'RED'
-				output = 'xp_cmdshell is enabled.'
+				output = 'Remote admin connections is enabled.'
 		
 		self.result['output'] = output
 		

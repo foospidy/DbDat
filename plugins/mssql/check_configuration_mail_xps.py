@@ -1,29 +1,30 @@
-class check_configuration_xp_cmdshell():
+class check_configuration_mail_xps():
 	"""
-	Determine current database version
+	check_configuration_mail_xps
 	"""
 	# References:
 	# http://sqltidbits.com/scripts/check-if-xpcmdshell-enabled-across-multiple-servers
 
-	TITLE    = 'Xp Cmdshell Enabled'
+	TITLE    = 'Database Mail XPs'
 	CATEGORY = 'Configuration'
 	TYPE     = 'sql'
-	SQL    	 = "SELECT name, CAST(value as int) as value_configured, CAST(value_in_use as int) as value_in_use FROM  master.sys.configurations WHERE  name = 'xp_cmdshell'"
+	SQL    	 = "SELECT name, CAST(value as int) as value_configured, CAST(value_in_use as int) as value_in_use FROM sys.configurations WHERE name='Database Mail XPs'"
+	
 	
 	verbose = False
 	skip	= False
 	result  = {}
 	
 	def do_check(self, *rows):
-		output         = ''
+		output = ''
 		
 		for row in rows:
 			if 0 == row[0][1]:
 				self.result['level'] = 'GREEN'
-				output = 'xp_cmdshell not enabled.'
+				output = 'Database Mail XPs not enabled.'
 			else:
 				self.result['level'] = 'RED'
-				output = 'xp_cmdshell is enabled.'
+				output = 'Database Mail XPs is enabled.'
 		
 		self.result['output'] = output
 		
