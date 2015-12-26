@@ -16,5 +16,6 @@ from check_configuration_error_log import *
 from check_privilege_user_grants import *
 from check_privilege_user_grantables import *
 from check_privilege_stale_users import *
+from check_privilege_mysql_database import *
 from check_user_access_denied import *
 from check_user_weak_password import *

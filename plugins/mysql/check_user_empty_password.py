@@ -7,7 +7,7 @@ class check_user_empty_password():
 	TITLE    = 'Empty Password'
 	CATEGORY = 'User'
 	TYPE     = 'sql'
-	SQL    	 = "SELECT user, host FROM mysql.user WHERE password=''"
+	SQL    	 = "SELECT user, host FROM mysql.user WHERE LENGTH(password)=0 OR password IS null"
 	
 	verbose = False
 	skip	= False

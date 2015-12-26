@@ -2,7 +2,7 @@ import ConfigParser
 
 class check_configuration_general_log():
 	"""
-	General log file
+	check_configuration_general_log
 	"""
 	# References:
 	# https://www.percona.com/blog/2012/12/28/auditing-login-attempts-in-mysql/
@@ -30,7 +30,7 @@ class check_configuration_general_log():
 			general_log_file = configuration.get('mysqld', 'general_log_file')
 		
 		except ConfigParser.NoOptionError as e:
-			self.result['level']  = 'RED'
+			self.result['level']  = 'YELLOW'
 			self.result['output'] = 'General log file not enabled.' 
 		
 		return self.result

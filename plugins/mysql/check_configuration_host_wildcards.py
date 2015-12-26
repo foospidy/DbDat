@@ -1,5 +1,6 @@
 class check_configuration_host_wildcards():
 	"""
+	check_configuration_host_wildcards
 	Are wildcards used when specifying allowed hosts?
 	"""
 	# References:
