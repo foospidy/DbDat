@@ -144,7 +144,7 @@ class dbscan():
 			report_file.write(']}')
 
 	def describe_scan(self):
-		return 'Scanning %s database %s on %s with the user %s and %s queries.' % (self.dbtype, self.dbname, self.dbhost, self.dbuser, str(len(self.checks)))
+		return 'Assesment: %s database %s on %s with the user %s and %s queries.' % (self.dbtype, self.dbname, self.dbhost, self.dbuser, str(len(self.checks)))
 	
 	def load_class(self, name):
 		components = name.split('.')

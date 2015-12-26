@@ -7,10 +7,13 @@ var body   = '';
 sortJsonArrayByProperty(json.report_data, 'json.report_data.category');
 
 for(var l in levels) {
+	var bgcolor = getColor(levels[l]);
+	
     for(var i in json.report_data) {
         if(levels[l] == json.report_data[i].result.level) {
 			count[levels[l]]++;
-            body += json.report_data[i].category + ' ' + json.report_data[i].title + ' (' + json.report_data[i].result.level + ')';
+			
+            body += '<div style="margin-left:5px;background-color:' + bgcolor + ';">' + json.report_data[i].category + ' ' + json.report_data[i].title + '</div>';
             body += '<div style="margin-left:5px;"><pre>' + json.report_data[i].description + '</pre></div>';
             body += '<div style="margin-left:25px;"><pre>' + json.report_data[i].result.output + '</pre></div>';
         }
@@ -18,7 +21,8 @@ for(var l in levels) {
 }
 
 for(var l in levels) {
-		menu += '<a href="javascript:filter(\'' + levels[l] + '\');">' + levels[l] + ' (' + count[levels[l]] + ') </a> &nbsp;';
+		bgcolor = getColor(levels[l]);
+		menu   += '<a href="javascript:filter(\'' + levels[l] + '\');" style="color: '+ levels[l] + '">' + levels[l] + ' (' + count[levels[l]] + ') </a> &nbsp;';
 }
 
 var div       = document.createElement('div');
@@ -30,12 +34,13 @@ document.getElementById('results').appendChild(div);
 
 function filter(level) {
 	document.getElementById('results').innerHTML = '';
+	var bgcolor                                  = getColor(level);
+	
 	for(var i in json.report_data) {
-		if(level == json.report_data[i].result.level) {
-			h = '';
-			h = json.report_data[i].category + ' ' + json.report_data[i].title + ' (' + json.report_data[i].result.level + ')';
-			h = h + '<div style="margin-left:5px;"><pre>' + json.report_data[i].description + '</pre></div>';
-			h = h + '<div style="margin-left:25px;"><pre>' + json.report_data[i].result.output + '</pre></div>';
+		if(level == json.report_data[i].result.level) {			
+			h  = '<div style="margin-left:5px;background-color:' + bgcolor + ';">' + json.report_data[i].category + ' ' + json.report_data[i].title + '</div>';
+			h += '<div style="margin-left:5px;">' + json.report_data[i].description + '</div>';
+			h += '<div style="margin-left:25px;"><pre>' + json.report_data[i].result.output + '</pre></div>';
 		
 			var div       = document.createElement('div');
 			div.innerHTML = h;
@@ -43,6 +48,24 @@ function filter(level) {
 			document.getElementById('results').appendChild(div);
 		}
 	}   
+}
+
+function getColor(color_text) {
+	var color = '';
+	
+	switch(color_text) {
+		case 'YELLOW':
+			color = '#ffff66';
+			break;
+		case 'GREEN':
+			color = '#00cc00';
+			break;
+		default:
+			color = color_text;
+			break;
+	}
+	
+	return color;
 }
 
 function readJSON(file) {
