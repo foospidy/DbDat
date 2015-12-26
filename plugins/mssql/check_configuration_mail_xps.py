@@ -1,15 +1,16 @@
 class check_configuration_mail_xps():
 	"""
-	check_configuration_mail_xps
+	check_configuration_mail_xps:
+    This option controls the generation and transmission of email messages from
+    SQL Server.
 	"""
 	# References:
-	# http://sqltidbits.com/scripts/check-if-xpcmdshell-enabled-across-multiple-servers
+	# https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=sql2012DB.120
 
 	TITLE    = 'Database Mail XPs'
 	CATEGORY = 'Configuration'
 	TYPE     = 'sql'
 	SQL    	 = "SELECT name, CAST(value as int) as value_configured, CAST(value_in_use as int) as value_in_use FROM sys.configurations WHERE name='Database Mail XPs'"
-	
 	
 	verbose = False
 	skip	= False

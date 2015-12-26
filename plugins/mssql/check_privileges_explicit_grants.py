@@ -1,6 +1,8 @@
 class check_privileges_explicit_grants():
 	"""
-	check_privileges_explicit_grants
+	check_privileges_explicit_grants:
+    Best practice is to grant privileges to roles and then add users as members
+    of roles.
 	"""
 	# References:
 	# https://www.mssqltips.com/sqlservertip/2739/issues-determining-an-individual-sql-server-users-permissions/

@@ -1,6 +1,6 @@
 class check_user_sa_account():
 	"""
-	check_user_sa_account
+	check_user_sa_account:
 	Rename and disable the SA account if your applications allow it.
 	"""
 	# References:

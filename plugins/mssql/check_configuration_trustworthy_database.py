@@ -1,9 +1,11 @@
 class check_configuration_trustworthy_database():
 	"""
-	check_configuration_trustworthy_database
+	check_configuration_trustworthy_database:
+    The TRUSTWORTHY option allows database objects to access objects in other
+    database under certain circumstances.
 	"""
 	# References:
-	# http://sqltidbits.com/scripts/check-if-xpcmdshell-enabled-across-multiple-servers
+	# https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=sql2012DB.120
 
 	TITLE    = 'Trustworthy Database'
 	CATEGORY = 'Configuration'

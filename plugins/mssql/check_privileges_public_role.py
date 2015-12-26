@@ -1,6 +1,9 @@
 class check_privileges_public_role():
 	"""
-	check_privileges_public_role
+	check_privileges_public_role:
+    By default the Public role may unecessarily have rights to many objects
+    in the database. Best practice is to follow the principle of least
+    privileges.
 	"""
 	# References:
 	# https://www.mssqltips.com/sqlservertip/1694/how-to-find-out-what-sql-server-rights-have-been-granted-to-the-public-role/

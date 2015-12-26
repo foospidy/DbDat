@@ -1,6 +1,7 @@
 class check_configuration_version():
 	"""
-	Determine current database version
+	check_configuration_version:
+    Determine current database version.
 	"""
 	# References:
 	# http://stackoverflow.com/questions/13331621/sql-query-to-get-sql-year-version

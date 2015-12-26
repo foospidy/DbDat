@@ -1,6 +1,9 @@
 class check_user_builtin_administrators():
 	"""
-	check_user_builtin_administrators
+	check_user_builtin_administrators:
+    By default the BUTLTIN/Administrators group may unecessarily have SQL Server
+    system administrator rights. Best practice is to follow the principle of
+    least privileges.
 	"""
 	# References:
 	# https://www.mssqltips.com/sqlservertip/1017/security-issues-with-the-sql-server-builtin-administrators-group/
