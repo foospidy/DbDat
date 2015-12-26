@@ -1,32 +1,32 @@
 var json   = JSON.parse(readJSON('data/report.json'));
 var levels = ['RED', 'YELLOW', 'ORANGE', 'GRAY', 'GREEN'];
+var count  = {RED:'0', YELLOW:'0', ORANGE:'0', GRAY:'0', GREEN:'0'};
 var menu   = '';
-
-document.getElementById('title').innerHTML = json.title;
+var body   = '';
 
 sortJsonArrayByProperty(json.report_data, 'json.report_data.category');
 
 for(var l in levels) {
-		menu += '<a href="javascript:filter(\'' + levels[l] + '\');">' + levels[l] + '</a> &nbsp;';
-}
-
-document.getElementById('menu').innerHTML = menu;
-
-for(var l in levels) {
     for(var i in json.report_data) {
         if(levels[l] == json.report_data[i].result.level) {
-            h = '';
-            h = json.report_data[i].category + ' ' + json.report_data[i].title + ' (' + json.report_data[i].result.level + ')';
-            h = h + '<div style="margin-left:5px;"><pre>' + json.report_data[i].description + '</pre></div>';
-            h = h + '<div style="margin-left:25px;"><pre>' + json.report_data[i].result.output + '</pre></div>';
-        
-            var div       = document.createElement('div');
-            div.innerHTML = h;
-            
-            document.getElementById('results').appendChild(div);
+			count[levels[l]]++;
+            body += json.report_data[i].category + ' ' + json.report_data[i].title + ' (' + json.report_data[i].result.level + ')';
+            body += '<div style="margin-left:5px;"><pre>' + json.report_data[i].description + '</pre></div>';
+            body += '<div style="margin-left:25px;"><pre>' + json.report_data[i].result.output + '</pre></div>';
         }
     }   
 }
+
+for(var l in levels) {
+		menu += '<a href="javascript:filter(\'' + levels[l] + '\');">' + levels[l] + ' (' + count[levels[l]] + ') </a> &nbsp;';
+}
+
+var div       = document.createElement('div');
+div.innerHTML = body;
+
+document.getElementById('title').innerHTML = json.title;
+document.getElementById('menu').innerHTML  = menu;
+document.getElementById('results').appendChild(div);
 
 function filter(level) {
 	document.getElementById('results').innerHTML = '';
