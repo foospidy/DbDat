@@ -1,6 +1,7 @@
-class check_privilege_mysql_database():
+class check_privilege_file():
 	"""
-	check_privilege_mysql_database
+	check_privilege_file
+    Do not grant to non Admin users.
 	"""
 	# References:
 	# https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=mysql.102
@@ -8,7 +9,7 @@ class check_privilege_mysql_database():
 	TITLE    = 'MySQL Databse'
 	CATEGORY = 'Privilege'
 	TYPE     = 'sql'
-	SQL      = "SELECT user, host FROM mysql.db WHERE db='mysql' AND ((Select_priv = 'Y') OR (Insert_priv = 'Y') OR (Update_priv = 'Y') OR (Delete_priv = 'Y') OR (Create_priv = 'Y') OR (Drop_priv = 'Y'))"
+	SQL      = "SELECT user, host FROM mysql.user WHERE File_priv='Y'"
 	
 	verbose = False
 	skip	= False
