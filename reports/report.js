@@ -14,7 +14,7 @@ for(var l in levels) {
 			count[levels[l]]++;
 			
             body += '<div style="margin-left:5px;background-color:' + bgcolor + ';">' + json.report_data[i].category + ' ' + json.report_data[i].title + '</div>';
-            body += '<div style="margin-left:5px;"><pre>' + json.report_data[i].description + '</pre></div>';
+            body += '<div style="margin-left:5px;">' + json.report_data[i].description + '</div>';
             body += '<div style="margin-left:25px;"><pre>' + json.report_data[i].result.output + '</pre></div>';
         }
     }   
