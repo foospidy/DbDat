@@ -1,5 +1,6 @@
 class check_configuration_test_database():
 	"""
+    check_configuration_test_database:
 	Does a test database exist?
 	"""
 	# References:

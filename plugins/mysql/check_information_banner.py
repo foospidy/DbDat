@@ -1,6 +1,7 @@
 class check_information_banner():
 	"""
-	Get database banner
+	check_information_banner:
+    Get database banner information.
 	"""
 	# References:
 
@@ -14,7 +15,7 @@ class check_information_banner():
 	result  = {}
 	
 	def do_check(self, *rows):
-		output          = ''
+		output               = ''
 		self.result['level'] = 'GREEN'
 		
 		for row in rows:

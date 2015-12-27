@@ -1,5 +1,6 @@
 class check_configuration_tls_support():
 	"""
+    check_configuration_tls_support:
 	Does the database support  SSL (TLS) connections?
 	"""
 	# References:

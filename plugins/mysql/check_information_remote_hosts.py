@@ -1,7 +1,8 @@
 class check_information_remote_hosts():
 	"""
-	Review allowed remote hosts. Administrative accounts
-	(e.g. root)	should only connect from localhost.
+    check_information_remote_hosts:
+	Review allowed remote hosts. Administrative accounts (e.g. root) should only
+    connect from localhost.
 	"""
 	# References:
 

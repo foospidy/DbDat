@@ -1,6 +1,6 @@
 class check_privilege_process():
 	"""
-	check_privilege_process
+	check_privilege_process:
     Do not grant to non Admin users.
 	"""
 	# References:

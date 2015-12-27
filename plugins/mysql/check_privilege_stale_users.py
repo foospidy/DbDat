@@ -1,6 +1,7 @@
 class check_privilege_stale_users():
 	"""
-	Users in mysql.db but not in mysql.user
+	check_privilege_stale_users:
+    Possible stale accounts. Account exists in msyql.db but not in mysql.user.
 	"""
 	# References:
 

@@ -1,5 +1,6 @@
 class check_configuration_version():
 	"""
+    check_configuration_version:
 	Determine current database version
 	"""
 	# References:

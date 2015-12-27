@@ -1,6 +1,6 @@
 class check_privilege_file():
 	"""
-	check_privilege_file
+	check_privilege_file:
     Do not grant to non Admin users.
 	"""
 	# References:

@@ -17,7 +17,7 @@ class check_configuration_listen_addresses():
 	result  = {}
 	
 	def do_check(self, configuration_file):
-		configuration      = ConfigParser.ConfigParser()
+		configuration = ConfigParser.ConfigParser()
 	
 		try:
 			configuration.read(configuration_file)

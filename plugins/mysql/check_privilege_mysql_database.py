@@ -1,6 +1,7 @@
 class check_privilege_mysql_database():
 	"""
-	check_privilege_mysql_database
+	check_privilege_mysql_database:
+    Non Admin database users should not have access to the "mysql" databse.
 	"""
 	# References:
 	# https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=mysql.102
