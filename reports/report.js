@@ -35,6 +35,30 @@ document.getElementById('results').appendChild(div);
 function filter(level) {
 	document.getElementById('results').innerHTML = '';
 	var bgcolor                                  = getColor(level);
+	var menu_info                                = '';
+	
+	switch(level) {
+		case 'RED':
+			menu_info = 'Items needing immediate attention.';
+			break;
+		case 'YELLOW':
+			menu_info = 'Items needing review.';
+			break;
+		case 'ORANGE':
+			menu_info = 'Checks that failed for some unknown reason.';
+			break;
+		case 'GRAY':
+			menu_info = 'Items that may not be applicable.';
+			break;
+		case 'GREEN':
+			menu_info = 'Items that passed.';
+			break;
+		default:
+			menu_info = '';
+			break;
+	}
+	
+	document.getElementById('menu-info').innerHTML = menu_info;
 	
 	for(var i in json.report_data) {
 		if(level == json.report_data[i].result.level) {			
