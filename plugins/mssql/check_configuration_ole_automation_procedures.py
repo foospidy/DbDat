@@ -20,12 +20,16 @@ class check_configuration_ole_automation_procedures():
 		output = ''
 		
 		for row in rows:
-			if 0 == row[0][1]:
-				self.result['level'] = 'GREEN'
-				output = 'Ole Automation Porcedures not enabled.'
+			if 0 != len(row):
+				if 0 == row[0][1]:
+					self.result['level'] = 'GREEN'
+					output = 'Ole Automation Porcedures not enabled.'
+				else:
+					self.result['level'] = 'RED'
+					output = 'Ole Automation Porcedures is enabled.'
 			else:
-				self.result['level'] = 'RED'
-				output = 'Ole Automation Porcedures is enabled.'
+				self.result['level'] = 'GRAY'
+				output = 'Ole Automation Porcedures setting not found in sys.configurations table.'
 		
 		self.result['output'] = output
 		

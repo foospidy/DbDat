@@ -20,16 +20,20 @@ class check_configuration_cross_db_ownership():
 		output = ''
 		
 		for row in rows:
-			if 0 == row[0][1]:
-				self.result['level'] = 'GREEN'
-				output = 'Cross DB Ownership Chaining not enabled.'
+			if 0 != len(row):
+				if 0 == row[0][1]:
+					self.result['level'] = 'GREEN'
+					output = 'Cross DB Ownership Chaining not enabled.'
+				else:
+					self.result['level'] = 'RED'
+					output = 'Cross DB Ownership Chaining is enabled.'
 			else:
-				self.result['level'] = 'RED'
-				output = 'Cross DB Ownership Chaining is enabled.'
+				self.result['level'] = 'GRAY'
+				output = 'Cross DB Ownership Chaining setting not found in sys.configurations table.'
+			
+			self.result['output'] = output
+			
+			return self.result
 		
-		self.result['output'] = output
-		
-		return self.result
-	
 	def __init__(self, parent):
 		print('Performing check: ' + self.TITLE)
