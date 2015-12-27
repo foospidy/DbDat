@@ -1,6 +1,7 @@
 class check_privilege_user_grants():
 	"""
-	Show current user grants.
+    check_privilege_user_grantables
+	The application account's privileges.
 	"""
 	# References:
 	# reference: http://dbadiaries.com/no-mysql-show-users-how-to-list-mysql-user-accounts-and-their-privileges

@@ -1,5 +1,6 @@
 class check_user_anonymous_users():
 	"""
+    check_user_anonymous_users:
 	Do anonymous users exist.
 	"""
 	# References:
