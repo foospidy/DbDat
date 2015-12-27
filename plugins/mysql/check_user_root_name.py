@@ -1,5 +1,6 @@
 class check_user_root_name():
 	"""
+    check_user_root_name:
 	Change the default name of administrator's account name (root).
 	"""
 	# References:

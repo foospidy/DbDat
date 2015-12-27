@@ -1,5 +1,6 @@
 class check_user_empty_password():
 	"""
+    check_user_empty_password:
 	Accounts with empty passwords.
 	"""
 	# References:

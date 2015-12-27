@@ -1,5 +1,6 @@
 class check_user_any_host():
 	"""
+    check_user_any_host:
 	User can connect from any host.
 	"""
 	# References:

@@ -1,5 +1,6 @@
 class check_user_same_password():
 	"""
+    check_user_same_password:
 	Accounts using the same password.
 	"""
 	# References:

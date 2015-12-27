@@ -2,6 +2,7 @@ import os
 
 class check_user_weak_password():
 	"""
+    check_user_weak_password:
 	Accounts with weak passwords.
 	"""
 	# References:

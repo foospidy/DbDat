@@ -3,7 +3,8 @@ import os.path
  
 class check_user_access_denied():
 	"""
-	Access denied for user
+    check_user_access_denied:
+	Access denied events for user, these should be reviewed for malicious activity.
 	"""
 	# References:
 	# https://www.percona.com/blog/2012/12/28/auditing-login-attempts-in-mysql/
