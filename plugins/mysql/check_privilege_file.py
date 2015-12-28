@@ -1,19 +1,19 @@
 class check_privilege_file():
-	"""
-	check_privilege_file:
+    """
+    check_privilege_file:
     The following accounts have the FILE privilege. Do not grant to non Admin users.
-	"""
-	# References:
-	# https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=mysql.102
+    """
+    # References:
+    # https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=mysql.102
 
-	TITLE    = 'FILE Privilege'
-	CATEGORY = 'Privilege'
-	TYPE     = 'sql'
-	SQL      = "SELECT user, host FROM mysql.user WHERE File_priv='Y'"
-	
-	verbose = False
-	skip	= False
-	result  = {}
+    TITLE    = 'FILE Privilege'
+    CATEGORY = 'Privilege'
+    TYPE     = 'sql'
+    SQL      = "SELECT user, host FROM mysql.user WHERE File_priv='Y'"
+
+    verbose = False
+    skip	= False
+    result  = {}
 
     def do_check(self, *rows):
         if not self.skip:
@@ -29,8 +29,8 @@ class check_privilege_file():
                 output = 'No users found with FILE privilege.'
 
             self.result['output'] = output
-           
+            
         return self.result
-	
-	def __init__(self, parent):
-		print('Performing check: ' + self.TITLE)
+
+    def __init__(self, parent):
+        print('Performing check: ' + self.TITLE)
