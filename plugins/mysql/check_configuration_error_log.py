@@ -8,6 +8,9 @@ class check_configuration_error_log():
 	"""
 	# References:
 	# https://www.percona.com/blog/2012/12/28/auditing-login-attempts-in-mysql/
+    # 
+    # Note
+    # This could also be checked with: show variables like 'log_error';
 
 	TITLE    = 'Error Log'
 	CATEGORY = 'Configuration'
