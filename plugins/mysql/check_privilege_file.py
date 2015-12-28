@@ -29,7 +29,7 @@ class check_privilege_file():
                 output = 'No users found with FILE privilege.'
 
             self.result['output'] = output
-                
+           
         return self.result
 	
 	def __init__(self, parent):
