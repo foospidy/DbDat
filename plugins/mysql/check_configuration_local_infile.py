@@ -1,9 +1,12 @@
 class check_configuration_local_infile():
 	"""
-	check_configuration_local_infile
+	check_configuration_local_infile:
+    Local loading allows loading files from the client machine. This feature
+    is sometimes used to perform data loading from remote machines.
 	"""
 	# References:
 	# https://dev.mysql.com/doc/refman/5.5/en/load-data-local.html
+    # https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=mysql.102
 
 	TITLE    = 'Load Local data'
 	CATEGORY = 'Configuration'

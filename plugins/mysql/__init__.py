@@ -9,6 +9,7 @@ from check_configuration_host_wildcards import *
 from check_configuration_general_log import *
 from check_configuration_error_log import *
 from check_configuration_old_passwords import *
+from check_configuration_safe_show_database import *
 from check_privilege_user_grants import *
 from check_privilege_user_grantables import *
 from check_privilege_stale_users import *

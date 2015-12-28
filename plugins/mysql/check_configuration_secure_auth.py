@@ -1,15 +1,15 @@
-class check_configuration_old_passwords():
+class check_configuration_secure_auth():
 	"""
-	check_configuration_old_passwords:
-    This configuration parameter forces use of older insecure password hashing method.
+	check_configuration_secure_auth:
+    Disallow authentication for accounts that have old (pre-4.1) passwords.
 	"""
 	# References:
 	# https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=mysql.102
 
-	TITLE    = 'Old Passwords'
+	TITLE    = 'Secure Auth'
 	CATEGORY = 'Configuration'
 	TYPE     = 'sql'
-	SQL    	 = "SHOW GLOBAL VARIABLES LIKE 'old_passwords'"
+	SQL    	 = "SHOW GLOBAL VARIABLES LIKE 'secure_auth'"
 	
 	verbose = False
 	skip	= False
@@ -18,12 +18,12 @@ class check_configuration_old_passwords():
 	def do_check(self, *rows):		
 		for row in rows:
 			for r in row:
-				if 'ON' == r[1]:
+				if 'ON' != r[1]:
 					self.result['level']  = 'RED'
-					self.result['output'] = 'Old passwords is enabled.'
+					self.result['output'] = 'Secure Auth is disabled.'
 				else:
 					self.result['level']  = 'GREEN'
-					self.result['output'] = 'Old passwords is disabled.'
+					self.result['output'] = 'Secure Auth is enabled.'
 			
 			return self.result
 	
