@@ -20,7 +20,7 @@ class check_privilege_process():
 			output               = ''
 			self.result['level'] = 'GREEN'
 			
-			for row in rows:
+            for row in rows:
                 for r in row:					
                     self.result['level'] = 'RED'
                     output += r[0] + '\t' + r[1] + '\n'
