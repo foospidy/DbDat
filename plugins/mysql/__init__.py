@@ -13,6 +13,7 @@ from check_privilege_user_grantables import *
 from check_privilege_stale_users import *
 from check_privilege_mysql_database import *
 from check_privilege_file import *
+from check_privilege_process import *
 from check_user_anonymous_users import *
 from check_user_empty_password import *
 from check_user_same_password import *

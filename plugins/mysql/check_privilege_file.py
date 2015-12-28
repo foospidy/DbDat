@@ -6,7 +6,7 @@ class check_privilege_file():
 	# References:
 	# https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=mysql.102
 
-	TITLE    = 'MySQL Databse'
+	TITLE    = 'FILE Privilege'
 	CATEGORY = 'Privilege'
 	TYPE     = 'sql'
 	SQL      = "SELECT user, host FROM mysql.user WHERE File_priv='Y'"
