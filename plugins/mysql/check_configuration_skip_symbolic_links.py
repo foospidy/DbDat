@@ -7,7 +7,7 @@ class check_configuration_skip_symbolic_links():
 	# References:
     # https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=mysql.102
 
-	TITLE    = Skip Symbolic Links'
+	TITLE    = 'Skip Symbolic Links'
 	CATEGORY = 'Configuration'
 	TYPE     = 'sql'
 	SQL    	 = "SHOW GLOBAL VARIABLES LIKE 'have_symlink'"
