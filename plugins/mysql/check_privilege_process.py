@@ -21,9 +21,9 @@ class check_privilege_process():
 			self.result['level'] = 'GREEN'
 			
 			for row in rows:
-				for r in row:					
-					self.result['level'] = 'RED'
-					output += r[0] + '\t' + r[1] + '\n'
+                for r in row:					
+                    self.result['level'] = 'RED'
+                    output += r[0] + '\t' + r[1] + '\n'
 
             if 'GREEN' == self.result['level']:
                 output = 'No users found with PROCESS privileges.'
