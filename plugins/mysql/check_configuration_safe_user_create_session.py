@@ -16,8 +16,8 @@ class check_configuration_safe_user_create_session():
 	result  = {}
 	
 	def do_check(self, *rows):
-        self.result['level']  = 'RED'
-        self.result['output'] = 'Safe user create is not enabled.'
+		self.result['level']  = 'RED'
+		self.result['output'] = 'Safe user create is not enabled.'
             
 		for row in rows:
 			for r in row:
