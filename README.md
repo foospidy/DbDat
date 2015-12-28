@@ -2,18 +2,24 @@
 Db Database Assessment Tool
 
 ## Dependencies
-#MySQL support:
+###MySQL support
 
 Run: `pip install MySQL-python`
 
 Or on Debian, run: `apt-get install python-mysqldb`
 
-#PostgreSQL support: `pip install psycopg2`
+###PostgreSQL support
 
-#Oracle support: `pip install cx_Oracle`
+Run: `pip install psycopg2`
+
+###Oracle support
+
+Run: `pip install cx_Oracle`
 - https://cx-oracle.readthedocs.org/en/latest/index.html
 
-#MS SQL support: `pip install pymssql`
+###MS SQL support
+
+Run: `pip install pymssql`
 - https://pymssql.readthedocs.org/en/latest/index.html
 
 ## Running DbDat
