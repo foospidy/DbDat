@@ -10,6 +10,10 @@ from check_configuration_general_log import *
 from check_configuration_error_log import *
 from check_configuration_old_passwords import *
 from check_configuration_safe_show_database import *
+from check_configuration_secure_auth import *
+from check_configuration_skip_grant_tables import *
+from check_configuration_skip_merge import *
+from check_configuration_skip_networking import *
 from check_privilege_user_grants import *
 from check_privilege_user_grantables import *
 from check_privilege_stale_users import *
