@@ -24,7 +24,7 @@ class check_privilege_file():
                 for r in row:					
                     self.result['level'] = 'RED'
                     output += r[0] + '\t' + r[1] + '\n'
-
+            
             if 'GREEN' == self.result['level']:
                 output = 'No users found with FILE privilege.'
 
