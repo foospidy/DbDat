@@ -17,6 +17,7 @@ from check_configuration_skip_networking import *
 from check_configuration_safe_user_create_global import *
 from check_configuration_safe_user_create_session import *
 from check_configuration_skip_symbolic_links import *
+from check_configuration_client_password import *
 from check_privilege_user_grants import *
 from check_privilege_user_grantables import *
 from check_privilege_stale_users import *
