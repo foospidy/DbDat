@@ -17,9 +17,9 @@ class check_configuration_skip_grant_tables():
 	result  = {}
 	
 	def do_check(self, *rows):
-        # if variable does not exist, so default green
-        self.result['level']  = 'GREEN'
-        self.result['output'] = 'Skip Grant Tables is disabled.'
+		# if variable does not exist, so default green
+		self.result['level']  = 'GREEN'
+		self.result['output'] = 'Skip Grant Tables is disabled.'
 
 		for row in rows:
 			for r in row:
@@ -30,7 +30,7 @@ class check_configuration_skip_grant_tables():
 					self.result['level']  = 'GREEN'
 					self.result['output'] = 'Skip Grant Tables is disabled.'
 			
-			return self.result
+		return self.result
 	
 	def __init__(self, parent):
 		print('Performing check: ' + self.TITLE)
