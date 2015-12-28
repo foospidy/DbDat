@@ -27,7 +27,7 @@ class check_privilege_file():
             
             if 'GREEN' == self.result['level']:
                 output = 'No users found with FILE privilege.'
-
+            
             self.result['output'] = output
             
         return self.result
