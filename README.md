@@ -2,7 +2,11 @@
 Db Database Assessment Tool
 
 ## Dependencies
-MySQL support: `pip install MySQL-python`
+MySQL support:
+
+Run: `pip install MySQL-python`
+
+Or on Debian, run: `apt-get install python-mysqldb`
 
 PostgreSQL support: `pip install psycopg2`
 
