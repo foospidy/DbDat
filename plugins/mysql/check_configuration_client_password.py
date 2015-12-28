@@ -32,9 +32,9 @@ class check_configuration_client_password():
 		try:
 			general_log_file = configuration.get('client', 'password')
             
-            # if the option is found, then red!
-            self.result['level']  = 'RED'
-            self.result['output'] = 'Client password is in use.'
+			# if the option is found, then red!
+			self.result['level']  = 'RED'
+			self.result['output'] = 'Client password is in use.'
 		except ConfigParser.NoOptionError as e:
 			self.result['level']  = 'GREEN'
 			self.result['output'] = 'Client password not used.'
