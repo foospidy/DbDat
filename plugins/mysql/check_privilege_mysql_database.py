@@ -1,7 +1,7 @@
 class check_privilege_mysql_database():
 	"""
 	check_privilege_mysql_database:
-    Non Admin database users should not have access to the "mysql" databse.
+    Non Admin database users should not have access to the "mysql" database.
 	"""
 	# References:
 	# https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=mysql.102
@@ -23,8 +23,11 @@ class check_privilege_mysql_database():
 			for row in rows:
 				for r in row:					
 					self.result['level'] = 'RED'
-					output = output + r[0] + '\t' + r[1] + '\n'
+					output += r[0] + '\t' + r[1] + '\n'
 			
+            if 'GREEN' == self.result['level']:
+                output = 'No users found with privileges to the mysql database.'
+            
 			self.result['output'] = output
 		
 		return self.result
