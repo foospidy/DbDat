@@ -45,10 +45,10 @@ function filter(level) {
 			menu_info = 'Items needing review.';
 			break;
 		case 'ORANGE':
-			menu_info = 'Checks that failed for some unknown reason.';
+			menu_info = 'Checks that failed to execute for some unknown reason.';
 			break;
 		case 'GRAY':
-			menu_info = 'Items that may not be applicable.';
+			menu_info = 'Items that may not be applicable to this version of the database.';
 			break;
 		case 'GREEN':
 			menu_info = 'Items that passed.';
