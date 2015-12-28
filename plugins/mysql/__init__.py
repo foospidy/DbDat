@@ -14,6 +14,11 @@ from check_privilege_stale_users import *
 from check_privilege_mysql_database import *
 from check_privilege_file import *
 from check_privilege_process import *
+from check_privilege_super import *
+from check_privilege_shutdown import *
+from check_privilege_create_user import *
+from check_privilege_reload import *
+from check_privilege_global_grant import *
 from check_user_anonymous_users import *
 from check_user_empty_password import *
 from check_user_same_password import *
