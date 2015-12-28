@@ -14,6 +14,8 @@ from check_configuration_secure_auth import *
 from check_configuration_skip_grant_tables import *
 from check_configuration_skip_merge import *
 from check_configuration_skip_networking import *
+from check_configuration_safe_user_create_global import *
+from check_configuration_safe_user_create_session import *
 from check_privilege_user_grants import *
 from check_privilege_user_grantables import *
 from check_privilege_stale_users import *
