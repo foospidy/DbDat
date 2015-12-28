@@ -1,7 +1,7 @@
 class check_privilege_process():
 	"""
 	check_privilege_process:
-    Do not grant to non Admin users.
+    The following accounts have the PROCESS privilege. Do not grant to non Admin users.
 	"""
 	# References:
 	# https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=mysql.102
@@ -23,8 +23,11 @@ class check_privilege_process():
 			for row in rows:
 				for r in row:					
 					self.result['level'] = 'RED'
-					output = output + r[0] + '\t' + r[1] + '\n'
+					output += r[0] + '\t' + r[1] + '\n'
 			
+            if 'GREEN' == self.result['level']:
+                output = 'No users found with PROCESS privileges.'
+            
 			self.result['output'] = output
 		
 		return self.result
