@@ -10,6 +10,8 @@ from check_configuration_scan_startup_procs import *
 from check_configuration_trustworthy_database import *
 from check_configuration_server_authentication import *
 from check_configuration_adhoc_distributed_queries import *
+from check_configuration_default_trace_enabled import *
+from check_configuration_login_auditing import *
 from check_privileges_public_role import *
 from check_privileges_explicit_grants import *
 from check_privileges_guest_user import *

@@ -13,7 +13,7 @@ for(var l in levels) {
         if(levels[l] == json.report_data[i].result.level) {
 			count[levels[l]]++;
 			
-            body += '<div style="margin-left:5px;border-bottom:2px solid ' + bgcolor + ';">' + json.report_data[i].category + ' ' + json.report_data[i].title + '</div>';
+            body += '<div style="margin-left:5px;border-bottom:2px solid ' + bgcolor + ';">' + json.report_data[i].category + ': ' + json.report_data[i].title + '</div>';
             body += '<div style="margin-left:5px;">' + json.report_data[i].description + '</div>';
             body += '<div style="margin-left:25px;"><pre>' + json.report_data[i].result.output + '</pre></div>';
         }
@@ -62,7 +62,7 @@ function filter(level) {
 	
 	for(var i in json.report_data) {
 		if(level == json.report_data[i].result.level) {			
-			h  = '<div style="margin-left:5px;border-bottom:2px solid ' + bgcolor + ';">' + json.report_data[i].category + ' ' + json.report_data[i].title + '</div>';
+			h  = '<div style="margin-left:5px;border-bottom:2px solid ' + bgcolor + ';">' + json.report_data[i].category + ': ' + json.report_data[i].title + '</div>';
 			h += '<div style="margin-left:5px;">' + json.report_data[i].description + '</div>';
 			h += '<div style="margin-left:25px;"><pre>' + json.report_data[i].result.output + '</pre></div>';
 		
