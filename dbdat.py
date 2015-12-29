@@ -54,7 +54,7 @@ class dbscan():
 				print("Sybase is not yet supported")
 				quit()
            
-           elif 'db2' == self.dbtype:
+			elif 'db2' == self.dbtype:
 				#TODO
 				print("DB2 is not yet supported")
 				quit()
