@@ -15,6 +15,7 @@ from check_configuration_login_auditing import *
 from check_privileges_public_role import *
 from check_privileges_explicit_grants import *
 from check_privileges_guest_user import *
+from check_privileges_clr_assembly_permissions import *
 from check_user_builtin_administrators import *
 from check_user_sa_account import *
 from check_user_orphaned_users import *
