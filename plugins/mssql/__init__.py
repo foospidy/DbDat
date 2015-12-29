@@ -9,7 +9,10 @@ from check_configuration_remote_admin_connections import *
 from check_configuration_scan_startup_procs import *
 from check_configuration_trustworthy_database import *
 from check_configuration_server_authentication import *
+from check_configuration_adhoc_distributed_queries import *
 from check_privileges_public_role import *
 from check_privileges_explicit_grants import *
+from check_privileges_guest_user import *
 from check_user_builtin_administrators import *
 from check_user_sa_account import *
+from check_user_orphaned_users import *
