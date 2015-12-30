@@ -1,9 +1,9 @@
 class check_configuration_util_file_dir():
 	"""
 	check_configuration_util_file_dir:
-	The	utl_file_dir setting allows packages like utl_file to access 
-    (read/write/modify/delete) files specified in utl_file_dir.  (This is
-    deprecated but usable in 11g.)
+	The utl_file_dir setting allows packages like utl_file to access 
+	(read/write/modify/delete) files specified in utl_file_dir. This 
+	is deprecated but usable in 11g.
 	"""
 	# References:
 	# https://benchmarks.cisecurity.org/downloads/show-single/?file=oracle11gR2.210
