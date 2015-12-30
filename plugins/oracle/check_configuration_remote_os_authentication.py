@@ -15,17 +15,16 @@ class check_configuration_remote_os_authentication():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		output       = ''
-		for row in rows:
-			if 'TRUE' == row[0][0]:
-				self.result['level'] = 'RED'
-				output += 'Remote OS authentication is enabled. Set remtoe_os_authent to FALSE.'
-			else:
-				self.result['level'] = 'GREEN'
-				output += 'Remote OS authentication is disabled.'
+	def do_check(self, *results):
 
-		self.result['output'] = output
+		for rows in results:
+			for row in rows:
+				if 'TRUE' == row[0]:
+					self.result['level']  = 'RED'
+					self.result['output'] = 'Remote OS authentication is (%s) enabled. Set remtoe_os_authent to FALSE.' % (row[0])
+				else:
+					self.result['level']  = 'GREEN'
+					self.result['output'] = 'Remote OS authentication is (%s) not enabled.' % (row[0])
 			
 		return self.result
 

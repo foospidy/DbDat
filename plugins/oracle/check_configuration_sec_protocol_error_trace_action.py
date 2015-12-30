@@ -17,18 +17,17 @@ class check_configuration_sec_protocol_error_trace_action():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		
-		for row in rows:
-			if 'LOG' != row[0][0]:
-				self.result['level'] = 'RED'
-				output = 'SEC_PROTOCOL_ERROR_TRACE_ACTION is %s.' % (row[0][0])
-			else:
-				self.result['level'] = 'GREEN'
-				output = 'SEC_PROTOCOL_ERROR_TRACE_ACTION is %s.' % (row[0][0])
+		for rows in results:
+			for row in rows:
+				if 'LOG' != row[0]:
+					self.result['level']  = 'RED'
+					self.result['output'] = 'SEC_PROTOCOL_ERROR_TRACE_ACTION is %s.' % (row[0])
+				else:
+					self.result['level']  = 'GREEN'
+					self.result['output'] = 'SEC_PROTOCOL_ERROR_TRACE_ACTION is %s.' % (row[0])
 
-		self.result['output'] = output
-		
 		return self.result
 
 	def __init__(self, parent):

@@ -16,17 +16,16 @@ class check_configuration_sec_case_sensitive_logon():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		self.result['level'] = 'GREEN'
-		output = 'SEC_CASE_SENSITIVE_LOGON is enabled.'
+	def do_check(self, *results):
+		self.result['level']  = 'GREEN'
+		self.result['output'] = 'Case Sensitive Logon is enabled.'
 		
-		for row in rows:
-			if 'TRUE' != row[0][0]:
-				self.result['level'] = 'RED'
-				output = 'SEC_CASE_SENSITIVE_LOGON is disabled.'
+		for rows in results:
+			for row in rows:
+				if 'TRUE' != row[0]:
+					self.result['level']  = 'RED'
+					self.result['output'] = 'Case Sensitive Logon is (%s) not enabled.' % (row[0])
 
-		self.result['output'] = output
-			
 		return self.result
 
 	def __init__(self, parent):

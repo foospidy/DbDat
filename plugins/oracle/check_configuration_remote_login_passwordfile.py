@@ -17,17 +17,15 @@ class check_configuration_remote_login_passwordfile():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		self.result['level'] = 'GREEN'
-		output               = 'REMOTE_LOGIN_PASSWORDFILE not set.'
+	def do_check(self, *results):
+		self.result['level']  = 'GREEN'
+		self.result['output'] = 'Remote Login Password File not enabled.'
 		
-		for row in rows:
-			for r in row:
-				if 'NONE' != r[0]:
-					self.result['level'] = 'RED'
-					output               = 'REMOTE_LOGIN_PASSWORDFILE set to: %s' % (row[0])
-
-		self.result['output'] = output
+		for rows in results:
+			for row in rows:
+				if 'NONE' != row[0]:
+					self.result['level']  = 'RED'
+					self.result['output'] = 'Remote Login Password File is (%s) enabled.' % (row[0])
 			
 		return self.result
 

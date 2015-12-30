@@ -18,16 +18,14 @@ class check_configuration_util_file_dir():
 	result  = {}
 	
 	def do_check(self, *results):
-		self.result['level'] = 'GREEN'
-		output = 'UTIL_FILE_DIR is disabled.'
+		self.result['level']  = 'GREEN'
+		self.result['output'] = 'UTIL_FILE_DIR is not enabled.'
 		
 		for rows in results:
 			for row in rows:
 				if '' != row[0]:
-					self.result['level'] = 'RED'
-					output = 'UTIL_FILE_DIR is enabled and set to %s.' % (row[0])
-
-		self.result['output'] = output
+					self.result['level']  = 'RED'
+					self.result['output'] = 'UTIL_FILE_DIR is (%s) enabled.' % (row[0])
 			
 		return self.result
 

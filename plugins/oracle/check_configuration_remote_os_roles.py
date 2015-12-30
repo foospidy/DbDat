@@ -16,18 +16,17 @@ class check_configuration_remote_os_roles():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		output       = ''
-		for row in rows:
-			if 'TRUE' == row[0][0]:
-				self.result['level'] = 'RED'
-				output += 'REMOTE_OS_ROLES is enabled. Set remtoe_os_authent to FALSE.'
-			else:
-				self.result['level'] = 'GREEN'
-				output += 'REMOTE_OS_ROLES is disabled.'
+	def do_check(self, *results):
 
-		self.result['output'] = output
-			
+		for rows in results:
+			for row in rows:
+				if 'TRUE' == row[0]:
+					self.result['level']  = 'RED'
+					self.result['output'] = 'Remote OS Roles is (%s) enabled.' % (row[0])
+				else:
+					self.result['level']  = 'GREEN'
+					self.result['output'] = 'Remote OS Roles is (%s) not enabled.' % (row[0])
+
 		return self.result
 
 	def __init__(self, parent):

@@ -17,20 +17,18 @@ class check_configuration_trace_files_public():
 	result  = {}
 	
 	def do_check(self, *results):
-		self.result['level'] = 'GREEN'
-		output = '_TRACE_FILES_PUBLIC is not set (default is false).'
+		self.result['level']  = 'GREEN'
+		self.result['output'] = '_TRACE_FILES_PUBLIC is (not set) not enabled.'
 		
 		for rows in results:
 			for row in rows:
 				if 'FALSE' != row[0]:
-					self.result['level'] = 'RED'
-					output = '_TRACE_FILES_PUBLIC is %s.' % (row[0])
+					self.result['level']  = 'RED'
+					self.result['output'] = '_TRACE_FILES_PUBLIC is (%s) enabled.' % (row[0])
 				else:
-					self.result['level'] = 'GREEN'
-					output = '_TRACE_FILES_PUBLIC is %s.' % (row[0])
+					self.result['level']  = 'GREEN'
+					self.result['output'] = '_TRACE_FILES_PUBLIC is (%s) not enabled.' % (row[0])
 
-		self.result['output'] = output
-		
 		return self.result
 
 	def __init__(self, parent):

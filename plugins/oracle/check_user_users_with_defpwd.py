@@ -3,7 +3,7 @@ import helper
 class check_user_users_with_defpwd():
 	"""
 	check_user_users_with_defpwd
-	Users with default passwords
+	Users with default passwords.
 	"""
 	# References:
 	# http://docs.oracle.com/cd/B28359_01/server.111/b28320/statviews_5074.htm
@@ -20,20 +20,20 @@ class check_user_users_with_defpwd():
 	
 	dbversion = None
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		output               = ''
 		self.result['level'] = 'GREEN'
 		
 		if self.dbversion >= 11:
-			for row in rows:
-				for r in row:
+			for rows in results:
+				for row in rows:
 					self.result['level'] = 'RED'
-					output += r[0] + '\n'
+					output += row[0] + '\n'
 
 			self.result['output'] = output
 		else:
 			self.result['level'] = 'GRAY'
-			output = 'This check only applies to Oracle versions 11 and above'
+			output = 'This check only applies to Oracle versions 11 and above.'
 			
 		return self.result
 	

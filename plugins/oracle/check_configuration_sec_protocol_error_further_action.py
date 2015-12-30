@@ -16,17 +16,16 @@ class check_configuration_sec_protocol_error_further_action():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		
-		for row in rows:
-			if row[0][0] != 'DELAY, 3' and row[0][0] != 'DROP, 3':
-				self.result['level'] = 'RED'
-				output = 'SEC_PROTOCOL_ERROR_FURTHER_ACTION is %s.' % (row[0][0])
-			else:
-				self.result['level'] = 'GREEN'
-				output = 'SEC_PROTOCOL_ERROR_FURTHER_ACTION is %s.' % (row[0][0])
-
-		self.result['output'] = output
+		for rows in results:
+			for row in rows:
+				if row[0] != 'DELAY, 3' and row[0] != 'DROP, 3':
+					self.result['level']  = 'RED'
+					self.result['output'] = 'SEC_PROTOCOL_ERROR_FURTHER_ACTION is %s.' % (row[0])
+				else:
+					self.result['level']  = 'GREEN'
+					self.result['output'] = 'SEC_PROTOCOL_ERROR_FURTHER_ACTION is %s.' % (row[0])
 		
 		return self.result
 

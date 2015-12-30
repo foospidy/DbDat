@@ -9,17 +9,21 @@ class check_user_sys_system_lock():
 	TITLE       = 'SYS and SYSTEM Locked'
 	CATEGORY    = 'User'
 	TYPE        = 'sql'
-	SQL    		= "SELECT username, account_status FROM dba_users WHERE username IN ('SYS', 'SYSTEM')"
+	SQL    		= "SELECT username, account_status FROM dba_users WHERE UPPER(username) IN ('SYS', 'SYSTEM')"
 	result      = {}
 	
-	def do_check(self, *rows):
-		output       = ''
+	def do_check(self, *results):
+		output               = ''
+		self.result['level'] = 'GREEN'
 		
-		for row in rows:
-			for r in row:
-				if 'OPEN' == r[1]:
+		for rows in results:
+			for row in rows:
+				if 'OPEN' == row[1]:
 					self.result['level'] = 'RED'
-					output += 'SYS and SYSTEM accounts should be locked, ' + r[0] + ' is ' + r[1] + '\n'
+					output += 'SYS and SYSTEM accounts should be locked, ' + row[0] + ' is ' + row[1] + '\n'
+		
+		if 'GREEN' == self.result['level']:
+			output = 'SYS and SYSTEM accounts appear to be locked.'
 		
 		self.result['output'] = output
 		

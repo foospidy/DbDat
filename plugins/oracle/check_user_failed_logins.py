@@ -14,7 +14,7 @@ class check_user_failed_logins():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		output       = ''
 		ver_database = None
 		ver_plsql    = None
@@ -22,20 +22,20 @@ class check_user_failed_logins():
 		ver_tns      = None
 		ver_nlsrtl   = None
 		
-		for row in rows:
-			for r in row:
-				if 'UNLIMITED' == r[2]:
+		for rows in results:
+			for row in rows:
+				if 'UNLIMITED' == row[2]:
 					self.result['level'] = 'RED'
-					output += 'Number of allowed failed attempts for the ' + r[0] + ' profile is ' + r[2] + '\n'
-				elif r[2] > 10:
+					output += 'Number of allowed failed attempts for the ' + row[0] + ' profile is ' + row[2] + '\n'
+				elif row[2] > 10:
 					self.result['level'] = 'RED'
-					output += 'Number of allowed failed attempts for the ' + r[0] + ' profile is ' + r[2] + '\n'
-				elif r[2] > 3:
+					output += 'Number of allowed failed attempts for the ' + row[0] + ' profile is ' + row[2] + '\n'
+				elif row[2] > 3:
 					self.result['level'] = 'YELLOW'
-					output += 'Number of allowed failed attempts for the ' + r[0] + ' profile is ' + r[2] + '\n'
+					output += 'Number of allowed failed attempts for the ' + row[0] + ' profile is ' + row[2] + '\n'
 				else:
 					self.result['level'] = 'GREEN'
-					output += 'Number of allowed failed attempts for the ' + r[0] + ' profile is ' + r[2] + '\n'
+					output += 'Number of allowed failed attempts for the ' + row[0] + ' profile is ' + row[2] + '\n'
 		
 		self.result['output'] = output
 		

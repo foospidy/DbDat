@@ -16,17 +16,16 @@ class check_configuration_sql92_security():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		
-		for row in rows:
-			if 'FALSE' != row[0][0]:
-				self.result['level'] = 'YELLOW'
-				output = 'SQL92_SECURITY is %s.' % (row[0][0])
-			else:
-				self.result['level'] = 'GREEN'
-				output = 'SQL92_SECURITY is %s.' % (row[0][0])
+	def do_check(self, *results):
 
-		self.result['output'] = output
+		for rows in results:
+			for row in rows:
+				if 'FALSE' != row[0]:
+					self.result['level']  = 'YELLOW'
+					self.result['output'] = 'SQL92_SECURITY is (%s) enabled.' % (row[0])
+				else:
+					self.result['level']  = 'GREEN'
+					self.result['output'] = 'SQL92_SECURITY is (%s) not enabled.' % (row[0])
 		
 		return self.result
 

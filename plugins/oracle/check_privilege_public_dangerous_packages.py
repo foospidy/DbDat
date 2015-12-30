@@ -44,15 +44,18 @@ class check_privilege_public_dangerous_packages():
 		'HTTPURITYPE'
 		}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		output               = ''
 		self.result['level'] = 'GREEN'
 		
-		for row in rows:
-			for r in row:
+		for rows in results:
+			for row in rows:
 				self.result['level'] = 'RED'
-				output += r[0] + '\n'
+				output += row[0] + '\n'
 
+		if 'GREEN' == self.result['level']:
+			output = 'no PUBLIC dangerous packages found.'
+		
 		self.result['output'] = output
 			
 		return self.result

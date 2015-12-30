@@ -7,7 +7,7 @@ class check_configuration_remote_listener():
 	# References:
 	# https://benchmarks.cisecurity.org/downloads/show-single/?file=oracle11gR2.210
 
-	TITLE    = 'REMOTE_LISTENER'
+	TITLE    = 'Remote Listener'
 	CATEGORY = 'Configuration'
 	TYPE     = 'sql'
 	SQL    	 = "SELECT UPPER(value) FROM v$parameter WHERE UPPER(name)='REMOTE_LISTENER'"
@@ -16,18 +16,16 @@ class check_configuration_remote_listener():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		self.result['level'] = 'GREEN'
-		output               = 'REMOTE_LISTENER not set.'
+	def do_check(self, *results):
+		self.result['level']  = 'GREEN'
+		self.result['output'] = 'Remote Listener is not enabled.'
 		
-		for row in rows:
-			for r in row:
-				if None != r[0]:
-					self.result['level'] = 'RED'
-					output               = 'REMOTE_LISTENER set to: %s' % (row[0][0])
+		for rows in results:
+			for row in rows:
+				if None != row[0]:
+					self.result['level']  = 'RED'
+					self.result['output'] = 'Remote Listener is (%s) enabled.' % (row[0])
 
-		self.result['output'] = output
-			
 		return self.result
 
 	def __init__(self, parent):

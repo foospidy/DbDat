@@ -2,6 +2,7 @@ import os
 import csv
 import hashlib
 import binascii
+import helper
 
 class check_user_weak_password():
 	"""
@@ -23,18 +24,18 @@ class check_user_weak_password():
 	dbcurs    = None
 	dbversion = None
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		output        = ''
 		password_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'etc', 'check_user_weak_password.txt')
 		
-		for row in rows:
-			for r in row:
+		for rows in results:
+			for row in rows:
 				if os.path.isfile(str(password_file)):
 					with open(str(password_file), 'r') as passwords:
 						for password in passwords:
 							if int(self.dbversion) >= 11:
 								# sha-1 hash
-								ora_password = str(r[1])[2:]
+								ora_password = str(row[1])[2:]
 								ora_sha1     = ora_password[:40].upper()
 								ora_salt     = ora_password[40:60]
 								sha_hash     = hashlib.sha1()
@@ -44,13 +45,13 @@ class check_user_weak_password():
 								
 								if sha_hash.hexdigest().upper() == ora_sha1:
 									self.result['level'] = 'RED'
-									output += 'Weak password found for %s\n' % (r[0])
+									output += 'Weak password found for %s\n' % (row[0])
 							
 							else:
 								# DES
-								if line['hash_value'] == r[1]:
+								if line['hash_value'] == row[1]:
 									self.result['level'] = 'RED'
-									output += 'Weak password found for %s, description: %s\n' % (r[0])
+									output += 'Weak password found for %s, description: %s\n' % (row[0])
 		
 		if 0 == len(output):
 			self.result['level'] = 'GREEN'
@@ -59,23 +60,12 @@ class check_user_weak_password():
 		self.result['output'] = output
 		
 		return self.result
-	
-	def get_version(self):
-		version = None
-		
-		self.dbcurs.execute("SELECT * FROM v$version")
-		
-		rows    =   self.dbcurs.fetchall()
-		version = str(rows[0]).split()[-3].split('.')[0]
-		
-		return version
-		
+
 	def __init__(self, parent):
 		print('Performing check: ' + self.TITLE)
 		
 		self.appuser   = parent.appuser.upper() # upper it cuz oracle
-		self.dbcurs    = parent.dbcurs
-		self.dbversion = self.get_version()
+		self.dbversion = helper.get_version(parent.dbcurs)
 				
 		if int(self.dbversion) >= 11:
 			# sha-1 hash

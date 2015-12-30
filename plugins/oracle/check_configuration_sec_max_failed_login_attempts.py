@@ -16,17 +16,16 @@ class check_configuration_sec_max_failed_login_attempts():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		
-		for row in rows:
-			if int(row[0][0]) > 10:
-				self.result['level'] = 'RED'
-				output = 'SEC_MAX_FAILED_LOGIN_ATTEMPTS is %s (greater than 10).' % (row[0][0])
-			else:
-				self.result['level'] = 'GREEN'
-				output = 'SEC_MAX_FAILED_LOGIN_ATTEMPTS is %s.' % (row[0][0])
-
-		self.result['output'] = output
+		for rows in results:
+			for row in rows:
+				if int(row[0]) > 10:
+					self.result['level']  = 'RED'
+					self.result['output'] = 'SEC_MAX_FAILED_LOGIN_ATTEMPTS is %s (greater than 10).' % (row[0])
+				else:
+					self.result['level']  = 'GREEN'
+					self.result['output'] = 'SEC_MAX_FAILED_LOGIN_ATTEMPTS is %s (10 or less).' % (row[0])
 		
 		return self.result
 

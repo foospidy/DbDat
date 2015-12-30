@@ -15,7 +15,7 @@ class check_configuration_version():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		output       = ''
 		ver_database = None
 		ver_plsql    = None
@@ -24,13 +24,12 @@ class check_configuration_version():
 		ver_nlsrtl   = None
 		LATEST_VERSION = '12.1.1'
 		
-		for row in rows:
-			for r in rows:
-				ver_database = r[0][0]
-				ver_plsql    = r[1][0]
-				ver_core     = r[2][0]
-				ver_tns      = r[3][0]
-				ver_nlsrtl   = r[4][0]
+		for rows in results:
+			ver_database = rows[0][0]
+			ver_plsql    = rows[1][0]
+			ver_core     = rows[2][0]
+			ver_tns      = rows[3][0]
+			ver_nlsrtl   = rows[4][0]
 		
 		if ver_database:
 			thisdb = ver_database.split()
