@@ -7,24 +7,23 @@ class check_configuration_audit_trail():
 	TITLE    = 'Audit Trail'
 	CATEGORY = 'Configuration'
 	TYPE     = 'sql'
-	SQL    	 = "SELECT value FROM v$parameter WHERE name='audit_trail'"
+	SQL    	 = "SELECT UPPER(value) FROM v$parameter WHERE UPPER(name)='AUDIT_TRAIL'"
 	
 	verbose = False
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		output       = ''
-		for row in rows:
-			if 'NONE' == row[0][0]:
-				self.result['level'] = 'RED'
-				output += 'No audit trail enabled.'
-			else:
-				output += 'Audit trial set to: ' + row[0][0]
-				self.result['level'] = 'GREEN'
+	def do_check(self, *results):
 
-		self.result['output'] = output
-			
+		for rows in results:
+			for row in rows:
+				if 'NONE' == row[0]:
+					self.result['level']  = 'RED'
+					self.result['output'] = 'Audit trail is (%s) not enabled.' % (row[0])
+				else:
+					self.result['level']  = 'GREEN'
+					self.result['output'] = 'Audit trail is (%s) enabled.' % (row[0])
+
 		return self.result
 
 	def __init__(self, parent):

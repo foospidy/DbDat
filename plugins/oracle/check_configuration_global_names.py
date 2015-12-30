@@ -7,7 +7,7 @@ class check_configuration_global_names():
 	# References:
 	# https://benchmarks.cisecurity.org/downloads/show-single/?file=oracle11gR2.210
 
-	TITLE    = 'GLOBAL_NAMES'
+	TITLE    = 'Global Names'
 	CATEGORY = 'Configuration'
 	TYPE     = 'sql'
 	SQL    	 = "SELECT UPPER(value) FROM v$parameter WHERE UPPER(name)='GLOBAL_NAMES'"
@@ -16,18 +16,17 @@ class check_configuration_global_names():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		output       = ''
-		for row in rows:
-			if 'TRUE' == row[0][0]:
-				self.result['level'] = 'GREEN'
-				output += 'GLOBAL_NAMES is set to true.'
-			else:
-				self.result['level'] = 'RED'
-				output += 'GLOBAL_NAMES is set to %s.' % (row[0][0])
+	def do_check(self, *results):
 
-		self.result['output'] = output
-			
+		for rows in results:
+			for row in rows:
+				if 'TRUE' == row[0][0]:
+					self.result['level']  = 'GREEN'
+					self.result['output'] = 'Global names is (%s) enabled.' % (row[0])
+				else:
+					self.result['level']  = 'RED'
+					self.result['output'] = 'Global names is (%s) not enabled.' % (row[0])
+	
 		return self.result
 
 	def __init__(self, parent):
