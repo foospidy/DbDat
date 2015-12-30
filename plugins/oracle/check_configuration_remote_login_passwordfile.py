@@ -8,7 +8,7 @@ class check_configuration_remote_login_passwordfile():
 	# References:
 	# https://benchmarks.cisecurity.org/downloads/show-single/?file=oracle11gR2.210
 
-	TITLE    = 'REMOTE_LISTENER'
+	TITLE    = 'Remote Login Password File'
 	CATEGORY = 'Configuration'
 	TYPE     = 'sql'
 	SQL    	 = "SELECT UPPER(value) FROM v$parameter WHERE UPPER(name)='REMOTE_LOGIN_PASSWORDFILE'"

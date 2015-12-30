@@ -32,7 +32,6 @@ class check_configuration_admin_restrictions_listener():
 			if self.verbose:
 				print('Cannot read configuration file:\n' + str(e))
 		
-		print self.result['level']
 		return self.result
 	
 	def __init__(self, parent):

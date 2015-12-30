@@ -17,14 +17,15 @@ class check_configuration_util_file_dir():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		self.result['level'] = 'GREEN'
 		output = 'UTIL_FILE_DIR is disabled.'
 		
-		for row in rows:
-			if '' != row[0][0]:
-				self.result['level'] = 'RED'
-				output = 'UTIL_FILE_DIR is enabled.'
+		for rows in results:
+			for row in rows:
+				if '' != row[0]:
+					self.result['level'] = 'RED'
+					output = 'UTIL_FILE_DIR is enabled and set to %s.' % (row[0])
 
 		self.result['output'] = output
 			

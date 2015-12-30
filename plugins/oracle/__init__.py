@@ -10,6 +10,13 @@ from check_configuration_remote_listener import *
 from check_configuration_remote_login_passwordfile import *
 from check_configuration_remote_os_roles import *
 from check_configuration_util_file_dir import *
+from check_configuration_sec_case_sensitive_logon import *
+from check_configuration_sec_max_failed_login_attempts import *
+from check_configuration_sec_protocol_error_further_action import *
+from check_configuration_sec_protocol_error_trace_action import *
+from check_configuration_sec_return_server_release_banner import *
+from check_configuration_sql92_security import *
+from check_configuration_trace_files_public import *
 from check_privilege_public_dangerous_packages import *
 from check_user_failed_logins import *
 from check_user_default_credentials import *
