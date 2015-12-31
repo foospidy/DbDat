@@ -13,10 +13,10 @@ class check_configuration_test_database():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):		
-		for row in rows:
-			for r in rows:
-				if 'test' == r[0]:
+	def do_check(self, *results):		
+		for rows in results:
+			for row in rows:
+				if 'test' == row[0]:
 					self.result['level']  = 'YELLOW'
 					self.result['output'] = 'test database exists.'
 				else:

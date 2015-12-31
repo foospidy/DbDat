@@ -45,7 +45,7 @@ function filter(level) {
 			menu_info = 'Items needing review.';
 			break;
 		case 'ORANGE':
-			menu_info = 'Checks that failed to execute for some unknown reason.';
+			menu_info = 'Checks that failed to execute properly. If the explination provided is unclear it may be a bug that should be reported here <a href="https://github.com/foospidy/DbDat/issues" target="_new">https://github.com/foospidy/DbDat/issues</a>.';
 			break;
 		case 'GRAY':
 			menu_info = 'Items that may not be applicable to this version of the database.';

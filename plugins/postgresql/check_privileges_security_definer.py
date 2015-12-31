@@ -15,16 +15,16 @@ class check_privileges_security_definer():
 	result  = {}
 	appuser = None
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		output = ''
 		
-		if 0 == len(rows[0]):
+		if 0 == len(results[0]):
 			self.result['level'] = 'GREEN'
 			output               = 'No security definer functions found.'
 		
-		for row in rows:
-			for r in row:
-				output += str(r[0]) + ' ' + str(r[1]) + ' ' + str(r[2]) + '\n'
+		for rows in results:
+			for row in rows:
+				output += str(row[0]) + ' ' + str(row[1]) + ' ' + str(row[2]) + '\n'
 				self.result['level'] = 'RED'
 			
 		self.result['output'] = output

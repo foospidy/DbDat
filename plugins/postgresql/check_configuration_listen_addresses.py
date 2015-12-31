@@ -1,4 +1,4 @@
-from pg_read_config import *
+import helper
 
 class check_configuration_listen_addresses():
 	"""
@@ -21,7 +21,7 @@ class check_configuration_listen_addresses():
 		output               = ''
 		self.result['level'] = 'GREEN'
 		
-		addresses = get_pg_config_value(configuration_file, 'listen_addresses')
+		addresses = helper.get_pg_config_value(configuration_file, 'listen_addresses')
 		
 		if not addresses:
 			# if option not found then postgresql defaults to localhost

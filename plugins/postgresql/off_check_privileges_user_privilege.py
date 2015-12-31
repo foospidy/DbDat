@@ -15,23 +15,23 @@ class check_privileges_user_privilege():
 	result  = {}
 	appuser = None
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		output  = ''
 		
-		for row in rows:
-			for r in row:
-				output = output + str(r[0]) + ' ' + str(r[1]) + ' ' + str(r[2]) + '\n'
+		for rows in results:
+			for row in rows:
+				output = output + str(row[0]) + ' ' + str(row[1]) + ' ' + str(row[2]) + '\n'
 				
-				if 'GRANT ALL' in r[0]:
+				if 'GRANT ALL' in row[0]:
 					result['level'] = 'RED'
 				
-				if 'ON *.* TO' in r[0]:
+				if 'ON *.* TO' in row[0]:
 					result['level'] = 'RED'
 					
-				if 'WITH GRANT OPTIONS' in r[0]:
+				if 'WITH GRANT OPTIONS' in row[0]:
 					result['level'] = 'RED'
 				
-				if 'GRANT PROXY' in r[0]:
+				if 'GRANT PROXY' in row[0]:
 					result['level'] = 'RED'
 			
 			result['output'] = output

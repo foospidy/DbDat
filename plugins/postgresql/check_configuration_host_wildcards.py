@@ -1,4 +1,5 @@
-from pg_read_config import *
+import os
+import helper
 
 class check_configuration_host_wildcards():
 	"""
@@ -20,24 +21,26 @@ class check_configuration_host_wildcards():
 		output               = ''
 		pg_hba_file_path     = None
 		self.result['level'] = 'GREEN'
-		
-		pg_hba_file_path = get_pg_config_value(configuration_file, 'hba_file')
-		
-		if os.path.isfile(str(pg_hba_file_path)):
-			with open(str(pg_hba_file_path), 'r') as config:
-				for line in config:
-					if not line.startswith('#'):
-						if '' != line.strip():
-							values = line.strip().split()
-							if 'host' == values[0]:
-								if not values[2].startswith('.'):
-									self.result['level'] = 'RED'
-									output +=  values[2] + '\n'
 
+		pg_hba_file_path = helper.get_pg_config_value(configuration_file, 'hba_file')
+
+		try:
+			if os.path.isfile(str(pg_hba_file_path)):
+				with open(str(pg_hba_file_path), 'r') as config:
+					for line in config:
+						if not line.startswith('#'):
+							if '' != line.strip():
+								values = line.strip().split()
+								if 'host' == values[0]:
+									if not values[2].startswith('.'):
+										self.result['level'] = 'RED'
+										output +=  values[2] + '\n'
+			
 			self.result['output'] = output
-		
-		else:
-			print 'fuuu'
+			
+		except IOError as e:
+			self.result['level']  = 'ORANGE'
+			self.result['output'] = 'DbDat could not read configuration file. You may need to run DbDat using sudo.'
 
 		return self.result
 

@@ -1,4 +1,5 @@
-from pg_read_config import *
+import os
+import helper
 
 class check_information_remote_hosts():
 	"""
@@ -21,19 +22,21 @@ class check_information_remote_hosts():
 		pg_hba_file_path     = None
 		self.result['level'] = 'GREEN'
 		
-		pg_hba_file_path = get_pg_config_value(configuration_file, 'hba_file')
+		pg_hba_file_path = helper.get_pg_config_value(configuration_file, 'hba_file')
 		
-		if os.path.isfile(str(pg_hba_file_path)):
-			with open(str(pg_hba_file_path), 'r') as config:
-				for line in config:
-					if not line.startswith('#'):
-						if '' != line.strip():
-							output += line.strip() + '\n'
+		try:
+			if os.path.isfile(str(pg_hba_file_path)):
+				with open(str(pg_hba_file_path), 'r') as config:
+					for line in config:
+						if not line.startswith('#'):
+							if '' != line.strip():
+								output += line.strip() + '\n'
 
 			self.result['output'] = output
 		
-		else:
-			print 'fuuu'
+		except IOError as e:
+			self.result['level']  = 'ORANGE'
+			self.result['output'] = 'DbDat could not read configuration file. You may need to run DbDat using sudo.'
 	
 		return self.result
 		

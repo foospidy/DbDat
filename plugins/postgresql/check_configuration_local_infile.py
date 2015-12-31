@@ -13,15 +13,15 @@ class check_configuration_local_infile():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):		
-		for row in rows:
-			for r in row:
-				if 'must be superuser' not in r[0]:
+	def do_check(self, *results):		
+		for rows in results:
+			for row in rows:
+				if 'must be superuser' not in row[0]:
 					self.result['level']  = 'RED'
-					self.result['output'] = r[0]
+					self.result['output'] = row[0]
 				else:
 					self.result['level']  = 'GREEN'
-					self.result['output'] = r[0]
+					self.result['output'] = row[0]
 
 		return self.result
 	
