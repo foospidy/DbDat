@@ -15,13 +15,14 @@ class check_user_sa_account():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		self.result['level'] = 'GREEN'
-		output = 'sa account does not exist.'
+		output               = 'sa account does not exist.'
 		
-		for row in rows:
-			self.result['level'] = 'YELLOW'
-			output = 'sa account exists.'
+		for rows in results:
+			for row in rows:
+				self.result['level'] = 'YELLOW'
+				output = 'sa account does exist.'
 		
 		self.result['output'] = output
 		

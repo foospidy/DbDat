@@ -15,19 +15,17 @@ class check_configuration_server_authentication():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		output = ''
-		
-		for row in rows:
-			if 'Windows NT Authentication' == row[0][1]:
-				self.result['level'] = 'GREEN'
-				output = 'Windows Authentication mode only enabled.'
-			else:
-				self.result['level'] = 'YELLOW'
-				output = 'Non optimal authentication mode (%s) enabled.' % row[0][1]
-		
-		self.result['output'] = output
-		
+	def do_check(self, *results):
+
+		for rows in results:
+			for row in rows:
+				if 'Windows NT Authentication' == row[1]:
+					self.result['level']  = 'GREEN'
+					self.result['output'] = 'Windows Authentication mode only is (%s) enabled.' % row[1]
+				else:
+					self.result['level']  = 'YELLOW'
+					self.result['output'] = 'Authentication mode is (%s), Windows Authentication mode only not enabled.' % row[1]
+
 		return self.result
 	
 	def __init__(self, parent):

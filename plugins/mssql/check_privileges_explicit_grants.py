@@ -16,13 +16,19 @@ class check_privileges_explicit_grants():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	user    = ''
+	
+	def do_check(self, *results):
 		self.result['level'] = 'GREEN'
 		output = 'No explicit privileges granted to user'
 
-		for row in rows:
-			self.result['level'] = 'YELLOW'
-			output = 'Privileges explicitly granted to user'
+		for rows in results:
+			for row in rows:
+				self.result['level'] = 'YELLOW'
+				output = 'Privileges explicitly granted to user (%s): table: %s privilege: %s.' % (self.user, row[1], row[2])
+		
+		if 'GREEN' == self.result['level']:
+			output = 'No explicit privileges granted to user (%s).' % (self.user)
 		
 		self.result['output'] = output
 		
@@ -31,4 +37,5 @@ class check_privileges_explicit_grants():
 	def __init__(self, parent):
 		print('Performing check: ' + self.TITLE)
 		
-		self.SQL = "SELECT grantee, table_name, privilege_type FROM INFORMATION_SCHEMA.TABLE_PRIVILEGES WHERE grantee = '" + parent.appuser + "'"
+		self.SQL  = "SELECT grantee, table_name, privilege_type FROM INFORMATION_SCHEMA.TABLE_PRIVILEGES WHERE grantee = '" + parent.appuser + "'"
+		self.user = parent.appuser

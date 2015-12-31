@@ -17,16 +17,19 @@ class check_privileges_clr_assembly_permissions():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		self.result['level'] = 'GREEN'
-		output               = 'No assemblies without SAFE_ACCESS permission found.'
+		output               = ''
 
-		for row in rows:
-			for r in row:
-				if 'SAFE_ACCESS' != r[1]:
+		for rows in results:
+			for row in rows:
+				if 'SAFE_ACCESS' != row[1]:
 					self.result['level'] = 'RED'
-					output += r[0] + '\t' + r[1] + '\n'
+					output += row[0] + '\t' + row[1] + '\n'
 
+		if 'GREEN' == self.result['level']:
+			output = 'Assemblies without SAFE_ACCESS permission not found.'
+		
 		self.result['output'] = output
 
 		return self.result

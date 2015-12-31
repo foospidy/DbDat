@@ -17,16 +17,17 @@ class check_configuration_trustworthy_database():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		output = ''
+	def do_check(self, *results):
+		output                = ''
+		self.result['level']  = 'GREEN'
 		
-		self.result['level'] = 'GREEN'
-		output = 'No databases with trustworthy enabled.'
-		
-		for row in rows:
-			for r in row:
+		for rows in results:
+			for row in rows:
 				self.result['level'] = 'RED'
-				output = 'Databases with trustworthy enabled.'
+				output += 'Database (%s) with trustworthy enabled.\n' % (row[0])
+		
+		if 'GREEN' == self.result['level']:
+			output = 'No databases found with trustworthy enabled.'
 		
 		self.result['output'] = output
 		

@@ -16,19 +16,17 @@ class check_configuration_scan_startup_procs():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		output = ''
-				
-		for row in rows:
-			if 0 == row[0][1]:
-				self.result['level'] = 'GREEN'
-				output = 'Remote admin connections not enabled.'
-			else:
-				self.result['level'] = 'RED'
-				output = 'Remote admin connections is enabled.'
-		
-		self.result['output'] = output
-		
+	def do_check(self, *results):
+
+		for rows in results:
+			for row in rows:
+				if 0 == row[1] and 0 == row[2]:
+					self.result['level']  = 'GREEN'
+					self.result['output'] = 'Scan For Startup Procs is (%s %s) not enabled.' % (row[1], row[2])
+				else:
+					self.result['level']  = 'RED'
+					self.result['output'] = 'Scan For Startup Procs is (%s %s) enabled.' % (row[1], row[2])
+
 		return self.result
 	
 	def __init__(self, parent):

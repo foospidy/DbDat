@@ -18,19 +18,17 @@ class check_configuration_xp_cmdshell():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		output = ''
-		
-		for row in rows:
-			if 0 == row[0][1]:
-				self.result['level'] = 'GREEN'
-				output = 'xp_cmdshell not enabled.'
-			else:
-				self.result['level'] = 'RED'
-				output = 'xp_cmdshell is enabled.'
-		
-		self.result['output'] = output
-		
+	def do_check(self, *results):
+
+		for rows in results:
+			for row in rows:
+				if 0 == row[1]:
+					self.result['level']  = 'GREEN'
+					self.result['output'] = 'xp_cmdshell is (%s) not enabled.' % (row[1])
+				else:
+					self.result['level']  = 'RED'
+					self.result['output'] = 'xp_cmdshell is (%s) enabled.' % (row[1])
+
 		return self.result
 	
 	def __init__(self, parent):

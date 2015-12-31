@@ -15,23 +15,20 @@ class check_configuration_login_auditing():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		output = ''
-		
-		for row in rows:
-			for r in row:
-				if 'none' == r[1]:
-					self.result['level'] = 'RED'
-					output = 'No login audit loging enabled.'
-				elif 'all' != r[1]:
-					self.result['level'] = 'YELLOW'
-					output = 'Logging of %s logins only enabled.' % (r[1])
+	def do_check(self, *results):
+
+		for rows in results:
+			for row in rows:
+				if 'none' == row[1]:
+					self.result['level']  = 'RED'
+					self.result['output'] = 'Login audit logging is (%s) not enabled.' % (row[1])
+				elif 'all' != row[1]:
+					self.result['level']  = 'YELLOW'
+					self.result['output'] = 'Logging of %s logins only is enabled.' % (row[1])
 				else:
-					self.result['level'] = 'GREEN'
-					output = 'Logging of successful and failed logins enabled.'
-        
-		self.result['output'] = output
-		
+					self.result['level']  = 'GREEN'
+					self.result['output'] = 'Logging of successful and failed logins enabled.'
+
 		return self.result
 	
 	def __init__(self, parent):

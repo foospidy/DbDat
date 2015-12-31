@@ -16,21 +16,19 @@ class check_configuration_remote_admin_connections():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		output = ''
-		self.result['level'] = 'GREEN'
-		output = 'Remote admin connections not enabled.'
-				
-		for row in rows:
-			if 0 == row[0][1]:
-				self.result['level'] = 'GREEN'
-				output = 'Remote admin connections not enabled.'
-			else:
-				self.result['level'] = 'RED'
-				output = 'Remote admin connections is enabled.'
-		
-		self.result['output'] = output
-		
+	def do_check(self, *results):
+		self.result['level']  = 'GREEN'
+		self.result['output'] = 'Remote admin connections not enabled.'
+
+		for rows in results:
+			for row in rows:
+				if 0 == row[1]:
+					self.result['level']  = 'GREEN'
+					self.result['output'] = 'Remote admin connections is (%s) not enabled.' % (row[1])
+				else:
+					self.result['level']  = 'RED'
+					self.result['output'] = 'Remote admin connections is (%s) enabled.' % (row[1])
+
 		return self.result
 	
 	def __init__(self, parent):

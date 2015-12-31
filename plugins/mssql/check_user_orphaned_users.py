@@ -17,20 +17,20 @@ class check_user_orphaned_users():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		self.result['level'] = 'GREEN'
 		output               = 'No orphaned users found.'
 		count                = 0
 		
-		for row in rows:
-			for r in row:
+		for rows in results:
+			for row in rows:
 				count += 1
 				
 				if 1 == count:
 					self.result['level'] = 'RED'
 					output = 'Orphaned users found:\n\n'
 			
-				output += r[0] + '\t' + r[1] + '\n'
+				output += row[0] + '\t' + row[1] + '\n'
 		
 		self.result['output'] = output
 		

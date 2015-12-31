@@ -16,20 +16,21 @@ class check_configuration_adhoc_distributed_queries():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		output = ''
 		
-		for row in rows:
-			if 0 != len(row):
-				if 0 == row[0][1]:
-					self.result['level'] = 'GREEN'
-					output = 'Ad Hoc Distributed Queries not enabled.'
+		for rows in results:
+			for row in rows:
+				if 0 != len(row):
+					if 0 == row[1]:
+						self.result['level'] = 'GREEN'
+						output = 'Ad Hoc Distributed Queries is (%s) not enabled.' % (row[1])
+					else:
+						self.result['level'] = 'RED'
+						output = 'Ad Hoc Distributed Queries is (%s) enabled.' % (row[1])
 				else:
-					self.result['level'] = 'RED'
-					output = 'Ad Hoc Distributed Queries is enabled.'
-			else:
-				self.result['level'] = 'GRAY'
-				output = 'Ad Hoc Distributed Queries setting not found in sys.configurations table.'
+					self.result['level'] = 'GRAY'
+					output = 'Ad Hoc Distributed Queries setting not found in sys.configurations table.'
 		
 		self.result['output'] = output
 		

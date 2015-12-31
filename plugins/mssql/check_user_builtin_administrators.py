@@ -17,13 +17,14 @@ class check_user_builtin_administrators():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		self.result['level'] = 'GREEN'
-		output = 'BUILTIN\Administrators does not exist.'
+		output               = 'BUILTIN\Administrators does not exist.'
 		
-		for row in rows:
-			self.result['level'] = 'RED'
-			output = 'BUILTIN\Administrators exists.'
+		for rows in results:
+			for row in rows:
+				self.result['level'] = 'RED'
+				output = 'BUILTIN\Administrators does exist.'
 		
 		self.result['output'] = output
 		

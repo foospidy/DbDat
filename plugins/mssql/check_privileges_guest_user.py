@@ -15,20 +15,20 @@ class check_privileges_guest_user():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		self.result['level'] = 'GREEN'
 		output               = 'No CONNECT privilege granted to guest user'
 		count                = 0
 		
-		for row in rows:
-			for r in row:
+		for rows in results:
+			for row in rows:
 				count += 1
 				
 				if 1 == count:
 					self.result['level'] = 'RED'
 					output               = 'CONNECT privileges granted to guest user\n\n'
 				
-				output += r[0] + '\t' + r[1] + '\t' + r[2] + '\n'
+				output += row[0] + '\t' + row[1] + '\t' + row[2] + '\n'
 		
 		self.result['output'] = output
 		

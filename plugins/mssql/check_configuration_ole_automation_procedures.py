@@ -16,23 +16,20 @@ class check_configuration_ole_automation_procedures():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		output = ''
+	def do_check(self, *results):
+		self.result['level']  = 'GRAY'
+		self.result['output'] = 'Ole Automation Porcedures setting not found in sys.configurations table.'
 		
-		for row in rows:
-			if 0 != len(row):
-				if 0 == row[0][1]:
-					self.result['level'] = 'GREEN'
-					output = 'Ole Automation Porcedures not enabled.'
-				else:
-					self.result['level'] = 'RED'
-					output = 'Ole Automation Porcedures is enabled.'
-			else:
-				self.result['level'] = 'GRAY'
-				output = 'Ole Automation Porcedures setting not found in sys.configurations table.'
-		
-		self.result['output'] = output
-		
+		for rows in results:
+			for row in rows:
+				if 0 != len(row):
+					if 0 == row[1]:
+						self.result['level']  = 'GREEN'
+						self.result['output'] = 'Ole Automation Porcedures is (%s) not enabled.' % (row[1])
+					else:
+						self.result['level']  = 'RED'
+						self.result['output'] = 'Ole Automation Porcedures is (%s) enabled.' % (row[1])
+
 		return self.result
 	
 	def __init__(self, parent):

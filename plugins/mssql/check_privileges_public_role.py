@@ -17,13 +17,20 @@ class check_privileges_public_role():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		self.result['level'] = 'GREEN'
-		output = 'No privileges granted to public'
+		output = 'No privileges granted to public.'
+		count  = 0
 		
-		for row in rows:
-			self.result['level'] = 'YELLOW'
-			output = 'Privileges granted to public'
+		for rows in results:
+			for row in rows:
+				count += 1
+				
+				if 1 == count:
+					self.result['level'] = 'YELLOW'
+					output = 'Privileges granted to public:\n'
+				
+				output += '%s %s %s\n' % (row[1], row[2], row[3])
 		
 		self.result['output'] = output
 		

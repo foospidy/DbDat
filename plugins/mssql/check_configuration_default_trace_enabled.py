@@ -16,18 +16,16 @@ class check_configuration_default_trace_enabled():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		output = ''
-		
-		for row in rows:
-			if 0 == row[0][1]:
-				self.result['level'] = 'RED'
-				output = 'Default Trace not enabled.'
-			else:
-				self.result['level'] = 'GREEN'
-				output = 'Default Trace is enabled.'
-		
-		self.result['output'] = output
+	def do_check(self, *results):
+
+		for rows in results:
+			for row in rows:
+				if 0 == row[1]:
+					self.result['level']  = 'RED'
+					self.result['output'] = 'Default Trace is (%s) not enabled.' % (row[1])
+				else:
+					self.result['level']  = 'GREEN'
+					self.result['output'] = 'Default Trace is (%s) enabled.' % (row[1])
 		
 		return self.result
 	
