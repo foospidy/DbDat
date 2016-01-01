@@ -16,19 +16,18 @@ class check_configuration_skip_grant_tables():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		# if variable does not exist, so default green
 		self.result['level']  = 'GREEN'
-		self.result['output'] = 'Skip Grant Tables is disabled.'
+		self.result['output'] = 'Skip Grant Tables is not enabled.'
 
-		for row in rows:
-			for r in row:
+		for rows in results:
+			for row in rows:
 				if 'ON' == r[1]:
 					self.result['level']  = 'RED'
-					self.result['output'] = 'Skip Grant Tables is enabled.'
+					self.result['output'] = 'Skip Grant Tables is (%s) enabled.' % (row[1])
 				else:
-					self.result['level']  = 'GREEN'
-					self.result['output'] = 'Skip Grant Tables is disabled.'
+					self.result['output'] = 'Skip Grant Tables is (%s) not enabled.' % (row[1])
 			
 		return self.result
 	

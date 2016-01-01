@@ -14,13 +14,13 @@ class check_configuration_version():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		LATEST_VERSION = '5.7.9'
 		version_number = None
 		
-		for row in rows:
-			for r in rows:
-				version_number = r[0][0].split('-')[0]
+		for rows in results:
+			for row in rows:
+				version_number = row[0][0].split('-')[0]
 		
 		if version_number:
 			latest = LATEST_VERSION.split('.')

@@ -14,15 +14,16 @@ class check_configuration_tls_support():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):		
-		for row in rows:
-			for r in row:
-				if 'DISABLED' == r[1]:
+	def do_check(self, *results):
+
+		for rows in results:
+			for row in rows:
+				if 'DISABLED' == row[1]:
 					self.result['level']  = 'YELLOW'
-					self.result['output'] = 'SSL (TLS) is not supported by this database server.'
+					self.result['output'] = 'SSL (TLS) is (%s) not not enabled.' % (row[1])
 				else:
 					self.result['level']  = 'GREEN'
-					self.result['output'] = 'SSL (TLS) is not supported by this database server.'
+					self.result['output'] = 'SSL (TLS) is (%s) enabled.' % (row[1])
 
 		return self.result
 	

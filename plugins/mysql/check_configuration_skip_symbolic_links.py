@@ -16,15 +16,16 @@ class check_configuration_skip_symbolic_links():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):		
-		for row in rows:
-			for r in row:
-				if 'DISABLED' != r[1]:
+	def do_check(self, *results):
+
+		for rows in results:
+			for row in rows:
+				if 'DISABLED' != row[1]:
 					self.result['level']  = 'RED'
-					self.result['output'] = 'Symlinks is enabled.'
+					self.result['output'] = 'Symlinks is (%s) enabled.' % (row[1])
 				else:
 					self.result['level']  = 'GREEN'
-					self.result['output'] = 'Symlinks is disabled.'
+					self.result['output'] = 'Symlinks is (%s) not enabled.' % (row[1])
 			
 			return self.result
 	

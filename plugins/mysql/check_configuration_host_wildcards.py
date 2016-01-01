@@ -1,7 +1,7 @@
 class check_configuration_host_wildcards():
 	"""
 	check_configuration_host_wildcards
-	Are wildcards used when specifying allowed hosts?
+	Wildcard hosts should not be used.
 	"""
 	# References:
 
@@ -14,17 +14,19 @@ class check_configuration_host_wildcards():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):		
-		for row in rows:
-			if len(row) > 0:
+	def do_check(self, *results):
+		self.result['level']  = 'GREEN'
+		output                = ''
+		
+		for rows in results:
+			for row in rows:
 				self.result['level'] = 'RED'
-			else:
-				self.result['level']  = 'GREEN'
-				self.result['output'] = 'No wildcard hosts found.'
-			
-			for r in row:
-				output = output + 'user: ' + str(r[0]) + ' host: ' + str(r[1]) + '\n'
-				self.result['output'] = output
+				output += 'user: ' + str(row[0]) + ' host: ' + str(row[1]) + '\n'
+		
+		if 'GREEN' == self.result['level']:
+			output = 'No wildcard hosts found.'
+		
+		self.result['output'] = output
 		
 		return self.result
 	

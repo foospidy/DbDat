@@ -14,13 +14,13 @@ class check_information_banner():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		output               = ''
 		self.result['level'] = 'GREEN'
 		
-		for row in rows:
-			for r in row:
-				output = output + r[0] + ': ' + r[1] + "\n"
+		for rows in results:
+			for row in rows:
+				output += row[0] + ': ' + row[1] + "\n"
 		
 		self.result['output'] = output
 		

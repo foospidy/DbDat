@@ -15,15 +15,16 @@ class check_configuration_old_passwords():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):		
-		for row in rows:
-			for r in row:
-				if 'ON' == r[1]:
+	def do_check(self, *results):
+
+		for rows in results:
+			for row in rows:
+				if 'ON' == row[1]:
 					self.result['level']  = 'RED'
-					self.result['output'] = 'Old passwords is enabled.'
+					self.result['output'] = 'Old passwords is (%s) enabled.' % (row[1])
 				else:
 					self.result['level']  = 'GREEN'
-					self.result['output'] = 'Old passwords is disabled.'
+					self.result['output'] = 'Old passwords is (%s) not enabled.' % (row[1])
 			
 			return self.result
 	

@@ -15,15 +15,16 @@ class check_configuration_safe_user_create_session():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		self.result['level']  = 'RED'
-		self.result['output'] = 'Safe user create is not enabled.'
-            
-		for row in rows:
-			for r in row:
-				if 'NO_AUTO_CREATE_USER' == r[1]:
+	def do_check(self, *results):
+
+		for rows in results:
+			for row in rows:
+				if 'NO_AUTO_CREATE_USER' == row[0]:
 					self.result['level']  = 'GREEN'
-					self.result['output'] = 'Safe user create is enabled.'
+					self.result['output'] = 'Safe user create is (%s) enabled.' % (row[0])
+				else:
+					self.result['level']  = 'RED'
+					self.result['output'] = 'Safe user create is (%s) not enabled.' % (row[0])
 		
 		return self.result
 	

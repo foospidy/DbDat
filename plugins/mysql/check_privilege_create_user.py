@@ -15,15 +15,15 @@ class check_privilege_create_user():
     skip	= False
     result  = {}
 
-    def do_check(self, *rows):
+    def do_check(self, *results):
         if not self.skip:
             output               = ''
             self.result['level'] = 'GREEN'
 
-            for row in rows:
-                for r in row:					
+            for rows in results:
+				for row in rows:
                     self.result['level'] = 'RED'
-                    output += r[0] + '\t' + r[1] + '\n'
+                    output += row[0] + '\t' + row[1] + '\n'
             
             if 'GREEN' == self.result['level']:
                 output = 'No users found with CREATE USER privilege.'

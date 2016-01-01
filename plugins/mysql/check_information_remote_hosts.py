@@ -15,20 +15,19 @@ class check_information_remote_hosts():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
-		output  = ''
+	def do_check(self, *results):
+		self.result['level']  = 'GREEN'
+		output                = ''
 		
-		for row in rows:
-			if len(row) > 0:
+		for rows in results:
+			for row in rows:
 				self.result['level'] = 'YELLOW'
-				
-				for r in row:
-					output = output + 'user: ' + str(r[0]) + ' host: ' + str(r[1]) + '\n'
-					self.result['output'] = output
-				
-			else:
-				self.result['level']  = 'GREEN'
-				self.result['output'] = 'No remote hosts found.'
+				output +='user: ' + str(row[0]) + ' host: ' + str(row[1]) + '\n'
+		
+		if 'GREEN' == self.result['level']:
+			output = 'No remote hosts found.'
+			
+		self.result['output'] = output
 		
 		return self.result
 	
