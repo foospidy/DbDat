@@ -14,19 +14,19 @@ class check_user_anonymous_users():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		output  = ''
 		
-		for row in rows:
-			if len(row) > 0:
+		for rows in results:
+			if len(rows) > 0:
 				self.result['level'] = 'RED'
+				for row in rows:
+					output += row[0] + "\n"
 			else:
 				self.result['level']  = 'GREEN'
-				self.result['output'] = 'No anonymous users found.'
-			
-			for r in row:
-				output = output + r[0] + "\n"
-				self.result['output'] = output
+				output                = 'No anonymous users found.'
+
+			self.result['output'] = output
 		
 		return self.result
 	

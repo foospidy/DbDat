@@ -14,19 +14,19 @@ class check_user_any_host():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		output  = ''
 		
-		for row in rows:
-			if len(row) > 0:
+		for rows in results:
+			if len(rows) > 0:
 				self.result['level'] = 'RED'
+				for row in rows:
+					output += 'user: ' + str(row[0]) + ' host: ' + str(row[1]) + '\n'
 			else:
 				self.result['level']  = 'GREEN'
-				self.result['output'] = 'No users can connect from any host.'
-			
-			for r in row:
-				output = output + 'user: ' + str(r[0]) + ' host: ' + str(r[1]) + '\n'
-				self.result['output'] = output
+				output                = 'No users can connect from any host.'
+
+			self.result['output'] = output
 		
 		return self.result
 	

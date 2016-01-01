@@ -15,19 +15,24 @@ class check_privilege_user_grantables():
 	verbose = False
 	skip	= False
 	result  = {}
+	
+	appuser = None
 
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		if not self.skip:
 			output               = ''
 			self.result['level'] = 'GREEN'
 			
-			for row in rows:
-				for r in row:
+			for rows in results:
+				for row in rows:
 					if 0 == len(output):
 						output = output + 'grantee\ttable_catalog\tprivilege_type\n'
 					
 					self.result['level'] = 'YELLOW'
-					output = output + r[0] + '\t' + r[1] + '\t' + r[2] + "\n"
+					output += row[0] + '\t' + row[1] + '\t' + row[2] + "\n"
+			
+			if 'GREEN' == self.result['level']:
+				output = 'The application account (%s) has no grant privileges.' % (self.appuser)
 			
 			self.result['output'] = output
 		
@@ -37,7 +42,8 @@ class check_privilege_user_grantables():
 		print('Performing check: ' + self.TITLE)
 		
 		if '' != parent.appuser:
-			self.SQL = "SELECT grantee, table_catalog, privilege_type FROM information_schema.user_privileges WHERE is_grantable='YES' AND grantee LIKE '''" + parent.appuser + "''%'"
+			self.SQL     = "SELECT grantee, table_catalog, privilege_type FROM information_schema.user_privileges WHERE is_grantable='YES' AND grantee LIKE '''" + parent.appuser + "''%'"
+			self.appuser = parent.appuser
 		else:
 			self.skip             = True
 			self.result['level']  = 'GRAY'

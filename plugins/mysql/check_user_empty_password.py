@@ -14,19 +14,19 @@ class check_user_empty_password():
 	skip	= False
 	result  = {}
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		output  = ''
 		
-		for row in rows:
-			if len(row) > 0:
+		for rows in results:
+			if len(rows) > 0:
 				self.result['level'] = 'RED'
+				for row in rows:
+					output += 'user: ' + str(row[0]) + ' host: ' + str(row[1]) + '\n'
 			else:
 				self.result['level']  = 'GREEN'
-				self.result['output'] = 'No anonymous users found.'
+				output                = 'No anonymous users found.'
 			
-			for r in row:
-				output = output + 'user: ' + str(r[0]) + ' host: ' + str(r[1]) + '\n'
-				self.result['output'] = output
+			self.result['output'] = output
 		
 		return self.result
 	

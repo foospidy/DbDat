@@ -40,7 +40,7 @@ class check_user_weak_password():
 			
 			if match:
 				self.result['level']  = 'RED'
-				self.result['output'] = 'Weak password found!'
+				self.result['output'] = 'Weak password found for user %s' % (self.appuser)
 			else:
 				self.result['level']  = 'GREEN'
 				self.result['output'] = 'No weak password found.'

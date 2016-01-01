@@ -1,6 +1,6 @@
 class check_privilege_user_grants():
 	"""
-    check_privilege_user_grantables
+    check_privilege_user_grants
 	The application account's privileges.
 	"""
 	# References:
@@ -16,13 +16,13 @@ class check_privilege_user_grants():
 	result  = {}
 	dbcurs  = None
 	
-	def do_check(self, *rows):
+	def do_check(self, *results):
 		if not self.skip:
 			output  = ''
 			self.result['level'] = 'GREEN'
 			
-			for row in rows:
-				for r in row:
+			for rows in results:
+				for r in rows:
 					self.SQL = "SHOW GRANTS FOR '" + r[0] + "'@'" + r[1] + "'"
 					
 					self.dbcurs.execute(self.SQL)
@@ -55,7 +55,6 @@ class check_privilege_user_grants():
 		print('Performing check: ' + self.TITLE)
 		
 		if '' != parent.appuser:
-			#self.SQL = "SHOW GRANTS FOR '''" + parent.appuser + "'@'%'"
 			self.SQL    = "SELECT user, host FROM mysql.user WHERE user='" + parent.appuser + "'"
 			self.dbcurs = parent.dbcurs
 			
