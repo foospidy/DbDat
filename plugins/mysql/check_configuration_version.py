@@ -19,9 +19,7 @@ class check_configuration_version():
 		version_number = None
 		
 		for rows in results:
-			print rows
 			for row in rows:
-				print row
 				version_number = row[0].split('-')[0]
 		
 		if version_number:
