@@ -1,9 +1,14 @@
 class check_user_failed_logins():
 	"""
-	check_user_failed_logins
-	Check the number of allowed failed login attempts.
+	check_user_failed_logins:
+	Check the number of allowed failed login attempts. The failed_login_attempts
+    setting determines how many	failed login attempts are permitted before the
+    system locks the user's account. While different profiles can have different
+    and more restrictive settings, such as USERS and APPS, the minimum(s) 
+    recommended	here should	be set on the DEFAULT profile.
 	"""
 	# References:
+    # https://benchmarks.cisecurity.org/downloads/show-single/?file=oracle11gR2.210
 
 	TITLE    = 'Failed Login Attempts'
 	CATEGORY = 'Configuration'
@@ -16,11 +21,6 @@ class check_user_failed_logins():
 	
 	def do_check(self, *results):
 		output       = ''
-		ver_database = None
-		ver_plsql    = None
-		ver_core     = None
-		ver_tns      = None
-		ver_nlsrtl   = None
 		
 		for rows in results:
 			for row in rows:

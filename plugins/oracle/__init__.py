@@ -17,9 +17,13 @@ from check_configuration_sec_protocol_error_trace_action import *
 from check_configuration_sec_return_server_release_banner import *
 from check_configuration_sql92_security import *
 from check_configuration_trace_files_public import *
+from check_configuration_resource_limit import *
 from check_privilege_public_dangerous_packages import *
 from check_user_failed_logins import *
 from check_user_default_credentials import *
 from check_user_weak_password import *
 from check_user_sys_system_lock import *
 from check_user_users_with_defpwd import *
+from check_user_password_lock_time import *
+from check_user_password_life_time import *
+from check_user_password_reuse_max import *
