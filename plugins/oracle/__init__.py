@@ -27,3 +27,8 @@ from check_user_users_with_defpwd import *
 from check_user_password_lock_time import *
 from check_user_password_life_time import *
 from check_user_password_reuse_max import *
+from check_user_password_grace_time import *
+from check_user_dba_users_password import *
+from check_user_password_verify_function import *
+from check_user_no_users_assigned_default import *
+from check_user_sessions_per_user import *
