@@ -11,7 +11,7 @@ _Pull requests are very welcome!_ Checks are organized by database type (e.g. My
 
 1. Be sure you have the necessary dependencies installed for Python scripts to connect to your target database. See dependencies section below.
 2. Add a connection profile entry in the `etc/dbdat.conf` file for each database you want to assess.
-3. Run: `python dbdat.py -p <profie name>`
+3. Run: `python dbdat.py -p <profile name>`
 
 To view the report cd to reports directory and run `python -m SimpleHTTPServer 9000` (or choose a port number you prefer). Then open your browser and navigate to http://localhost:9000
 
