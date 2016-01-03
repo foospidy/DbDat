@@ -9,7 +9,7 @@ class check_user_no_users_assigned_default():
 	TITLE    = 'Users Assigned the DEFAULT Profile'
 	CATEGORY = 'User'
 	TYPE     = 'sql'
-	SQL    	 = "SELECT username FROM sys.dba_users WHERE profile='DEFAULT' AND account_status='OPEN' AND username NOT IN ('ANONYMOUS', 'CTXSYS', 'DBSNMP', 'EXFSYS', 'LBACSYS', 'MDSYS', 'MGMT_VIEW','OLAPSYS','OWBSYS', 'ORDPLUGINS', 'ORDSYS', 'OUTLN', 'SI_INFORMTN_SCHEMA','SYS', 'SYSMAN', 'SYSTEM', 'TSMSYS', 'WK_TEST', 'WKPROXY', 'WMSYS', 'XDB', 'CISSCAN');"
+	SQL    	 = "SELECT username FROM sys.dba_users WHERE profile='DEFAULT' AND account_status='OPEN' AND username NOT IN ('ANONYMOUS', 'CTXSYS', 'DBSNMP', 'EXFSYS', 'LBACSYS', 'MDSYS', 'MGMT_VIEW','OLAPSYS','OWBSYS', 'ORDPLUGINS', 'ORDSYS', 'OUTLN', 'SI_INFORMTN_SCHEMA','SYS', 'SYSMAN', 'SYSTEM', 'TSMSYS', 'WK_TEST', 'WKPROXY', 'WMSYS', 'XDB', 'CISSCAN')"
 	
 	verbose = False
 	skip	= False
