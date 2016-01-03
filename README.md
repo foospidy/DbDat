@@ -17,6 +17,9 @@ _Pull requests are very welcome!_ Checks are organized by database type (e.g. My
 To see a list of additional command line arguments run `python dbdat.py -h`
 
 ## Dependencies
+
+So far DbDat has been tested on Debian Linux and Windows 7 with Python 2.7
+
 #####MySQL support
 
 Run: `pip install MySQL-python`
