@@ -19,6 +19,7 @@ from check_configuration_sql92_security import *
 from check_configuration_trace_files_public import *
 from check_configuration_resource_limit import *
 from check_configuration_audit_option import *
+from check_configuration_audit_option_aud import *
 from check_privilege_public_dangerous_packages import *
 from check_privilege_select_any_dictionary import *
 from check_privilege_select_any_table import *
