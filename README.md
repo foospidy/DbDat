@@ -53,4 +53,8 @@ Run: `pip install pymssql`
 
 ## Developing Plugins
 
-todo... When adding a new check file an import statement needs to be added to the corresponding plugin directory's `__init__.py` file. The code pattern for the checks are fairly consistent. Until I can provide more detailed documentation, review the existing files to get a sense of how they are structured. Note the difference between checks of type sql and configuration_file. ...todo...
+### Plugin Folders
+
+### Check Files
+
+When adding a new check file an import statement needs to be added to the corresponding plugin directory's `__init__.py` file. The code pattern for the checks are fairly consistent. Until I can provide more detailed documentation, review the existing files to get a sense of how they are structured. Note the difference between checks of type sql and configuration_file.
