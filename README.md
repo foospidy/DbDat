@@ -46,7 +46,10 @@ Run: `pip install pymssql`
 - todo
 
 #####DB2 support
-- todo
+
+Run: `pip install ibm_db`
+
+- full support todo
 
 #####MongoDB support
 - todo
