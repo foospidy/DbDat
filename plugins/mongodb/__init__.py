@@ -5,3 +5,4 @@ from check_configuration_nohttpinterface import *
 from check_configuration_rest_interface import *
 from check_configuration_ssl import *
 from check_configuration_keyfile import *
+from check_configuration_noscripting import *
