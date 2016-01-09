@@ -47,7 +47,7 @@ Run: `pip install pymssql`
 
 #####DB2 support
 
-Run: `pip install ibm_db`
+Run: `pip install ibm_db` or `easy_install ibm_db`
 
 - full support todo
 
