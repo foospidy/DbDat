@@ -21,7 +21,7 @@ class check_configuration_listen_addresses():
 		output               = ''
 		self.result['level'] = 'GREEN'
 		
-		addresses = helper.get_pg_config_value(configuration_file, 'listen_addresses')
+		addresses = helper.get_config_value(configuration_file, 'listen_addresses')
 		
 		if not addresses:
 			# if option not found then postgresql defaults to localhost

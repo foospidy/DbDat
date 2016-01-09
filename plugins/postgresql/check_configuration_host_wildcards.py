@@ -22,7 +22,7 @@ class check_configuration_host_wildcards():
 		pg_hba_file_path     = None
 		self.result['level'] = 'GREEN'
 
-		pg_hba_file_path = helper.get_pg_config_value(configuration_file, 'hba_file')
+		pg_hba_file_path = helper.get_config_value(configuration_file, 'hba_file')
 
 		try:
 			if os.path.isfile(str(pg_hba_file_path)):

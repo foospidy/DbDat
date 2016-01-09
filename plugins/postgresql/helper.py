@@ -2,7 +2,7 @@ import ConfigParser
 import StringIO
 import os
 
-def get_pg_config_value(configuration_file, option, verbose=False):
+def get_config_value(configuration_file, option, verbose=False):
 	# postgresql config files do not have sections, so inject a dummy section
 	# see: https://stackoverflow.com/questions/2819696/parsing-properties-file-in-python/
 	config = StringIO.StringIO()
