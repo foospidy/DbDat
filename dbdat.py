@@ -14,6 +14,7 @@ class dbscan():
 	dbcurs  = None
 	dbtype  = None
 	dbhost  = None
+	dbport  = None
 	dbname  = None
 	dbuser  = None
 	dbpass  = None
@@ -60,9 +61,20 @@ class dbscan():
 				quit()
 			
 			elif 'mongodb' == self.dbtype:
+				from pymongo import MongoClient
+
+				self.db = MongoClient(self.dbhost, int(self.dbport))
+				
+				self.db[self.dbname].authenticate(self.dbuser, self.dbpass)
+				#print self.db.server_info()
+				#self.dbcurs = self.db[self.dbname].restaurants.find()
+				
+				#for doc in self.dbcurs:
+				#    print(doc)
+
 				#TODO
-				print("MongoDB is not yet supported")
-				quit()
+				#print("MongoDB is not yet supported")
+				#quit()
 			
 			else:
 				raise Exception('Unknown database type!')
@@ -108,6 +120,13 @@ class dbscan():
 			if 'configuration_file' == c.TYPE:
 				result['result'] = c.do_check(self.config)
 			
+			elif 'nosql' == c.TYPE:
+				try:
+			         result['result'] = c.do_check()
+
+				except Exception as e:
+				    print(e)
+                  
 			else:
 				try:
 					# perform database check and get result
@@ -149,7 +168,7 @@ class dbscan():
 			report_file.write(']}')
 
 	def describe_scan(self):
-		return 'Assessment: %s database %s on %s with the user %s and %s queries.' % (self.dbtype, self.dbname, self.dbhost, self.dbuser, str(len(self.checks)))
+		return 'Assesment: %s database %s on %s with the user %s and %s queries.' % (self.dbtype, self.dbname, self.dbhost, self.dbuser, str(len(self.checks)))
 	
 	def load_class(self, name):
 		components = name.split('.')
@@ -171,7 +190,7 @@ class dbscan():
 				self.checks.append(file[:-3])
 
 if __name__ == "__main__":
-    SUPPORTED_DB = ('mysql', 'postgresql', 'oracle', 'mssql')
+    SUPPORTED_DB = ('mysql', 'postgresql', 'oracle', 'mssql', 'mongodb')
 
     # parse command line arguments
     parser = argparse.ArgumentParser(description='At minimum, the -p or -l option must be specified.')
@@ -219,6 +238,7 @@ if __name__ == "__main__":
 
     scan.verbose = arguments.v
     scan.dbhost  = configuration.get(arguments.p, 'server')
+    scan.dbport  = configuration.get(arguments.p, 'port')
     scan.dbname  = configuration.get(arguments.p, 'database')
     scan.config  = configuration.get(arguments.p, 'configuration_file')
     scan.report  = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'reports', 'data', 'report.json')  # todo - dynamic file naming
