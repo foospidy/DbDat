@@ -49,10 +49,11 @@ Run: `pip install pymssql`
 
 Run: `pip install ibm_db` or `easy_install ibm_db`
 
-- full support todo
+- support in progress
 
 #####MongoDB support
-- todo
+
+Run: `pip install mongodb`
 
 ## Developing Plugins
 
