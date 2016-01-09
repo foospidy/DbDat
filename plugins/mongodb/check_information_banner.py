@@ -6,7 +6,7 @@ class check_information_banner():
     """
     # References:
 
-    TITLE    = 'Version Check'
+    TITLE    = 'Server Info'
     CATEGORY = 'Information'
     TYPE     = 'nosql'
     SQL    	 = ''
