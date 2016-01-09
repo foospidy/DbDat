@@ -3,9 +3,9 @@
 
 DbDat performs numerous checks on a database to evaluate security. The categories of checks performed are configuration, privileges, users, and information. Checks are performed by running SQL queries or database reading configuration files. The goal of this tool is to highlight issues that need immediate attention and identify configuration settings that should be reviewed for appropriateness. This tool is not for identifying SQL Injection vulnerabilities in an application, there are good tools available for that already (e.g. https://github.com/sqlmapproject and https://github.com/tcstool/NoSQLMap). Also, this tool does not attempt to determine what CVEs may impact the version of the target database. Rather, this tool can help you better understand the potential impact of a successful SQL Injection attack due to weak configuration or access controls. A majority of the checks are from the CIS Security Benchmarks for databases, so thanks to the CIS and the benchmark documents can be found here: https://benchmarks.cisecurity.org/downloads/browse/index.cfm?category=benchmarks.servers.database. I highly recommend downloading the benchmark document for your target database as it contains additional information about the checks performed.
 
-**Creating New Database Checks**
+**Developing New Database Checks**
 
-_Pull requests are very welcome!_ Checks are organized by database type (e.g. MySQL, Oracle, MS SQL, etc.) in the plugins folder. Each check is a single python file. When adding a new check file an import statement needs to be added to the corresponding plugin directory's `__init__.py` file. The code pattern for the checks are fairly consistent. Until I can provide more detailed documentation, review the existing files to get a sense of how they are structured. Note the difference between checks of type sql and configuration_file.
+_Pull requests are very welcome!_ Checks are organized by database type (e.g. MySQL, Oracle, MS SQL, etc.) in the plugins folder. Each check is a single python file that must have `check_` at the begining of the file name. Each file contains a class with a `do_check` method. This method is the primary logic for checks. The quick way to get started is to copy an existing check file and modify it. However, see the Developing Plugins section below for more details.
 
 ## Running DbDat
 
@@ -46,7 +46,18 @@ Run: `pip install pymssql`
 - todo
 
 #####DB2 support
-- todo
+
+Run: `pip install ibm_db` or `easy_install ibm_db`
+
+- full support todo
 
 #####MongoDB support
 - todo
+
+## Developing Plugins
+
+### Plugin Folders
+
+### Check Files
+
+When adding a new check file an import statement needs to be added to the corresponding plugin directory's `__init__.py` file. The code pattern for the checks are fairly consistent. Until I can provide more detailed documentation, review the existing files to get a sense of how they are structured. Note the difference between checks of type sql and configuration_file.

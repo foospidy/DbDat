@@ -228,6 +228,7 @@ if __name__ == "__main__":
 
     except ConfigParser.ParsingError as e:
         print('Error parsing configuration file.')
+        print(e)
         quit()
     except ConfigParser.NoSectionError as e:
         print('The database profile "%s" does not exist.' % (arguments.p))
