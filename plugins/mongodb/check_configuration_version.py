@@ -8,7 +8,7 @@ class check_configuration_version():
     TITLE    = 'Version Check'
     CATEGORY = 'Information'
     TYPE     = 'nosql'
-    SQL    	 = ''
+    SQL    	 = None # SQL not needed... because this is NoSQL.
 
     verbose = False
     skip	= False

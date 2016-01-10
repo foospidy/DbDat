@@ -12,7 +12,7 @@ class check_configuration_keyfile():
     TITLE    = 'Key File for Replica Set'
     CATEGORY = 'Configuration'
     TYPE     = 'configuration_file'
-    SQL    	 = None
+    SQL    	 = None # SQL not needed... because this is NoSQL.
 
     verbose = False
     skip	= False

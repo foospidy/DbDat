@@ -14,7 +14,7 @@ class check_configuration_ssl():
     TITLE    = 'Enable SSL'
     CATEGORY = 'Configuration'
     TYPE     = 'configuration_file'
-    SQL    	 = None
+    SQL    	 = None # SQL not needed... because this is NoSQL.
 
     verbose = False
     skip	= False

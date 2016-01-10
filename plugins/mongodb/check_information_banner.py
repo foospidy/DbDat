@@ -1,4 +1,3 @@
-import json
 class check_information_banner():
     """
     check_configuration_version:
@@ -9,11 +8,12 @@ class check_information_banner():
     TITLE    = 'Server Info'
     CATEGORY = 'Information'
     TYPE     = 'nosql'
-    SQL    	 = ''
+    SQL    	 = None # SQL not needed... because this is NoSQL.
 
     verbose = False
     skip	= False
     result  = {}
+    
     db      = None
 
     def do_check(self):

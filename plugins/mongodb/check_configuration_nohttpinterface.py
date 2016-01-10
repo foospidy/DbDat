@@ -11,10 +11,10 @@ class check_configuration_nohttpinterface():
     # References:
     # http://blog.mongodirector.com/10-tips-to-improve-your-mongodb-security/
 
-    TITLE    = 'HTTP Status Interface'
+    TITLE    = 'No HTTP Interface'
     CATEGORY = 'Configuration'
     TYPE     = 'configuration_file'
-    SQL    	 = None
+    SQL    	 = None # SQL not needed... because this is NoSQL.
 
     verbose = False
     skip	= False
@@ -25,13 +25,13 @@ class check_configuration_nohttpinterface():
 
         if None == value:
             self.result['level']  = 'YELLOW'
-            self.result['output'] = 'HTTP Status Interface setting not found.'
+            self.result['output'] = 'No HTTP Interface setting not found.'
         elif 'true' == value.lower():
             self.result['level']  = 'GREEN'
-            self.result['output'] = 'HTTP Status Interface is (%s) enabled.' % (value)
+            self.result['output'] = 'No HTTP Interface is (%s) enabled.' % (value)
         else: 
             self.result['level']  = 'RED'
-            self.result['output'] = 'HTTP Status Interface is (%s) not enabled.' % (value)
+            self.result['output'] = 'No HTTP Interface is (%s) not enabled.' % (value)
 
         return self.result
 	

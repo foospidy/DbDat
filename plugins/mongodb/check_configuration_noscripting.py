@@ -13,7 +13,7 @@ class check_configuration_noscripting():
     TITLE    = 'No Scripting'
     CATEGORY = 'Configuration'
     TYPE     = 'configuration_file'
-    SQL    	 = None
+    SQL    	 = None # SQL not needed... because this is NoSQL.
 
     verbose = False
     skip	= False

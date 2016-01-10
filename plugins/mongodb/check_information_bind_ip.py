@@ -13,7 +13,7 @@ class check_information_bind_ip():
     TITLE    = 'Bind IP'
     CATEGORY = 'Information'
     TYPE     = 'configuration_file'
-    SQL    	 = None
+    SQL    	 = None # SQL not needed... because this is NoSQL.
 
     verbose = False
     skip	= False

@@ -11,7 +11,7 @@ class check_configuration_auth():
     TITLE    = 'Enable Auth'
     CATEGORY = 'Configuration'
     TYPE     = 'configuration_file'
-    SQL    	 = None
+    SQL    	 = None # SQL not needed... because this is NoSQL.
 
     verbose = False
     skip	= False
