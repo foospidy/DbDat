@@ -223,7 +223,7 @@ if __name__ == "__main__":
         
         # get database profile and check for supported db type
         if configuration.get(arguments.p, 'database_type') not in SUPPORTED_DB:
-            print 'Invalid database! Supported databases are %s' % (SUPPORTED_DB)
+            print 'Invalid database! Supported databases are %s' % (str(SUPPORTED_DB))
             quit()
 
     except ConfigParser.ParsingError as e:
