@@ -55,6 +55,10 @@ Run: `pip install ibm_db` or `easy_install ibm_db`
 
 Run: `pip install mongodb`
 
+#####CouchDB support
+
+Run: `pip install couchdb`
+
 ## Developing Plugins
 
 ### Plugin Folders
