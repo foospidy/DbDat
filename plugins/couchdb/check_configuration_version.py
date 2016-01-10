@@ -16,28 +16,28 @@ class check_configuration_version():
     db      = None
 
     def do_check(self):
-        LATEST_VERSION = '3.2.0'
-        version_number = self.db.server_info()['versionArray']
-        string_version = self.db.server_info()['version']
+        LATEST_VERSION = '1.6.1'
+        version_number = self.db.version()
         
         if version_number:
             latest = LATEST_VERSION.split('.')
+            thisdb = version_number.split('.')
 
-            if int(version_number[0]) < int(latest[0]):
+            if int(thisdb[0]) < int(latest[0]):
                 self.result['level']  = 'RED'
-                self.result['output'] = '%s very old version.' % (string_version)
+                self.result['output'] = '%s very old version.' % (version_number)
                 
-            elif int(version_number[1]) < int(latest[1]):
+            elif int(thisdb[1]) < int(latest[1]):
                 self.result['level']  = 'YELLOW'
-                self.result['output'] = '%s old version.' % (string_version)
+                self.result['output'] = '%s old version.' % (version_number)
                 
-            elif int(version_number[2]) < int(latest[2]):
+            elif int(thisdb[2]) < int(latest[2]):
                 self.result['level']  = 'YELLOW'
-                self.result['output'] = '%s slightly old version.' % (string_version)
+                self.result['output'] = '%s slightly old version.' % (version_number)
                 
             else:
                 self.result['level']  = 'GREEN'
-                self.result['output'] = '%s recent version.' % (string_version)
+                self.result['output'] = '%s recent version.' % (version_number)
         
         return self.result
 	
