@@ -4,3 +4,7 @@ from check_configuration_version import *
 from check_configuration_admins import *
 from check_configuration_verify_auth import *
 from check_user_admins_weak_password import *
+from check_configuration_allow_jsonp import *
+from check_configuration_log_level import *
+from check_configuration_cors import *
+from check_configuration_ssl import *
