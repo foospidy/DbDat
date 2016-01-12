@@ -52,13 +52,16 @@ class dbscan():
 
             elif 'sybase' == self.dbtype:
                 #TODO
-                print("Sybase is not yet supported")
+                print("Sybase is not yet supported.")
                 quit()
 
             elif 'db2' == self.dbtype:
-                #TODO
-                print("DB2 is not yet supported")
-                quit()
+                import ibm_db
+                import ibm_db_dbi
+
+                ibm_db_conn = ibm_db.connect('DATABASE=' + self.dbname + ';HOSTNAME=' + self.dbhost + ';PORT=' + self.dbport + ';PROTOCOL=TCPIP;UID=' + self.dbuser + ';PWD=' + self.dbpass + ';"', '', '')
+                self.db           = ibm_db_dbi.Connection(ibm_db_conn)
+                self.dbcurs     = self.db.cursor()
 
             elif 'mongodb' == self.dbtype:
                 from pymongo import MongoClient
@@ -70,12 +73,12 @@ class dbscan():
             elif 'couchdb' == self.dbtype:
                 import couchdb
                 from urlparse import urlparse
-                
+
                 url = urlparse(self.dbhost)
-                
+
                 if 'http' == url.scheme:
                     print('Warning: You are authenticating over an insecure (http://) connection!')
-                
+
                 self.db = couchdb.Server(url.scheme + '://' + self.dbuser + ':' + self.dbpass + '@' + url.hostname + ':' + self.dbport)
 
             else:
@@ -174,13 +177,13 @@ class dbscan():
         return 'Assesment: %s database %s on %s with the user %s and %s queries.' % (self.dbtype, self.dbname, self.dbhost, self.dbuser, str(len(self.checks)))
 
     def load_class(self, name):
-        components = name.split('.')
-        module     = __import__(components[0])
+		components = name.split('.')
+		module     = __import__(name)
 
-        for component in components[1:]:
-            module = getattr(module, component)
+		for component in components[1:]:
+			module = getattr(module, component)
 
-        return module
+		return module
 
     def __init__(self, dbtype=None):
         self.dbtype = dbtype
@@ -193,7 +196,7 @@ class dbscan():
                 self.checks.append(file[:-3])
 
 if __name__ == "__main__":
-    SUPPORTED_DB = ('mysql', 'postgresql', 'oracle', 'mssql', 'mongodb', 'couchdb')
+    SUPPORTED_DB = ('mysql', 'postgresql', 'oracle', 'mssql', 'db2', 'mongodb', 'couchdb')
 
     # parse command line arguments
     parser = argparse.ArgumentParser(description='At minimum, the -p or -l option must be specified.')
