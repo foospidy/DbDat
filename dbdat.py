@@ -69,16 +69,22 @@ class dbscan():
 
             elif 'couchdb' == self.dbtype:
                 import couchdb
+                from urlparse import urlparse
                 
-                self.db = couchdb.Server(self.dbhost + ':' + self.dbport)
+                url = urlparse(self.dbhost)
+                
+                if 'http' == url.scheme:
+                    print('Warning: You are authenticating over an insecure (http://) connection!')
+                
+                self.db = couchdb.Server(url.scheme + '://' + self.dbuser + ':' + self.dbpass + '@' + url.hostname + ':' + self.dbport)
 
             else:
                 raise Exception('Unknown database type!')
 
         except Exception as e:
-            print 'Error connecting to database!'
-            print 'Error detail:'
-            print '%s' % (str(e))
+            print('Error connecting to database!')
+            print('Error detail:')
+            print('%s' % str(e))
             quit()
 
     def disconnect(self):
@@ -220,7 +226,7 @@ if __name__ == "__main__":
 
         # get database profile and check for supported db type
         if configuration.get(arguments.p, 'database_type') not in SUPPORTED_DB:
-            print 'Invalid database! Supported databases are %s' % (str(SUPPORTED_DB))
+            print('Invalid database! Supported databases are %s' % str(SUPPORTED_DB))
             quit()
 
     except ConfigParser.ParsingError as e:
