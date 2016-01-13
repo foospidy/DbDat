@@ -92,16 +92,18 @@ A check file should implemented as following:
 
 ```
 # (OPTIONAL): Add import statements, include any necessary modules to support this check
-import ConfigParser
+import helper
 
 # (REQUIRED): Define class, the class must have the same name as its file name.
-class check_configuration_client_password():
+class check_configuration_evaluate_something():
+
   # (REQUIRED): Add documentation, provide information on this check as this will be displayed in the report.
 	"""
-	check_configuration_client_password:
-  The [Client] section of the MySQL configuration file allows setting a password
-  to be used. Verify this option is not used.
+	check_configuration_evaluate_something:
+	The [Client] section of the MySQL configuration file allows setting a password
+	to be used. Verify this option is not used.
 	"""
+
   # (OPTIONAL): Add references, this is only comments in code, adding references is helpful to others.
   # References:
   # https://www.percona.com/blog/2012/12/28/auditing-login-attempts-in-mysql/
@@ -120,29 +122,28 @@ class check_configuration_client_password():
 	# (OPTIONAL): Add any custom variables specific to this check 
 	custom_var = 'custom_val'
 	
-	# (REQUIRED): Define the do_check method, this is the actual check logic and is called by the main program.
-	def do_check(self, configuration_file):
-		configuration = ConfigParser.ConfigParser()
 	
-		try:
-			configuration.read(configuration_file)
-			
-		except ConfigParser.ParsingError as e:
-			if self.verbose:
-				print('Ignoring parsing errors:\n' + str(e))
+	# (REQUIRED): Define the do_check method, this is the actual check logic and is called by the main program.
+	def do_check(self, *results):
+	
+		# (REQUIRED): check logic goes here, besure to set values for self.result['level'] and self.result['output']
 		
-		try:
-			general_log_file = configuration.get('client', 'password')
-            
-			# if the option is found, then red!
-			self.result['level']  = 'RED'
-			self.result['output'] = 'Client password is in use.'
-		except ConfigParser.NoOptionError as e:
-			self.result['level']  = 'GREEN'
-			self.result['output'] = 'Client password not used.'
+		# Results from the SQL variable can be processed using:
+		for rows in results:
+			for row in rows:
 		
-		# (REQUIRED):
-		# Always set the self.result['level'] and self.result['output'] variables before returning.
+			# (REQUIRED):
+			# Always set the self.result['level'] and self.result['output'] variables before returning.
+			if row[0] == 'bad':
+				self.result['level']  = 'RED'
+				self.result['output'] = 'Result is %s' % (row[0])
+			elif row[0] == 'needs review':
+				self.result['level']  = 'YELLOW'
+				self.result['output'] = 'Result is %s' % (row[0])
+			else:
+				self.result['level']  = 'GREEN'
+				self.result['output'] = 'Result is %s' % (row[0])
+		
 		# Always return self.result
 		return self.result
 	
