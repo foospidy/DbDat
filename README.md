@@ -83,3 +83,4 @@ When adding a new check file an import statement needs to be added to the corres
 
 - SQLMap - https://github.com/sqlmapproject
 - NoSQLMap - https://github.com/tcstool/NoSQLMap
+- Audit CouchDB - https://github.com/iriscouch/audit_couchdb
