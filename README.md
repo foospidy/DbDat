@@ -28,7 +28,7 @@ The report organizes results by levels, which are RED, YELLOW, ORANGE, GRAY, and
 - YELLOW - items needing review.
 - ORANGE - checks that failed to execute properly.
 - GRAY - items that may not be applicable to the version of the database being assessed.
-- GREEN - itesm that passed
+- GREEN - items that passed
 
 ## Dependencies
 
