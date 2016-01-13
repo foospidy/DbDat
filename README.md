@@ -90,15 +90,15 @@ When adding a new check file an import statement needs to be added to the corres
 
 There are different "types" of checks that can be defined. The check type is determined by the `TYPE` variable and can be sql, configurtion_file, nosql, or clp. Below are example implementations for the different check type scnearios.
 
-##### sql check
+#### sql check
 
 For sql checks the do_check method signature must be: `do_check(self, *results)`
 
-_Typical sql check_
+##### Typical sql check
 
 https://github.com/foospidy/DbDat/blob/master/plugins/mysql/check_user_empty_password.py
 
-_sql check where SQL variable is set on init_
+##### sql check where SQL variable is set on init
 
 In this example we need the `appuser` variable from the calling parent class. The appuser needs to be dynamically added to the sql statement, so the `self.SQL` varaible is being set in the `__init__` method. Also, since this do_check method needs to execute the sql we need the DB cursur (connection) as well, this is set in the `__init_-` method with `self.dbcurs = parent.dbcurs`.
 
