@@ -88,7 +88,11 @@ When adding a new check file an import statement needs to be added to the corres
 
 #### Check File
 
-A check file should implemented as following:
+There are different "types" of checks that can be defined. The check type is determined by the `TYPE` variable and can be sql, configurtion_file, nosql, or clp.
+
+
+
+A check file should be implemented as following:
 
 ```
 # (OPTIONAL): Add import statements, include any necessary modules to support this check
