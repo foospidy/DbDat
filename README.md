@@ -100,10 +100,25 @@ https://github.com/foospidy/DbDat/blob/master/plugins/mysql/check_user_empty_pas
 
 ##### sql check where SQL variable is set on init
 
-In this example we need the `appuser` variable from the calling parent class. The appuser needs to be dynamically added to the sql statement, so the `self.SQL` varaible is being set in the `__init__` method. Also, since this do_check method needs to execute the sql we need the DB cursur (connection) as well, this is set in the `__init_-` method with `self.dbcurs = parent.dbcurs`.
+In this example we need the `appuser` variable from the calling parent class. The appuser needs to be dynamically added to the sql statement, so the `self.SQL` varaible is being set in the `__init__` method. Also, since this do_check method needs to execute the sql we need the DB cursur (connection) as well, this is set in the `__init__` method with `self.dbcurs = parent.dbcurs`.
 
 https://github.com/foospidy/DbDat/blob/master/plugins/mysql/check_privilege_user_grants.py
 
+#### configuration_file check
+
+For configuration_file checks the do_check method signature must be: `do_check(self, configuration_file)`
+
+##### Parsing configuration files that are compliant with Python's ConfigParser module
+
+https://github.com/foospidy/DbDat/blob/master/plugins/mysql/check_configuration_general_log.py
+
+##### Parsing configuration files that are not compliant with Python's ConfigParser module
+
+In this example, the PostgreSQL configuration file does not have sections (e.g. `[section_name]`), so the helper module in the PostgreSQL folder contains a function that handles this. See the `get_config_value` function defined in `helper.py`.
+
+https://github.com/foospidy/DbDat/blob/master/plugins/postgresql/check_configuration_host_wildcards.py
+
+For other configuration file formats you will need to define your own parsing logic.
 
 
 A check file should be implemented as following:
