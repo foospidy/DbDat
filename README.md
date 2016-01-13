@@ -1,7 +1,7 @@
 # DbDat
 **Db Database Assessment Tool**
 
-DbDat performs numerous checks on a database to evaluate security. The categories of checks performed are configuration, privileges, users, and information. Checks are performed by running SQL queries or database reading configuration files. The goal of this tool is to highlight issues that need immediate attention and identify configuration settings that should be reviewed for appropriateness. This tool is not for identifying SQL Injection vulnerabilities in an application, there are good tools available for that already (e.g. https://github.com/sqlmapproject and https://github.com/tcstool/NoSQLMap). Also, this tool does not attempt to determine what CVEs may impact the version of the target database. Rather, this tool can help you better understand the potential impact of a successful SQL Injection attack due to weak configuration or access controls. A majority of the checks are from the CIS Security Benchmarks for databases, so thanks to the CIS and the benchmark documents can be found here: https://benchmarks.cisecurity.org/downloads/browse/index.cfm?category=benchmarks.servers.database. I highly recommend downloading the benchmark document for your target database as it contains additional information about the checks performed.
+DbDat performs numerous checks on a database to evaluate security. The categories of checks performed are configuration, privileges, users, and information. Checks are performed by running queries or reading database configuration files. The goal of this tool is to highlight issues that need immediate attention and identify configuration settings that should be reviewed for appropriateness. This tool is not for identifying SQL Injection vulnerabilities in an application, there are good tools available for that already (e.g. https://github.com/sqlmapproject). Also, this tool does not attempt to determine what CVEs may impact the version of the target database (but may do so in the future - maybe). Rather, this tool can help you better understand the potential impact of a successful SQL Injection attack due to weak configuration or access controls. A majority of the checks are from the CIS (https://cisecurity.org) Security Benchmarks for databases, so thanks to the CIS! The benchmark documents can be found here: https://benchmarks.cisecurity.org/downloads/browse/index.cfm?category=benchmarks.servers.database. I highly recommend downloading the benchmark document for your target database as it contains additional information about the checks performed.
 
 **Developing New Database Checks**
 
@@ -64,3 +64,8 @@ Run: `pip install couchdb`
 ### Check Files
 
 When adding a new check file an import statement needs to be added to the corresponding plugin directory's `__init__.py` file. The code pattern for the checks are fairly consistent. Until I can provide more detailed documentation, review the existing files to get a sense of how they are structured. Note the difference between checks of type sql and configuration_file.
+
+## Othere Database Security Tools
+
+- SQLMap - https://github.com/sqlmapproject
+- NoSQLMap - https://github.com/tcstool/NoSQLMap
