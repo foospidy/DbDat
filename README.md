@@ -32,7 +32,7 @@ The report organizes results by levels, which are RED, YELLOW, ORANGE, GRAY, and
 
 ## Dependencies
 
-So far DbDat has been tested on Debian Linux and Windows 7 with Python 2.7
+So far DbDat has been tested on Debian Linux, CentOS Linux, and Windows 7 with Python 2.7
 
 #####MySQL support
 
