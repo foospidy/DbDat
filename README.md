@@ -49,8 +49,6 @@ Run: `pip install pymssql`
 
 Run: `pip install ibm_db` or `easy_install ibm_db`
 
-- support in progress
-
 #####MongoDB support
 
 Run: `pip install mongodb`
