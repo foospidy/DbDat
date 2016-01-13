@@ -75,11 +75,18 @@ Run: `pip install couchdb`
 
 ### Plugin Folders
 
-Within the plugins folder there is a folder for each type of database, and each folder contains check files.
+Within the plugins folder there is a folder for each type of database, and each folder contains check files. This is a very simple structure, but you can also browse the plugins folder to get familiar https://github.com/foospidy/DbDat/tree/master/plugins
+
+The database folders will contain:
+- `__init.py` - The init file has an import statement for each check file.
+- `check_` files - These are the actual files performing the database checks. The file and the class defined within the file should have the same name.
+- `helper.py` - A file containing common functions. Check files can import `helper.py` to leverage common functions.
 
 ### Check Files
 
-When adding a new check file an import statement needs to be added to the corresponding plugin directory's `__init__.py` file. The code pattern for the checks are fairly consistent. Until I can provide more detailed documentation, review the existing files to get a sense of how they are structured. Note the difference between checks of type sql and configuration_file.
+When adding a new check file an import statement needs to be added to the corresponding plugin directory's `__init__.py` file. The code pattern for the checks are fairly consistent. Review the existing files to get a sense of how they are structured. Note the difference between checks of type sql and configuration_file.
+
+#### Check File
 
 ## Other Database Security Tools
 
