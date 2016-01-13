@@ -151,6 +151,7 @@ class check_configuration_evaluate_something():
 	def __init__(self, parent):
 		print('Performing check: ' + self.TITLE)
 		
+		# get values from the parent calling class
 		self.verbose = parent.verbose
 ```
 
