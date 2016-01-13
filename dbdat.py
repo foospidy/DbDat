@@ -111,67 +111,79 @@ class dbscan():
         count = 0 # counter for reporting
 
         for database_check in self.checks:
-            # load a database check
-            check = self.load_class('plugins.' + self.dbtype + '.' + database_check)
-            c     = check(self)
+			# load a database check
+			check = self.load_class('plugins.' + self.dbtype + '.' + database_check)
+			c     = check(self)
 
-            if self.verbose:
-                print(c.__doc__)
+			if self.verbose:
+				print(c.__doc__)
 
-            # first get title, category, and description
-            result['title']       = c.TITLE
-            result['category']    = c.CATEGORY
-            result['description'] = c.__doc__
+			# first get title, category, and description
+			result['title']       = c.TITLE
+			result['category']    = c.CATEGORY
+			result['description'] = c.__doc__
 
-            if 'configuration_file' == c.TYPE:
-                result['result'] = c.do_check(self.config)
+			if 'configuration_file' == c.TYPE:
+				result['result'] = c.do_check(self.config)
 
-            elif 'nosql' == c.TYPE:
-                try:
-                    result['result'] = c.do_check()
+			elif 'nosql' == c.TYPE:
+				try:
+					result['result'] = c.do_check()
 
-                except Exception as e:
-                    print(e)
+				except Exception as e:
+					print(e)
 
-            else:
-                try:
-                    # perform database check and get result
-                    self.dbcurs.execute(c.SQL)
+			elif 'clp' == c.TYPE:
+				# command line processor option for db2
+				import subprocess
+				
+				try:
+					p                = subprocess.Popen(c.CMD, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+					out, err         = p.communicate()
+					result['result'] = c.do_check(out)
+				
+				except Exception as e:
+					print(e)
 
-                    rows             =   self.dbcurs.fetchall()
-                    result['result'] = c.do_check(rows)
+			else:
+				try:
+					# perform database check and get result
+					self.dbcurs.execute(c.SQL)
 
-                except Exception as e:
-                    # sql execution error possible, issue rollback and capture error in results
-                    if 'postgresql' == self.dbtype:
-                        self.db.rollback()
+					rows             =   self.dbcurs.fetchall()
+					result['result'] = c.do_check(rows)
 
-                    c.result['level']  = 'ORANGE'
-                    c.result['output'] = str(e)
-                    result['result']   = c.result
+				except Exception as e:
+					# sql execution error possible, issue rollback and capture error in results
+					if 'postgresql' == self.dbtype:
+						self.db.rollback()
 
-                    if self.verbose:
-                        print('\tException: %s' % str(e))
+					c.result['level']  = 'ORANGE'
+					c.result['output'] = str(e)
+					result['result']   = c.result
 
-            if self.verbose:
-                print('Result:')
-                pp.pprint(result)
+					if self.verbose:
+						print('\tException: %s' % str(e))
 
-            # write result to report file
-            with open(self.report, 'a') as report_file:
-                comma = ''
+				if self.verbose:
+					print('Result:')
+					pp.pprint(result)
 
-                if count > 0:
-                    comma = ','
+				# write result to report file
+				with open(self.report, 'a') as report_file:
+					comma = ''
 
-                # dump them JSONs
-                report_file.write(comma + json.dumps(result))
+					if count > 0:
+						comma = ','
 
-                count += 1
+					# dump them JSONs
+					report_file.write(comma + json.dumps(result))
 
-        # finalize report file
-        with open(self.report, 'a') as report_file:
-            report_file.write(']}')
+					count += 1
+
+			# finalize report file
+			with open(self.report, 'a') as report_file:
+				report_file.write(']}')
 
     def describe_scan(self):
         return 'Assesment: %s database %s on %s with the user %s and %s queries.' % (self.dbtype, self.dbname, self.dbhost, self.dbuser, str(len(self.checks)))
