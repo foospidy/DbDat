@@ -90,7 +90,7 @@ When adding a new check file an import statement needs to be added to the corres
 
 There are different "types" of checks that can be defined. The check type is determined by the `TYPE` variable and can be sql, configurtion_file, nosql, or clp. Below are example implementations for the different check type scnearios.
 
-#### sql check
+#### sql check type
 
 For sql checks the do_check method signature must be: `do_check(self, *results)`
 
@@ -104,7 +104,7 @@ In this example we need the `appuser` variable from the calling parent class. Th
 
 https://github.com/foospidy/DbDat/blob/master/plugins/mysql/check_privilege_user_grants.py
 
-#### configuration_file check
+#### configuration_file check type
 
 For configuration_file checks the do_check method signature must be: `do_check(self, configuration_file)`
 
@@ -120,6 +120,9 @@ https://github.com/foospidy/DbDat/blob/master/plugins/postgresql/check_configura
 
 For other configuration file formats you will need to define your own parsing logic.
 
+#### nosql check type
+
+#### clp check type
 
 A check file should be implemented as following:
 
