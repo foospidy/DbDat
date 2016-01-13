@@ -88,6 +88,71 @@ When adding a new check file an import statement needs to be added to the corres
 
 #### Check File
 
+A check file should implemented as following:
+
+```
+# (OPTIONAL): Add import statements, include any necessary modules to support this check
+import ConfigParser
+
+# (REQUIRED): Define class, the class must have the same name as its file name.
+class check_configuration_client_password():
+  # (REQUIRED): Add documentation, provide information on this check as this will be displayed in the report.
+	"""
+	check_configuration_client_password:
+  The [Client] section of the MySQL configuration file allows setting a password
+  to be used. Verify this option is not used.
+	"""
+  # (OPTIONAL): Add references, this is only comments in code, adding references is helpful to others.
+  # References:
+  # https://www.percona.com/blog/2012/12/28/auditing-login-attempts-in-mysql/
+  # https://dev.mysql.com/doc/refman/5.7/en/password-security-user.html
+
+  # (REQUIRED): Add the standard set of variables 
+	TITLE    = 'Client Password'
+	CATEGORY = 'Configuration'
+	TYPE     = 'configuration_file'
+	SQL    	 = None
+	
+	verbose = False
+	skip	= False
+	result  = {}
+	
+	# (OPTIONAL): Add any custom variables specific to this check 
+	custom_var = 'custom_val'
+	
+	# (REQUIRED): Define the do_check method, this is the actual check logic and is called by the main program.
+	def do_check(self, configuration_file):
+		configuration = ConfigParser.ConfigParser()
+	
+		try:
+			configuration.read(configuration_file)
+			
+		except ConfigParser.ParsingError as e:
+			if self.verbose:
+				print('Ignoring parsing errors:\n' + str(e))
+		
+		try:
+			general_log_file = configuration.get('client', 'password')
+            
+			# if the option is found, then red!
+			self.result['level']  = 'RED'
+			self.result['output'] = 'Client password is in use.'
+		except ConfigParser.NoOptionError as e:
+			self.result['level']  = 'GREEN'
+			self.result['output'] = 'Client password not used.'
+		
+		# (REQUIRED):
+		# Always set the self.result['level'] and self.result['output'] variables before returning.
+		# Always return self.result
+		return self.result
+	
+	# (REQUIRED): at minimum the __init__ method should print the check being performed.
+	def __init__(self, parent):
+		print('Performing check: ' + self.TITLE)
+		
+		self.verbose = parent.verbose
+```
+
 ## Other Database Security Tools
 
 - SQLMap - https://github.com/sqlmapproject
