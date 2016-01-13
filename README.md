@@ -100,7 +100,7 @@ https://github.com/foospidy/DbDat/blob/master/plugins/mysql/check_user_empty_pas
 
 _sql check where SQL variable is set on init_
 
-In this example we need the `appuser` variable from the calling parent class. The appuser needs to be dynamically added to the sql statement, so the `self.SQL` varaible is being set in the `__init__` method.
+In this example we need the `appuser` variable from the calling parent class. The appuser needs to be dynamically added to the sql statement, so the `self.SQL` varaible is being set in the `__init__` method. Also, since this do_check method needs to execute the sql we need the DB cursur (connection) as well, this is set in the `__init_-` method with `self.dbcurs = parent.dbcurs`.
 
 https://github.com/foospidy/DbDat/blob/master/plugins/mysql/check_privilege_user_grants.py
 
