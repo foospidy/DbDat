@@ -94,11 +94,13 @@ There are different "types" of checks that can be defined. The check type is det
 
 For sql checks the do_check method signature must be: `do_check(self, *results)`
 
-*Typical sql check*
+_Typical sql check_
 
 https://github.com/foospidy/DbDat/blob/master/plugins/mysql/check_user_empty_password.py
 
-*sql check where SQL variable is set on init* - in this example we need the `appuser` variable from the calling parent class. The appuser needs to be dynamically added to the sql statement, so the `self.SQL` varaible is being set in the `__init__` method.
+_sql check where SQL variable is set on init_
+
+In this example we need the `appuser` variable from the calling parent class. The appuser needs to be dynamically added to the sql statement, so the `self.SQL` varaible is being set in the `__init__` method.
 
 https://github.com/foospidy/DbDat/blob/master/plugins/mysql/check_privilege_user_grants.py
 
