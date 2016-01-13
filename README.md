@@ -124,7 +124,15 @@ For other configuration file formats you will need to define your own parsing lo
 
 For nosql checks the do_check method signature must be: `do_check(self)`
 
+NoSQL queries need to be executed within the do_check method, so the class `__init__` method must implement `self.db = parent.db`. The `self.db` variable can then used to execute NoSQL queries within the do_check method.
+
+https://github.com/foospidy/DbDat/blob/master/plugins/mongodb/check_information_banner.py
+
 #### clp check type
+
+For clp checks the do_check method signature must be: `do_check(self, *results)`. clp checks are needed for IBM DB2 databases so the db2 command line processor can be executed to get information about the database. However, this type of check could be used to execute any arbitrary command line command. All command line output can be parsed from the `results` variable passed to the do_check method. In addition, you will need to define the `CMD` class method. This variable is list of the command and related arguments.
+
+https://github.com/foospidy/DbDat/blob/master/plugins/db2/check_privilege_group_entitlements.py
 
 #### Outline of Check File
 This is a rough example demontrate the pattern a check file should follow:
