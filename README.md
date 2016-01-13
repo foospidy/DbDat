@@ -124,7 +124,8 @@ For other configuration file formats you will need to define your own parsing lo
 
 #### clp check type
 
-A check file should be implemented as following:
+#### Outline of Check File
+This is a rough example demontrate the pattern a check file should follow:
 
 ```
 # (OPTIONAL): Add import statements, include any necessary modules to support this check
@@ -136,8 +137,7 @@ class check_configuration_evaluate_something():
   # (REQUIRED): Add documentation, provide information on this check as this will be displayed in the report.
 	"""
 	check_configuration_evaluate_something:
-	The [Client] section of the MySQL configuration file allows setting a password
-	to be used. Verify this option is not used.
+	Some description goes here!
 	"""
 
   # (OPTIONAL): Add references, this is only comments in code, adding references is helpful to others.
