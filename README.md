@@ -122,6 +122,8 @@ For other configuration file formats you will need to define your own parsing lo
 
 #### nosql check type
 
+For nosql checks the do_check method signature must be: `do_check(self)`
+
 #### clp check type
 
 #### Outline of Check File
