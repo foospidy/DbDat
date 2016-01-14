@@ -29,6 +29,7 @@ class check_privilege_tablespaces():
 			output = 'Tablespaces not granted to PUBLIC.'
 		
 		self.result['output'] = output
+		
 		return self.result
 	
 	def __init__(self, parent):

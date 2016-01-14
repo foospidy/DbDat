@@ -1,5 +1,3 @@
-import subprocess
-
 class check_privilege_group_entitlements():
 	"""
 	check_privilege_group_entitlements:
