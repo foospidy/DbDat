@@ -98,19 +98,19 @@ class dbscan():
             self.db.close()
 
     def hacktheplanet(self):
-        result = {}
+		result = {}
 
-        if self.verbose:
-            import pprint
-            pp = pprint.PrettyPrinter(indent=4)
+		if self.verbose:
+			import pprint
+			pp = pprint.PrettyPrinter(indent=4)
 
-        # setup report file
-        with open(self.report, 'w') as report_file:
-            report_file.write('{"title":"' + self.describe_scan() + '", "report_data":[')
+		# setup report file
+		with open(self.report, 'w') as report_file:
+			report_file.write('{"title":"' + self.describe_scan() + '", "report_data":[')
 
-        count = 0 # counter for reporting
+		count = 0 # counter for reporting
 
-        for database_check in self.checks:
+		for database_check in self.checks:
 			# load a database check
 			check = self.load_class('plugins.' + self.dbtype + '.' + database_check)
 			c     = check(self)
@@ -165,25 +165,25 @@ class dbscan():
 					if self.verbose:
 						print('\tException: %s' % str(e))
 
-				if self.verbose:
-					print('Result:')
-					pp.pprint(result)
+			if self.verbose:
+				print('Result:')
+				pp.pprint(result)
 
-				# write result to report file
-				with open(self.report, 'a') as report_file:
-					comma = ''
-
-					if count > 0:
-						comma = ','
-
-					# dump them JSONs
-					report_file.write(comma + json.dumps(result))
-
-					count += 1
-
-			# finalize report file
+			# write result to report file
 			with open(self.report, 'a') as report_file:
-				report_file.write(']}')
+				comma = ''
+
+				if count > 0:
+					comma = ','
+
+				# dump them JSONs
+				report_file.write(comma + json.dumps(result))
+
+				count += 1
+
+		# finalize report file
+		with open(self.report, 'a') as report_file:
+			report_file.write(']}')
 
     def describe_scan(self):
         return 'Assesment: %s database %s on %s with the user %s and %s queries.' % (self.dbtype, self.dbname, self.dbhost, self.dbuser, str(len(self.checks)))
