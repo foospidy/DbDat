@@ -138,7 +138,7 @@ https://github.com/foospidy/DbDat/blob/master/plugins/db2/check_privilege_group_
 
 #### The Category Variable
 
-Every check must have a category specified using the `category` variable. The category is a way to organize checks. Possible categories are: Information, Configuration, Privilege, and User. Specify the category that is most relevant to the context of the check. 
+Every check must have a category specified using the `CATEGORY` variable. The category is a way to organize checks. Possible categories are: Information, Configuration, Privilege, and User. Specify the category that is most relevant to the context of the check. 
 
 #### Outline of Check File
 This is a rough example demontrate the pattern a check file should follow:
