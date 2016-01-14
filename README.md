@@ -63,7 +63,7 @@ Run: `pip install pymssql`
 
 Run: `pip install ibm_db` or `easy_install ibm_db`
 
-_Note: you will need to ensure the user running DbDat has access to execute DB2 CLP commands (e.g. db2 and db2level).
+_Note: you will need to ensure the user running DbDat has access to execute DB2 CLP commands (e.g. db2 and db2level)._
 
 #####MongoDB support
 
