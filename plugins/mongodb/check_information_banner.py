@@ -8,7 +8,7 @@ class check_information_banner():
     TITLE    = 'Server Info'
     CATEGORY = 'Information'
     TYPE     = 'nosql'
-    SQL    	 = None # SQL not needed... because this is NoSQL.
+    SQL      = None # SQL not needed... because this is NoSQL.
 
     verbose = False
     skip	= False
