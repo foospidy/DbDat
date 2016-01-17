@@ -69,6 +69,8 @@ _Note: you will need to ensure the user running DbDat has access to execute DB2 
 
 Run: `pip install mongodb`
 
+To support MongoDB YAML config files run: `pip install pyyaml`
+
 #####CouchDB support
 
 Run: `pip install couchdb`
