@@ -64,11 +64,12 @@ class dbscan():
                 self.dbcurs     = self.db.cursor()
 
             elif 'mongodb' == self.dbtype:
-                from pymongo import MongoClient
+				from pymongo import MongoClient
 
-                self.db = MongoClient(self.dbhost, int(self.dbport))
+				self.db = MongoClient(self.dbhost, int(self.dbport))
 
-                self.db['admin'].authenticate(self.dbuser, self.dbpass)
+				if '' != self.dbuser:
+					self.db['admin'].authenticate(self.dbuser, self.dbpass)
 
             elif 'couchdb' == self.dbtype:
                 import couchdb
@@ -208,68 +209,70 @@ class dbscan():
                 self.checks.append(file[:-3])
 
 if __name__ == "__main__":
-    SUPPORTED_DB = ('mysql', 'postgresql', 'oracle', 'mssql', 'db2', 'mongodb', 'couchdb')
+	SUPPORTED_DB = ('mysql', 'postgresql', 'oracle', 'mssql', 'db2', 'mongodb', 'couchdb')
 
-    # parse command line arguments
-    parser = argparse.ArgumentParser(description='At minimum, the -p or -l option must be specified.')
+	# parse command line arguments
+	parser = argparse.ArgumentParser(description='At minimum, the -p or -l option must be specified.')
 
-    parser.add_argument('-p', help='Specify the database profile.')
-    parser.add_argument('-l', help='List all database profiles.', default=False, action='store_true')
-    parser.add_argument('-v', help='Verbos output.', default=False, action='store_true')
+	parser.add_argument('-p', help='Specify the database profile.')
+	parser.add_argument('-l', help='List all database profiles.', default=False, action='store_true')
+	parser.add_argument('-v', help='Verbos output.', default=False, action='store_true')
 
-    arguments = parser.parse_args()
+	arguments = parser.parse_args()
 
-    if not (arguments.l or arguments.p):
-        parser.error('Either -p or -l must be provided.')
+	if not (arguments.l or arguments.p):
+		parser.error('Either -p or -l must be provided.')
 
-    # read configuration
-    configuration      = ConfigParser.ConfigParser()
-    configuration_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'etc', 'dbdat.conf')
+	# read configuration
+	configuration      = ConfigParser.ConfigParser()
+	configuration_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'etc', 'dbdat.conf')
 
-    try:
-        configuration.read(configuration_file)
+	try:
+		configuration.read(configuration_file)
 
-        if arguments.l:
-            # list all configured profiles and quit
-            if 0 == len(configuration._sections):
-                print('No profiles configured.')
-            else:
-                for section in configuration._sections:
-                    print(section)
+		if arguments.l:
+			# list all configured profiles and quit
+			if 0 == len(configuration._sections):
+				print('No profiles configured.')
+			else:
+				for section in configuration._sections:
+					print(section)
 
-            quit()
+			quit()
 
-        # get database profile and check for supported db type
-        if configuration.get(arguments.p, 'database_type') not in SUPPORTED_DB:
-            print('Invalid database! Supported databases are %s' % str(SUPPORTED_DB))
-            quit()
+		# get database profile and check for supported db type
+		if configuration.get(arguments.p, 'database_type') not in SUPPORTED_DB:
+			print('Invalid database! Supported databases are %s' % str(SUPPORTED_DB))
+			quit()
 
-    except ConfigParser.ParsingError as e:
-        print('Error parsing configuration file.')
-        quit()
-    except ConfigParser.NoSectionError as e:
-        print('The database profile "%s" does not exist.' % (arguments.p))
-        quit()
+	except ConfigParser.ParsingError as e:
+		print('Error parsing configuration file.')
+		quit()
+	except ConfigParser.NoSectionError as e:
+		print('The database profile "%s" does not exist.' % (arguments.p))
+		quit()
 
-    # initialize dbscan
-    scan = dbscan(configuration.get(arguments.p, 'database_type'))
+	# initialize dbscan
+	scan = dbscan(configuration.get(arguments.p, 'database_type'))
 
-    scan.verbose = arguments.v
-    scan.dbhost  = configuration.get(arguments.p, 'server')
-    scan.dbport  = configuration.get(arguments.p, 'port')
-    scan.dbname  = configuration.get(arguments.p, 'database')
-    scan.config  = configuration.get(arguments.p, 'configuration_file')
-    scan.report  = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'reports', 'data', 'report.json')  # todo - dynamic file naming
+	scan.verbose = arguments.v
+	scan.dbhost  = configuration.get(arguments.p, 'server')
+	scan.dbport  = configuration.get(arguments.p, 'port')
+	scan.dbname  = configuration.get(arguments.p, 'database')
+	scan.config  = configuration.get(arguments.p, 'configuration_file')
+	scan.report  = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'reports', 'data', 'report.json')  # todo - dynamic file naming
 
-    if len(configuration.get(arguments.p, 'privileged_account')):
-        scan.dbuser  = configuration.get(arguments.p, 'privileged_account')
-        scan.dbpass  = configuration.get(arguments.p, 'privileged_account_password')
-        scan.appuser = configuration.get(arguments.p, 'application_account')
+	if 0 == len(configuration.get(arguments.p, 'privileged_account')):
+		print('Warning: Attempting to connect with empty privileged_account.')
+		
+	scan.dbuser  = configuration.get(arguments.p, 'privileged_account')
+	scan.dbpass  = configuration.get(arguments.p, 'privileged_account_password')
+	scan.appuser = configuration.get(arguments.p, 'application_account')
 
-        if scan.verbose:
-            print('os: ' + sys.platform)
+	if scan.verbose:
+		print('os: ' + sys.platform)
 
-        print(scan.describe_scan())
-        scan.connect()
-        scan.hacktheplanet()
-        scan.disconnect()
+	print(scan.describe_scan())
+	scan.connect()
+	scan.hacktheplanet()
+	scan.disconnect()

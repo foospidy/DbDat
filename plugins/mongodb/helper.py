@@ -3,7 +3,7 @@ import StringIO
 import os
 
 def get_config_value(configuration_file, option, verbose=False):
-	# postgresql config files do not have sections, so inject a dummy section
+	# mongodb config files do not have sections, so inject a dummy section
 	# see: https://stackoverflow.com/questions/2819696/parsing-properties-file-in-python/
 	config = StringIO.StringIO()
 	config.write('[dbdat]\n')
@@ -26,9 +26,23 @@ def get_config_value(configuration_file, option, verbose=False):
 		# clean up required
 		value = value.split()[0]
 		value = value.translate(None, "'")
-		
 				
 	except ConfigParser.NoOptionError as e:
+		value = None
+	
+	return value
+
+def get_yaml_config_value(configuration_file, option, verbose=False):
+	import yaml
+	
+	stream = file(configuration_file, 'r')
+	config = yaml.load(stream)
+	value  = None
+	
+	try:
+		value = config[option.split('.')[0]][option.split('.')[1]]
+	
+	except KeyError as e:
 		value = None
 	
 	return value
