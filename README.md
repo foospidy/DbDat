@@ -5,7 +5,7 @@ DbDat performs numerous checks on a database to evaluate security. The categorie
 
 I highly recommend downloading the benchmark document for your target database as it contains additional information about the checks performed.
 
-Finally, DbDat is intended to be a framework to enable easy creation of new plugins and checks. Contributions from the security, or even database administrator, community is what will make this a great tool. Please contribute!
+Finally, DbDat is intended to be a framework to enable easy creation of new plugins and checks. Contributions from the security, or even database administrator, community is what will make this a great tool. The current set of checks are in no way complete, certainly more needs to be done. Please contribute!
 
 **Developing New Database Checks**
 
@@ -135,6 +135,10 @@ https://github.com/foospidy/DbDat/blob/master/plugins/mongodb/check_information_
 For clp checks the do_check method signature must be: `do_check(self, *results)`. clp checks are needed for IBM DB2 databases so the db2 command line processor can be executed to get information about the database. However, this type of check could be used to execute any arbitrary command line command. All command line output can be parsed from the `results` variable passed to the do_check method. In addition, you will need to define the `CMD` class method. This variable is list of the command and related arguments.
 
 https://github.com/foospidy/DbDat/blob/master/plugins/db2/check_privilege_group_entitlements.py
+
+#### The Category Variable
+
+Every check must have a category specified using the `CATEGORY` variable. The category is a way to organize checks. Possible categories are: Information, Configuration, Privilege, and User. Specify the category that is most relevant to the context of the check. 
 
 #### Outline of Check File
 This is a rough example demontrate the pattern a check file should follow:
