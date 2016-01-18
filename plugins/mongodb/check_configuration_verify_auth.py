@@ -6,7 +6,9 @@ class check_configuration_verify_auth():
     Verifying authentication is required.
     """
     # References:
-    # 
+    # https://docs.mongodb.org/v2.4/tutorial/enable-authentication/
+    # https://docs.mongodb.org/v2.6/tutorial/enable-authentication/
+    # https://docs.mongodb.org/v2.6/core/authentication/#localhost-exception
 
     TITLE    = 'Authentication Required'
     CATEGORY = 'Configuration'

@@ -30,7 +30,7 @@ class check_configuration_noscripting():
 		option         = None
 		version_number = self.db.server_info()['versionArray']
 		
-		if version_number[0] <= 2 and version_number[1] <= 6:
+		if version_number[0] <= 2 and version_number[1] < 6:
 			option = 'noscripting'
 			value = helper.get_config_value(configuration_file, option)
 			
@@ -63,5 +63,6 @@ class check_configuration_noscripting():
 	def __init__(self, parent):
 		print('Performing check: ' + self.TITLE)
 
+        # db is needed to get version info
 		self.db      = parent.db
 		self.verbose = parent.verbose
