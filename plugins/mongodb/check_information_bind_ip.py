@@ -47,7 +47,7 @@ class check_information_bind_ip():
 				self.result['level']  = 'YELLOW'
 				self.result['output'] = 'Bind IP setting not found.'
 
-			return self.result
+		return self.result
 
 	def __init__(self, parent):
 		print('Performing check: ' + self.TITLE)
