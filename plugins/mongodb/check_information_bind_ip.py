@@ -1,38 +1,68 @@
 import helper
 
-class check_information_bind_ip():
-    """
-    check_information_bind_ip:
-    If your system has multiple network interfaces you can use the "bind_ip" option
-    to restrict your mongodb server to listen only on the interfaces that are
-    relevant. By default mongodb will bind to all the interfaces.
-    """
-    # References:
-    # http://blog.mongodirector.com/10-tips-to-improve-your-mongodb-security/
+class check_configuration_noscripting():
+	"""
+	check_configuration_noscripting:
 
-    TITLE    = 'Bind IP'
-    CATEGORY = 'Information'
-    TYPE     = 'configuration_file'
-    SQL    	 = None # SQL not needed... because this is NoSQL.
+	MongoDB supports the execution of JavaScript code for certain server-side operations: 
+	mapReduce, group, eval, and $where. If you do not use these operations, disable server-side
+	scripting by using:
 
-    verbose = False
-    skip	= False
-    result  = {}
-	
-    def do_check(self, configuration_file):
-        try:
-            value = helper.get_config_value(configuration_file, 'bind_ip')
+	The --noscripting option on the command line in versions <=2.6.
+	The security.javascriptEnabled configuration option in versions >2.6
+	"""
+	# References:
+	# https://docs.mongodb.org/v2.6/MongoDB-security-guide-v2.6.pdf
+	# https://docs.mongodb.org/manual/reference/configuration-options/#core-options
 
-            self.result['level']  = 'GREEN'
-            self.result['output'] = 'Bind IP is (%s) enabled.' % (value)
+	TITLE    = 'No Scripting'
+	CATEGORY = 'Configuration'
+	TYPE     = 'configuration_file'
+	SQL    	 = None # SQL not needed... because this is NoSQL.
 
-        except ConfigParser.NoOptionError as e:
-            self.result['level']  = 'YELLOW'
-            self.result['output'] = 'Bind IP setting not found.'
+	verbose = False
+	skip	= False
+	result  = {}
 
-        return self.result
-	
-    def __init__(self, parent):
-        print('Performing check: ' + self.TITLE)
+	db      = None
 
-        self.verbose = parent.verbose
+	def do_check(self, configuration_file):
+		option         = None
+		version_number = self.db.server_info()['versionArray']
+		
+		if version_number[0] <= 2 and version_number[1] < 6:
+			option = 'noscripting'
+			value = helper.get_config_value(configuration_file, option)
+			
+			if None == value:
+				self.result['level']  = 'RED'
+				self.result['output'] = '%s is (not found) not enabled.' % (option)
+			elif 'true' != value.lower():
+				self.result['level']  = 'GREEN'
+				self.result['output'] = '%s is (%s) enabled.' % (option, value)
+			else: 
+				self.result['level']  = 'RED'
+				self.result['output'] = '%s is (%s) not enabled.' % (option, value)
+			
+		else:
+			option = 'security.javascriptEnabled'
+			value = helper.get_yaml_config_value(configuration_file, option)
+			
+			if None == value:
+				self.result['level']  = 'RED'
+				self.result['output'] = '%s is (not found) enabled.' % (option)
+			elif False == value:
+				self.result['level']  = 'GREEN'
+				self.result['output'] = '%s is (%s) not enabled.' % (option, value)
+			else: 
+				self.result['level']  = 'RED'
+				self.result['output'] = '%s is (%s) enabled.' % (option, value)
+
+		return self.result
+
+	def __init__(self, parent):
+		print('Performing check: ' + self.TITLE)
+		
+		# db is needed to get version info
+		self.db      = parent.db
+		self.verbose = parent.verbose
