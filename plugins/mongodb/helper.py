@@ -40,7 +40,13 @@ def get_yaml_config_value(configuration_file, option, verbose=False):
 	value  = None
 	
 	try:
-		value = config[option.split('.')[0]][option.split('.')[1]]
+		# totally hacky way of doing this... can be improved
+		if 3 == len(option.split('.')):
+			# if config option depth is 3
+			value = config[option.split('.')[0]][option.split('.')[1]][option.split('.')[2]]
+		else:
+			# else assume config option depth of 2
+			value = config[option.split('.')[0]][option.split('.')[1]]
 	
 	except KeyError as e:
 		value = None
