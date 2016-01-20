@@ -3,9 +3,12 @@ import helper
 class check_configuration_rest_interface():
 	"""
 	check_configuration_rest_interface:
-	he monogdb REST interface is not recommended for production. It does not support
+	The monogdb REST interface is not recommended for production. It does not support
 	any authentication. It is turned off by default. If you have turned it on using
 	the "rest" configuration option you should turn it off for production systems.
+    
+    MongoDB versions under 2.6: check the "rest" configuration option
+    MongoDB versions 2.6 and above, check the net.http.RESTInterfaceEnabled option
 	"""
 	# References:
 	# http://blog.mongodirector.com/10-tips-to-improve-your-mongodb-security/
@@ -41,7 +44,7 @@ class check_configuration_rest_interface():
 				self.result['level']  = 'RED'
 				self.result['output'] = '%s interface is (%s) not enabled.' % (option, value)
 		else:
-			option = 'net.http.enabled'
+			option = 'net.http.RESTInterfaceEnabled'
 			value  = helper.get_yaml_config_value(configuration_file, option)
 			
 			if None == value:

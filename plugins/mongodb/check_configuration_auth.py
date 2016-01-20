@@ -4,7 +4,8 @@ class check_configuration_auth():
     """
     check_configuration_auth:
     Authentication should be enabled. Set auth to true to enable database
-    authentication for users connecting from remote hosts.
+    authentication for users connecting from remote hosts. This setting 
+    applies to MondoDB versions below 2.6.
     """
     # References:
     # https://docs.mongodb.org/v2.4/reference/configuration-options/
