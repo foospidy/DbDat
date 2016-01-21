@@ -64,12 +64,12 @@ class dbscan():
                 self.dbcurs     = self.db.cursor()
 
             elif 'mongodb' == self.dbtype:
-				from pymongo import MongoClient
+                from pymongo import MongoClient
 
-				self.db = MongoClient(self.dbhost, int(self.dbport))
+                self.db = MongoClient(self.dbhost, int(self.dbport))
 
-				if '' != self.dbuser:
-					self.db['admin'].authenticate(self.dbuser, self.dbpass)
+                if '' != self.dbuser:
+                    self.db['admin'].authenticate(self.dbuser, self.dbpass)
 
             elif 'couchdb' == self.dbtype:
                 import couchdb
@@ -99,104 +99,104 @@ class dbscan():
             self.db.close()
 
     def hacktheplanet(self):
-		result = {}
+        result = {}
 
-		if self.verbose:
-			import pprint
-			pp = pprint.PrettyPrinter(indent=4)
+        if self.verbose:
+            import pprint
+            pp = pprint.PrettyPrinter(indent=4)
 
-		# setup report file
-		with open(self.report, 'w') as report_file:
-			report_file.write('{"title":"' + self.describe_scan() + '", "report_data":[')
+        # setup report file
+        with open(self.report, 'w') as report_file:
+            report_file.write('{"title":"' + self.describe_scan() + '", "report_data":[')
 
-		count = 0 # counter for reporting
+        count = 0 # counter for reporting
 
-		for database_check in self.checks:
-			# load a database check
-			check = self.load_class('plugins.' + self.dbtype + '.' + database_check)
-			c     = check(self)
+        for database_check in self.checks:
+            # load a database check
+            check = self.load_class('plugins.' + self.dbtype + '.' + database_check)
+            c     = check(self)
 
-			if self.verbose:
-				print(c.__doc__)
+            if self.verbose:
+                print(c.__doc__)
 
-			# first get title, category, and description
-			result['title']       = c.TITLE
-			result['category']    = c.CATEGORY
-			result['description'] = c.__doc__
+            # first get title, category, and description
+            result['title']       = c.TITLE
+            result['category']    = c.CATEGORY
+            result['description'] = c.__doc__
 
-			if 'configuration_file' == c.TYPE:
-				result['result'] = c.do_check(self.config)
+            if 'configuration_file' == c.TYPE:
+                result['result'] = c.do_check(self.config)
 
-			elif 'nosql' == c.TYPE:
-				try:
-					result['result'] = c.do_check()
+            elif 'nosql' == c.TYPE:
+                try:
+                    result['result'] = c.do_check()
 
-				except Exception as e:
-					print(e)
+                except Exception as e:
+                    print(e)
 
-			elif 'clp' == c.TYPE:
-				# command line processor option for db2
-				import subprocess
-				
-				try:
-					p                = subprocess.Popen(c.CMD, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-					out, err         = p.communicate()
-					result['result'] = c.do_check(out)
-				
-				except Exception as e:
-					print(e)
+            elif 'clp' == c.TYPE:
+                # command line processor option for db2
+                import subprocess
+                
+                try:
+                    p                = subprocess.Popen(c.CMD, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    out, err         = p.communicate()
+                    result['result'] = c.do_check(out)
+                
+                except Exception as e:
+                    print(e)
 
-			else:
-				try:
-					# perform database check and get result
-					self.dbcurs.execute(c.SQL)
+            else:
+                try:
+                    # perform database check and get result
+                    self.dbcurs.execute(c.SQL)
 
-					rows             =   self.dbcurs.fetchall()
-					result['result'] = c.do_check(rows)
+                    rows             =   self.dbcurs.fetchall()
+                    result['result'] = c.do_check(rows)
 
-				except Exception as e:
-					# sql execution error possible, issue rollback and capture error in results
-					if 'postgresql' == self.dbtype:
-						self.db.rollback()
+                except Exception as e:
+                    # sql execution error possible, issue rollback and capture error in results
+                    if 'postgresql' == self.dbtype:
+                        self.db.rollback()
 
-					c.result['level']  = 'ORANGE'
-					c.result['output'] = str(e)
-					result['result']   = c.result
+                    c.result['level']  = 'ORANGE'
+                    c.result['output'] = str(e)
+                    result['result']   = c.result
 
-					if self.verbose:
-						print('\tException: %s' % str(e))
+                    if self.verbose:
+                        print('\tException: %s' % str(e))
 
-			if self.verbose:
-				print('Result:')
-				pp.pprint(result)
+            if self.verbose:
+                print('Result:')
+                pp.pprint(result)
 
-			# write result to report file
-			with open(self.report, 'a') as report_file:
-				comma = ''
+            # write result to report file
+            with open(self.report, 'a') as report_file:
+                comma = ''
 
-				if count > 0:
-					comma = ','
+                if count > 0:
+                    comma = ','
 
-				# dump them JSONs
-				report_file.write(comma + json.dumps(result))
+                # dump them JSONs
+                report_file.write(comma + json.dumps(result))
 
-				count += 1
+                count += 1
 
-		# finalize report file
-		with open(self.report, 'a') as report_file:
-			report_file.write(']}')
+        # finalize report file
+        with open(self.report, 'a') as report_file:
+            report_file.write(']}')
 
     def describe_scan(self):
         return 'Assessment: %s database %s on %s with the user %s and %s queries.' % (self.dbtype, self.dbname, self.dbhost, self.dbuser, str(len(self.checks)))
 
     def load_class(self, name):
-		components = name.split('.')
-		module     = __import__(name)
+        components = name.split('.')
+        module     = __import__(name)
 
-		for component in components[1:]:
-			module = getattr(module, component)
+        for component in components[1:]:
+            module = getattr(module, component)
 
-		return module
+        return module
 
     def __init__(self, dbtype=None):
         self.dbtype = dbtype
@@ -209,70 +209,70 @@ class dbscan():
                 self.checks.append(file[:-3])
 
 if __name__ == "__main__":
-	SUPPORTED_DB = ('mysql', 'postgresql', 'oracle', 'mssql', 'db2', 'mongodb', 'couchdb')
+    SUPPORTED_DB = ('mysql', 'postgresql', 'oracle', 'mssql', 'db2', 'mongodb', 'couchdb')
 
-	# parse command line arguments
-	parser = argparse.ArgumentParser(description='At minimum, the -p or -l option must be specified.')
+    # parse command line arguments
+    parser = argparse.ArgumentParser(description='At minimum, the -p or -l option must be specified.')
 
-	parser.add_argument('-p', help='Specify the database profile.')
-	parser.add_argument('-l', help='List all database profiles.', default=False, action='store_true')
-	parser.add_argument('-v', help='Verbos output.', default=False, action='store_true')
+    parser.add_argument('-p', help='Specify the database profile.')
+    parser.add_argument('-l', help='List all database profiles.', default=False, action='store_true')
+    parser.add_argument('-v', help='Verbos output.', default=False, action='store_true')
 
-	arguments = parser.parse_args()
+    arguments = parser.parse_args()
 
-	if not (arguments.l or arguments.p):
-		parser.error('Either -p or -l must be provided.')
+    if not (arguments.l or arguments.p):
+        parser.error('Either -p or -l must be provided.')
 
-	# read configuration
-	configuration      = ConfigParser.ConfigParser()
-	configuration_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'etc', 'dbdat.conf')
+    # read configuration
+    configuration      = ConfigParser.ConfigParser()
+    configuration_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'etc', 'dbdat.conf')
 
-	try:
-		configuration.read(configuration_file)
+    try:
+        configuration.read(configuration_file)
 
-		if arguments.l:
-			# list all configured profiles and quit
-			if 0 == len(configuration._sections):
-				print('No profiles configured.')
-			else:
-				for section in configuration._sections:
-					print(section)
+        if arguments.l:
+            # list all configured profiles and quit
+            if 0 == len(configuration._sections):
+                print('No profiles configured.')
+            else:
+                for section in configuration._sections:
+                    print(section)
 
-			quit()
+            quit()
 
-		# get database profile and check for supported db type
-		if configuration.get(arguments.p, 'database_type') not in SUPPORTED_DB:
-			print('Invalid database! Supported databases are %s' % str(SUPPORTED_DB))
-			quit()
+        # get database profile and check for supported db type
+        if configuration.get(arguments.p, 'database_type') not in SUPPORTED_DB:
+            print('Invalid database! Supported databases are %s' % str(SUPPORTED_DB))
+            quit()
 
-	except ConfigParser.ParsingError as e:
-		print('Error parsing configuration file.')
-		quit()
-	except ConfigParser.NoSectionError as e:
-		print('The database profile "%s" does not exist.' % (arguments.p))
-		quit()
+    except ConfigParser.ParsingError as e:
+        print('Error parsing configuration file.')
+        quit()
+    except ConfigParser.NoSectionError as e:
+        print('The database profile "%s" does not exist.' % (arguments.p))
+        quit()
 
-	# initialize dbscan
-	scan = dbscan(configuration.get(arguments.p, 'database_type'))
+    # initialize dbscan
+    scan = dbscan(configuration.get(arguments.p, 'database_type'))
 
-	scan.verbose = arguments.v
-	scan.dbhost  = configuration.get(arguments.p, 'server')
-	scan.dbport  = configuration.get(arguments.p, 'port')
-	scan.dbname  = configuration.get(arguments.p, 'database')
-	scan.config  = configuration.get(arguments.p, 'configuration_file')
-	scan.report  = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'reports', 'data', 'report.json')  # todo - dynamic file naming
+    scan.verbose = arguments.v
+    scan.dbhost  = configuration.get(arguments.p, 'server')
+    scan.dbport  = configuration.get(arguments.p, 'port')
+    scan.dbname  = configuration.get(arguments.p, 'database')
+    scan.config  = configuration.get(arguments.p, 'configuration_file')
+    scan.report  = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'reports', 'data', 'report.json')  # todo - dynamic file naming
 
-	if 0 == len(configuration.get(arguments.p, 'privileged_account')):
-		print('Warning: Attempting to connect with empty privileged_account.')
-		
-	scan.dbuser  = configuration.get(arguments.p, 'privileged_account')
-	scan.dbpass  = configuration.get(arguments.p, 'privileged_account_password')
-	scan.appuser = configuration.get(arguments.p, 'application_account')
+    if 0 == len(configuration.get(arguments.p, 'privileged_account')):
+        print('Warning: Attempting to connect with empty privileged_account.')
+        
+    scan.dbuser  = configuration.get(arguments.p, 'privileged_account')
+    scan.dbpass  = configuration.get(arguments.p, 'privileged_account_password')
+    scan.appuser = configuration.get(arguments.p, 'application_account')
 
-	if scan.verbose:
-		print('os: ' + sys.platform)
+    if scan.verbose:
+        print('os: ' + sys.platform)
 
-	print(scan.describe_scan())
-	scan.connect()
-	scan.hacktheplanet()
-	scan.disconnect()
+    print(scan.describe_scan())
+    scan.connect()
+    scan.hacktheplanet()
+    scan.disconnect()
