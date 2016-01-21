@@ -33,13 +33,13 @@ class check_configuration_ssl():
 		version_number = self.db.server_info()['versionArray']
 		
 		if version_number[0] <= 2 and version_number[1] < 6:
-			optin = 'sslPEMKeyFile'
-			value = helper.get_config_value(configuration_file, option)
+			option = 'sslPEMKeyFile'
+			value  = helper.get_config_value(configuration_file, option)
 
 			if None == value:
 				self.result['level']  = 'RED'
 				self.result['output'] = '%s is not set, SSL is not enabled.' % (option)
-			elif '' != value.lower():
+			elif '' != value:
 				self.result['level']  = 'GREEN'
 				self.result['output'] = 'SSL is (%s: %s) enabled.' % (option, value)
 			else: 
