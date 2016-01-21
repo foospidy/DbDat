@@ -1,44 +1,75 @@
 import helper
 
 class check_configuration_ssl():
-    """
-    check_configuration_ssl:
-    If you don't use SSL your data is traveling between your Mongo client and Mongo 
-    server unencrypted and is susceptible to eavesdropping, tampering and "man in 
-    the middle" attacks. This is especially important if you are connecting to your 
-    Mongodb server over unsecure networks like the internet.
-    """
-    # References:
-    # http://blog.mongodirector.com/10-tips-to-improve-your-mongodb-security/
-    # https://docs.mongodb.org/v2.4/reference/configuration-options/#ssl-options
-    # https://docs.mongodb.org/v2.6/tutorial/configure-ssl/
-    # https://docs.mongodb.org/v2.6/reference/configuration-options/#net-ssl-options
+	"""
+	check_configuration_ssl:
+	If you don't use SSL your data is traveling between your Mongo client and Mongo 
+	server unencrypted and is susceptible to eavesdropping, tampering and "man in 
+	the middle" attacks. This is especially important if you are connecting to your 
+	Mongodb server over unsecure networks like the internet.
 
-    TITLE    = 'Enable SSL'
-    CATEGORY = 'Configuration'
-    TYPE     = 'configuration_file'
-    SQL    	 = None # SQL not needed... because this is NoSQL.
+	MongoDB versions under 2.6: check if the "sslPEMKeyFile" configuration option is set.
+	MongoDB versions 2.6 and above, check the net.ssl.mode option.
+	"""
+	# References:
+	# http://blog.mongodirector.com/10-tips-to-improve-your-mongodb-security/
+	# https://docs.mongodb.org/v2.4/reference/configuration-options/#ssl-options
+	# https://docs.mongodb.org/v2.6/tutorial/configure-ssl/
+	# https://docs.mongodb.org/v2.6/reference/configuration-options/#net-ssl-options
 
-    verbose = False
-    skip	= False
-    result  = {}
+	TITLE    = 'Enable SSL'
+	CATEGORY = 'Configuration'
+	TYPE     = 'configuration_file'
+	SQL    	 = None # SQL not needed... because this is NoSQL.
 
-    def do_check(self, configuration_file):
-        value = helper.get_config_value(configuration_file, 'sslPEMKeyFile')
+	verbose = False
+	skip	= False
+	result  = {}
 
-        if None == value:
-            self.result['level']  = 'RED'
-            self.result['output'] = 'SSL is (not found) not enabled.'
-        elif '' != value.lower():
-            self.result['level']  = 'GREEN'
-            self.result['output'] = 'SSL is (%s) enabled.' % (value)
-        else: 
-            self.result['level']  = 'RED'
-            self.result['output'] = 'SSL is (%s) not enabled.' % (value)
+	db      = None
 
-        return self.result
-	
-    def __init__(self, parent):
-        print('Performing check: ' + self.TITLE)
+	def do_check(self, configuration_file):
+		option         = None
+		version_number = self.db.server_info()['versionArray']
+		
+		if version_number[0] <= 2 and version_number[1] < 6:
+			optin = 'sslPEMKeyFile'
+			value = helper.get_config_value(configuration_file, option)
 
-        self.verbose = parent.verbose
+			if None == value:
+				self.result['level']  = 'RED'
+				self.result['output'] = '%s is not set, SSL is not enabled.' % (option)
+			elif '' != value.lower():
+				self.result['level']  = 'GREEN'
+				self.result['output'] = 'SSL is (%s: %s) enabled.' % (option, value)
+			else: 
+				self.result['level']  = 'RED'
+				self.result['output'] = 'SSL is (%s: %s) not enabled.' % (option, value)
+
+		else:
+			option = 'net.ssl.mode'
+			value  = helper.get_yaml_config_value(configuration_file, option)
+			
+			if None == value:
+				self.result['level']  = 'RED'
+				self.result['output'] = 'SSL is (%s not found) not enabled.' % (option)
+			elif 'requireSSL' == value:
+				self.result['level']  = 'GREEN'
+				self.result['output'] = 'SSL is (%s: %s) is required.' % (option, value)
+			elif 'preferSSL' == value:
+				self.result['level']  = 'YELLOW'
+				self.result['output'] = 'SSL is (%s: %s) is prefered, but not required.' % (option, value)
+			elif 'allowSSL' == value:
+				self.result['level']  = 'YELLOW'
+				self.result['output'] = 'SSL is (%s: %s) is allowed, but not required.' % (option, value)
+			else: 
+				self.result['level']  = 'RED'
+				self.result['output'] = 'SSL is (%s: %s) not enabled.' % (option, value)
+
+		return self.result
+
+	def __init__(self, parent):
+		print('Performing check: ' + self.TITLE)
+
+		self.verbose = parent.verbose
+		self.db      = parent.db
