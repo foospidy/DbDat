@@ -10,6 +10,9 @@ class check_configuration_ssl():
     """
     # References:
     # http://blog.mongodirector.com/10-tips-to-improve-your-mongodb-security/
+    # https://docs.mongodb.org/v2.4/reference/configuration-options/#ssl-options
+    # https://docs.mongodb.org/v2.6/tutorial/configure-ssl/
+    # https://docs.mongodb.org/v2.6/reference/configuration-options/#net-ssl-options
 
     TITLE    = 'Enable SSL'
     CATEGORY = 'Configuration'
