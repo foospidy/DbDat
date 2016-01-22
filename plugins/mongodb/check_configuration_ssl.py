@@ -33,12 +33,32 @@ class check_configuration_ssl():
 		version_number = self.db.server_info()['versionArray']
 		
 		if version_number[0] <= 2 and version_number[1] < 6:
-			option = 'sslPEMKeyFile'
-			value  = helper.get_config_value(configuration_file, option)
+			option              = 'sslPEMKeyFile'
+			value               = helper.get_config_value(configuration_file, option)
+			ssl_on_normal_ports = False
+			
+			if version_number[0] >= 2 and version_number[1] >= 2:
+				try:
+					dcurs  = self.db['admin']
+					result = dcurs.command('getCmdLineOpts')
+					
+					if '--sslOnNormalPorts' in result['argv']:
+						ssl_on_normal_ports = True
+							
+				except Exception as e:
+					# this will actually be a silent exception values below will be overwritten
+					# the exception is here so execution doesn't break if something goes wrong
+					result['level']  = 'ORANGE'
+					result['output'] = 'Error: %s' % (e)
 
 			if None == value:
 				self.result['level']  = 'RED'
 				self.result['output'] = '%s is not set, SSL is not enabled.' % (option)
+				
+				if ssl_on_normal_ports:
+					self.result['level']  = 'GREEN'
+					self.result['output'] = 'Command line option --sslOnNormalPorts set, SSL is enabled.'
+					
 			elif '' != value:
 				self.result['level']  = 'GREEN'
 				self.result['output'] = 'SSL is (%s: %s) enabled.' % (option, value)

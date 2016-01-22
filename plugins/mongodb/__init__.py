@@ -1,6 +1,7 @@
 from check_information_banner import *
 from check_information_bind_ip import *
 from check_information_database_list import *
+from check_information_cmd_line_opts import *
 from check_configuration_version import *
 from check_configuration_auth import *
 from check_configuration_nohttpinterface import *
