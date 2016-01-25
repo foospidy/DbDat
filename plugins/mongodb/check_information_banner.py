@@ -11,9 +11,9 @@ class check_information_banner():
     SQL      = None # SQL not needed... because this is NoSQL.
 
     verbose = False
-    skip	= False
+    skip    = False
     result  = {}
-    
+
     db      = None
 
     def do_check(self):
@@ -23,11 +23,11 @@ class check_information_banner():
         info = self.db.server_info()
         for name, value in info.items():
             output += '%s = %s\n' % (name, value)
-        
+
         self.result['output'] = output
-        
+
         return self.result
-	
+
     def __init__(self, parent):
         print('Performing check: ' + self.TITLE)
         self.db = parent.db

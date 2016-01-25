@@ -8,10 +8,10 @@ class check_information_vendor():
     TITLE    = 'Vendor'
     CATEGORY = 'Information'
     TYPE     = 'nosql'
-    SQL    	 = None # SQL not needed... because this is NoSQL.
+    SQL         = None # SQL not needed... because this is NoSQL.
 
     verbose = False
-    skip	= False
+    skip    = False
     result  = {}
     db      = None
 
@@ -19,14 +19,14 @@ class check_information_vendor():
         self.result['level']  = 'GREEN'
         vendor                = self.db.config()['vendor']
         output                = ''
-        
+
         for info in vendor:
             output += info + ': ' + vendor[info] + '\n'
-        
-        self.result['output'] = output 
-        
+
+        self.result['output'] = output
+
         return self.result
-	
+
     def __init__(self, parent):
         print('Performing check: ' + self.TITLE)
         self.db = parent.db

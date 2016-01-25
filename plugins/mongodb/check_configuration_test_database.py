@@ -8,18 +8,18 @@ class check_configuration_test_database():
     TITLE    = 'Test Database'
     CATEGORY = 'Configuration'
     TYPE     = 'nosql'
-    SQL    	 = None # SQL not needed... because this is NoSQL.
+    SQL         = None # SQL not needed... because this is NoSQL.
 
     verbose = False
-    skip	= False
+    skip    = False
     result  = {}
-    
+
     db      = None
 
     def do_check(self):
         try:
             dblist = self.db.database_names()
-            
+
             if 'test' in dblist:
                 self.result['level']  = 'YELLOW'
                 self.result['output'] = 'A "test" database was found.'
@@ -32,7 +32,7 @@ class check_configuration_test_database():
             self.result['output'] = 'Problem accessing database list, message:\n%s\n' % (e)
 
         return self.result
-	
+
     def __init__(self, parent):
         print('Performing check: ' + self.TITLE)
         self.db = parent.db
