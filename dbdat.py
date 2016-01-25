@@ -51,7 +51,7 @@ class dbscan():
                 self.dbcurs = self.db.cursor()
 
             elif 'sybase' == self.dbtype:
-                #TODO
+                #  TODO
                 print("Sybase is not yet supported.")
                 quit()
 
@@ -109,7 +109,7 @@ class dbscan():
         with open(self.report, 'w') as report_file:
             report_file.write('{"title":"' + self.describe_scan() + '", "report_data":[')
 
-        count = 0 # counter for reporting
+        count = 0  # counter for reporting
 
         for database_check in self.checks:
             # load a database check
@@ -137,12 +137,12 @@ class dbscan():
             elif 'clp' == c.TYPE:
                 # command line processor option for db2
                 import subprocess
-                
+
                 try:
                     p                = subprocess.Popen(c.CMD, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                     out, err         = p.communicate()
                     result['result'] = c.do_check(out)
-                
+
                 except Exception as e:
                     print(e)
 
@@ -264,7 +264,7 @@ if __name__ == "__main__":
 
     if 0 == len(configuration.get(arguments.p, 'privileged_account')):
         print('Warning: Attempting to connect with empty privileged_account.')
-        
+
     scan.dbuser  = configuration.get(arguments.p, 'privileged_account')
     scan.dbpass  = configuration.get(arguments.p, 'privileged_account_password')
     scan.appuser = configuration.get(arguments.p, 'application_account')

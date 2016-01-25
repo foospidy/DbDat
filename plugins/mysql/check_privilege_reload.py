@@ -12,7 +12,7 @@ class check_privilege_reload():
     SQL      = "SELECT user, host FROM mysql.user WHERE Reload_priv='Y'"
 
     verbose = False
-    skip	= False
+    skip    = False
     result  = {}
 
     def do_check(self, *results):
@@ -21,15 +21,15 @@ class check_privilege_reload():
             self.result['level'] = 'GREEN'
 
             for rows in results:
-				for row in rows:
-					self.result['level'] = 'RED'
-					output += row[0] + '\t' + row[1] + '\n'
-            
+                for row in rows:
+                    self.result['level'] = 'RED'
+                    output += row[0] + '\t' + row[1] + '\n'
+
             if 'GREEN' == self.result['level']:
                 output = 'No users found with RELOAD privilege.'
-            
+
             self.result['output'] = output
-            
+
         return self.result
 
     def __init__(self, parent):
