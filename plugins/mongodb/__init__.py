@@ -13,4 +13,6 @@ from check_configuration_verify_auth import *
 from check_configuration_test_database import *
 from check_configuration_localhost_auth_bypass import *
 from check_configuration_jsonp import *
+from check_configuration_noauth import *
+from check_configuration_ssl_weak_cert_validation import *
 from check_user_weak_password import *

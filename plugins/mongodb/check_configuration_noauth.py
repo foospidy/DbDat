@@ -1,17 +1,14 @@
 import helper
 
-class check_configuration_auth():
+class check_configuration_noauth():
     """
-    check_configuration_auth:
-    Authentication should be enabled. Set auth to true to enable database
-    authentication for users connecting from remote hosts. This setting 
-    applies to MondoDB versions below 2.6.
+    check_configuration_noauth:
+    This will explicitly disable authentication. This setting applies to MondoDB versions below 2.6.
     """
     # References:
-    # https://docs.mongodb.org/v2.4/reference/configuration-options/
-    # http://blog.mongodirector.com/10-tips-to-improve-your-mongodb-security/
+    # https://docs.mongodb.org/v2.4/reference/configuration-options/#noauth
 
-    TITLE    = 'Enable Authentication'
+    TITLE    = 'No Authentication'
     CATEGORY = 'Configuration'
     TYPE     = 'configuration_file'
     SQL      = None # SQL not needed... because this is NoSQL.
@@ -27,18 +24,18 @@ class check_configuration_auth():
         version_number = self.db.server_info()['versionArray']
 
         if version_number[0] <= 2 and version_number[1] < 6:
-            option = 'auth'
+            option = 'noauth'
             value = helper.get_config_value(configuration_file, option)
 
             if None == value:
                 self.result['level']  = 'YELLOW'
-                self.result['output'] = 'MongoDB Authentication setting not found.'
+                self.result['output'] = '%s setting not found. The default value is "true", ensure the "auth" option is enabled.' % (option)
             elif 'true' == value.lower():
-                self.result['level']  = 'GREEN'
-                self.result['output'] = 'MongoDB Authentication is (%s) enabled.' % (value)
-            else:
                 self.result['level']  = 'RED'
-                self.result['output'] = 'MongoDB Authentication is (%s) not enabled.' % (value)
+                self.result['output'] = '%s is (%s) enabled.' % (option, value)
+            else:
+                self.result['level']  = 'GREEN'
+                self.result['output'] = '%s is (%s) not enabled.' % (option, value)
 
         else:
             self.result['level']  = 'GRAY'
