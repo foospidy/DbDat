@@ -17,4 +17,6 @@ from check_configuration_noauth import *
 from check_configuration_ssl_weak_cert_validation import *
 from check_configuration_ssl_fips_mode import *
 from check_configuration_ssl_allow_invalid_cert import *
+from check_configuration_systemlog_quiet import *
+from check_configuration_authorization import *
 from check_user_weak_password import *
