@@ -10,5 +10,9 @@ from check_configuration_cors import *
 from check_configuration_ssl import *
 from check_configuration_allow_persistent_cookies import *
 from check_configuration_password_pbkdf2_iterations import *
+from check_configuration_password_pbkdf2_min_iterations import *
+from check_configuration_password_pbkdf2_max_iterations import *
 from check_user_admins_weak_password import *
 from check_configuration_require_valid_user import *
+from check_configuration_session_timeout import *
+from check_configuration_users_db_public import *

@@ -22,7 +22,7 @@ class check_configuration_password_pbkdf2_iterations():
     # http://docs.couchdb.org/en/1.6.1/config/auth.html#couch_httpd_auth/min_iterations
     # http://docs.couchdb.org/en/1.6.1/config/auth.html#couch_httpd_auth/max_iterations
 
-    TITLE    = 'Password Hasing Iterations'
+    TITLE    = 'Password Hashing Iterations'
     CATEGORY = 'Configuration'
     TYPE     = 'nosql'
     SQL         = None # SQL not needed... because this is NoSQL.
@@ -49,32 +49,32 @@ class check_configuration_password_pbkdf2_iterations():
                 self.result['level']  = 'GREEN'
                 output               += 'iterations is (%s) good.\n' % (value)
             
-            # todo
-            """
             if LooseVersion(version_number) >= LooseVersion("1.6"):
-                min = self.db.config()['couch_httpd_auth']['min_iterations']
-                max = self.db.config()['couch_httpd_auth']['max_iterations']
-                
-                if int(min) < 5000:
-                    self.result['level']  = 'RED'
-                    output               += 'min_iterations is (%s) low.\n' % (min)
-                elif int(min) < 10000:
-                    self.result['level']  = 'YELLOW'
-                    output               += 'min_iterations is (%s) ok.\n' % (min)
-                else:
-                    self.result['level']  = 'GREEN'
-                    output               += 'min_iterations is (%s) good.\n' % (min)
+                if 'min_iterations' in self.db.config()['couch_httpd_auth']:
+                    min = self.db.config()['couch_httpd_auth']['min_iterations']
+                    
+                    if int(min) < 5000:
+                        self.result['level']  = 'RED'
+                        output               += 'min_iterations is (%s) low.\n' % (min)
+                    elif int(min) < 10000:
+                        self.result['level']  = 'YELLOW'
+                        output               += 'min_iterations is (%s) ok.\n' % (min)
+                    else:
+                        self.result['level']  = 'GREEN'
+                        output               += 'min_iterations is (%s) good.\n' % (min)
 
-                if int(max) < 10000:
-                    self.result['level']  = 'RED'
-                    output               += 'max_iterations is (%s) low.\n' % (max)
-                elif int(max) < 20000:
-                    self.result['level']  = 'YELLOW'
-                    output               += 'max_iterations is (%s) ok.\n' % (max)
-                else:
-                    self.result['level']  = 'GREEN'
-                    output               += 'max_iterations is (%s) good.\n' % (max)
-            """
+                if 'max_iterations' in self.db.config()['couch_httpd_auth']:
+                    max = self.db.config()['couch_httpd_auth']['max_iterations']
+                    
+                    if int(max) < 10000:
+                        self.result['level']  = 'RED'
+                        output               += 'max_iterations is (%s) low.\n' % (max)
+                    elif int(max) < 20000:
+                        self.result['level']  = 'YELLOW'
+                        output               += 'max_iterations is (%s) ok.\n' % (max)
+                    else:
+                        self.result['level']  = 'GREEN'
+                        output               += 'max_iterations is (%s) good.\n' % (max)
             
             self.result['output'] = output
         else:
