@@ -5,6 +5,7 @@ class check_configuration_admins():
     """
     # References:
     # http://guide.couchdb.org/draft/security.html
+    # http://docs.couchdb.org/en/1.6.1/config/auth.html#admins
 
     TITLE    = 'Admins'
     CATEGORY = 'Configuration'
