@@ -1,16 +1,15 @@
-class check_configuration_cors():
+class check_configuration_ssl_verify_cert():
     """
-    check_configuration_cors:
-    CORS allows constrained access to CouchDB DBs and instances when accessed
-    by a web browser.
+    check_configuration_ssl_verify_cert:
+    Set to true to validate peer certificates.
     """
     # References:
-    # https://wiki.apache.org/couchdb/CORS
+    # http://docs.couchdb.org/en/1.6.1/config/http.html#ssl/verify_ssl_certificates
 
-    TITLE    = 'Enable CORS'
+    TITLE    = 'Verify SSL Certificates'
     CATEGORY = 'Configuration'
     TYPE     = 'nosql'
-    SQL         = None # SQL not needed... because this is NoSQL.
+    SQL         = None  # SQL not needed... because this is NoSQL.
 
     verbose = False
     skip    = False
@@ -18,8 +17,8 @@ class check_configuration_cors():
     db      = None
 
     def do_check(self):
-        option = 'enable_cors'
-        value  = self.db.config()['httpd'][option]
+        option = 'verify_ssl_certificates'
+        value  = self.db.config()['ssl'][option]
 
         if 'false' == value:
             self.result['level']  = 'RED'

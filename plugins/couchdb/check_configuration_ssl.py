@@ -7,7 +7,7 @@ class check_configuration_ssl():
     CouchDB server over unsecure networks like the internet.
     """
     # References:
-    # https://wiki.apache.org/couchdb/CORS
+    # http://docs.couchdb.org/en/1.6.1/config/http.html#secure-socket-level-options
 
     TITLE    = 'Enable SSL'
     CATEGORY = 'Configuration'
