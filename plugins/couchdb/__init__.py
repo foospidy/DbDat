@@ -20,3 +20,4 @@ from check_user_admins_weak_password import *
 from check_configuration_require_valid_user import *
 from check_configuration_session_timeout import *
 from check_configuration_users_db_public import *
+from check_configuration_authentication_handlers import *
