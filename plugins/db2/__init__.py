@@ -11,6 +11,7 @@ from check_configuration_discover_inst import *
 from check_configuration_fed_noauth import *
 from check_configuration_health_mon import *
 from check_configuration_keepfenced import *
+from check_configuration_notifylevel import *
 from check_privilege_syscat_views import *
 from check_privilege_tablespaces import *
 from check_privilege_group_entitlements import *
