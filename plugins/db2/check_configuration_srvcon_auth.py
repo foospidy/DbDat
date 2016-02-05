@@ -5,7 +5,7 @@ class check_configuration_srvcon_auth():
     for incoming connections to the server. It is recommended that this parameter
     is not set to CLIENT.
     
-    If a value is not specified, DB2® uses the value of the authentication database
+    If a value is not specified, DB2 uses the value of the authentication database
     manager configuration parameter.
     """
     # References:
