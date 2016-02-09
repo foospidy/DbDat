@@ -1,14 +1,14 @@
-class check_configuration_keepfenced():
+class check_configuration_mirrorlogpath():
     """
-    check_configuration_keepfenced:
-    The keepfenced parameter indicates whether or not external user-defined functions or
-    stored procedures will reuse a DB2 process after each subsequent call. It is recommended
-    that this parameter be set to NO.
+    check_configuration_mirrorlogpath:
+    The mirrorlogpath parameter specifies a location to store the mirror copy
+    of the logs. It is recommended that this parameter be set to a secure
+    location.
     """
     # References:
     # https://benchmarks.cisecurity.org/downloads/show-single/?file=db2.120
 
-    TITLE    = 'Fenced Model Processes'
+    TITLE    = 'Log Mirror Location'
     CATEGORY = 'Configuration'
     TYPE     = 'clp'
     SQL         = ''
@@ -19,16 +19,23 @@ class check_configuration_keepfenced():
     result  = {}
 
     def do_check(self, *results):
+        match = False
+        
         for line in results[0].split('\n'):
-            if '(KEEPFENCED)' in line:
+            if '(MIRRORLOGPATH)' in line:
                 value                 = line.split('=')[1].strip()
                 self.result['output'] = line
+                match                 = True
 
-                if 'NO' == value:
+                if '' != value.strip():
                     self.result['level'] = 'GREEN'
                 else:
                     self.result['level'] = 'RED'
 
+        if not match:
+            self.result['level']  = 'RED'
+            self.result['output'] = 'Setting not found, the mirror log path should not be empty.'
+        
         return self.result
 
     def __init__(self, parent):

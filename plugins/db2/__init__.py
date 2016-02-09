@@ -17,6 +17,7 @@ from check_configuration_archretrydelay import *
 from check_configuration_numarchretry import *
 from check_configuration_num_db_backups import *
 from check_configuration_autorestart import *
+from check_configuration_mirrorlogpath import *
 from check_privilege_syscat_views import *
 from check_privilege_tablespaces import *
 from check_privilege_group_entitlements import *
