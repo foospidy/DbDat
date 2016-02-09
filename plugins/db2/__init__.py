@@ -26,6 +26,7 @@ from check_configuration_dasadm_group import *
 from check_configuration_exec_exp_task import *
 from check_configuration_sched_enable import *
 from check_configuration_max_connection_limits import *
+from check_configuration_auto_maint import *
 from check_privilege_syscat_views import *
 from check_privilege_tablespaces import *
 from check_privilege_group_entitlements import *
