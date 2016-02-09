@@ -1,13 +1,13 @@
-class check_configuration_discover_inst():
+class check_configuration_discover_db():
     """
-    check_configuration_discover_inst:
-    The discover_inst parameter specifies whether the instance can be discovered
-    in the network. It is recommended that instances not be discoverable.
+    check_configuration_discover_db:
+    The discover_db parameter specifies if the database will respond to a discovery
+    request from a client. It is recommended that this parameter be set to DISABLE.
     """
     # References:
     # https://benchmarks.cisecurity.org/downloads/show-single/?file=db2.120
 
-    TITLE    = 'Discover Instance'
+    TITLE    = 'Database Discovery'
     CATEGORY = 'Configuration'
     TYPE     = 'clp'
     SQL         = ''
@@ -18,16 +18,23 @@ class check_configuration_discover_inst():
     result  = {}
 
     def do_check(self, *results):
+        match = False
+        
         for line in results[0].split('\n'):
-            if '(DISCOVER_INST)' in line:
+            if '(DISCOVER_DB)' in line:
                 value                 = line.split('=')[1].strip()
                 self.result['output'] = line
+                match                 = True
 
                 if 'DISABLE' == value:
                     self.result['level'] = 'GREEN'
                 else:
                     self.result['level'] = 'RED'
-
+        
+        if not match:
+            self.result['level']  = 'RED'
+            self.result['output'] = 'Setting not found, the default is ENABLED.'
+        
         return self.result
 
     def __init__(self, parent):

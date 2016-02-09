@@ -1,14 +1,14 @@
-class check_configuration_mirrorlogpath():
+class check_configuration_failarchpath():
     """
-    check_configuration_mirrorlogpath:
-    The mirrorlogpath parameter specifies a location to store the mirror copy
-    of the logs. It is recommended that this parameter be set to a secure
-    location.
+    check_configuration_failarchpath:
+    The failarchpath parameter specifies the location for the archive logs if
+    the primary or secondary archive destination is not available. It is 
+    recommended that this parameter be set to point to a secure location.
     """
     # References:
     # https://benchmarks.cisecurity.org/downloads/show-single/?file=db2.120
 
-    TITLE    = 'Log Mirror Location'
+    TITLE    = 'Tertiary Archive Log Location'
     CATEGORY = 'Configuration'
     TYPE     = 'clp'
     SQL         = ''
@@ -22,7 +22,7 @@ class check_configuration_mirrorlogpath():
         match = False
         
         for line in results[0].split('\n'):
-            if '(MIRRORLOGPATH)' in line:
+            if '(FAILARCHPATH)' in line:
                 value                 = line.split('=')[1].strip()
                 self.result['output'] = line
                 match                 = True
@@ -34,7 +34,7 @@ class check_configuration_mirrorlogpath():
 
         if not match:
             self.result['level']  = 'YELLOW'
-            self.result['output'] = 'Setting not found, the mirror log path should not be empty.'
+            self.result['output'] = 'Setting not found, the default value is null.'
         
         return self.result
 

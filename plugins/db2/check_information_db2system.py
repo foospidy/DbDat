@@ -1,15 +1,16 @@
-class check_configuration_mirrorlogpath():
+class check_information_db2system():
     """
-    check_configuration_mirrorlogpath:
-    The mirrorlogpath parameter specifies a location to store the mirror copy
-    of the logs. It is recommended that this parameter be set to a secure
-    location.
+    check_information_db2system:
+    The db2system parameter specifies the DB2 system name that is used by users
+    and database administrators to identify the DB2 server. It is recommended 
+    that this parameter be set to a value that does not represent sensitive 
+    aspects of the system.
     """
     # References:
     # https://benchmarks.cisecurity.org/downloads/show-single/?file=db2.120
 
-    TITLE    = 'Log Mirror Location'
-    CATEGORY = 'Configuration'
+    TITLE    = 'System Name'
+    CATEGORY = 'Information'
     TYPE     = 'clp'
     SQL         = ''
     CMD      = ['db2', '-tn', 'get', 'database', 'manager', 'configuration']
@@ -22,19 +23,15 @@ class check_configuration_mirrorlogpath():
         match = False
         
         for line in results[0].split('\n'):
-            if '(MIRRORLOGPATH)' in line:
+            if '(DB2SYSTEM)' in line:
+                match                 = True
                 value                 = line.split('=')[1].strip()
                 self.result['output'] = line
-                match                 = True
-
-                if '' != value.strip():
-                    self.result['level'] = 'GREEN'
-                else:
-                    self.result['level'] = 'YELLOW'
+                self.result['level']  = 'GREEN'
 
         if not match:
             self.result['level']  = 'YELLOW'
-            self.result['output'] = 'Setting not found, the mirror log path should not be empty.'
+            self.result['output'] = 'Setting not found.'
         
         return self.result
 

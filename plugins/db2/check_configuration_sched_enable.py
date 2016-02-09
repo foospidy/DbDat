@@ -1,14 +1,15 @@
-class check_configuration_mirrorlogpath():
+class check_configuration_sched_enable():
     """
-    check_configuration_mirrorlogpath:
-    The mirrorlogpath parameter specifies a location to store the mirror copy
-    of the logs. It is recommended that this parameter be set to a secure
-    location.
+    check_configuration_sched_enable:
+    The sched_enable parameter specifies whether the DB2 Task Center utility
+    is allowed to schedule and execute tasks at the administration server. It
+    is recommended that this parameter be set to OFF when the Task Scheduler 
+    is not in use.
     """
     # References:
     # https://benchmarks.cisecurity.org/downloads/show-single/?file=db2.120
 
-    TITLE    = 'Log Mirror Location'
+    TITLE    = 'Task Scheduler'
     CATEGORY = 'Configuration'
     TYPE     = 'clp'
     SQL         = ''
@@ -22,19 +23,19 @@ class check_configuration_mirrorlogpath():
         match = False
         
         for line in results[0].split('\n'):
-            if '(MIRRORLOGPATH)' in line:
+            if '(SCHED_ENABLE)' in line:
+                match                 = True
                 value                 = line.split('=')[1].strip()
                 self.result['output'] = line
-                match                 = True
 
-                if '' != value.strip():
+                if 'OFF' == value:
                     self.result['level'] = 'GREEN'
                 else:
                     self.result['level'] = 'YELLOW'
 
         if not match:
-            self.result['level']  = 'YELLOW'
-            self.result['output'] = 'Setting not found, the mirror log path should not be empty.'
+            self.result['level']  = 'GREEN'
+            self.result['output'] = 'Setting not found, default value is OFF.'
         
         return self.result
 
