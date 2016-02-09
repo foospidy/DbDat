@@ -27,7 +27,7 @@ class check_configuration_logarchmeth():
         for line in results[0].split('\n'):
             if '(LOGARCHMETH1)' in line:
                 value                 = line.split('=')[1].strip()
-                self.result['output'] = line
+                output               += line
                 match                 = True
 
                 if '' != value.strip():
