@@ -1,16 +1,16 @@
-class check_configuration_remote_os_roles():
+class check_configuration_os_roles():
     """
-    check_configuration_remote_os_roles:
-    The remote_os_roles setting permits remote users' OS roles to be applied to database
+    check_configuration_os_roles:
+    The	os_roles setting permits externally	created	groups to be applied to	database
     management.
     """
     # References:
     # https://benchmarks.cisecurity.org/downloads/show-single/?file=oracle11gR2.210
 
-    TITLE    = 'Remote OS Roles'
+    TITLE    = 'OS Roles'
     CATEGORY = 'Configuration'
     TYPE     = 'sql'
-    SQL         = "SELECT UPPER(value) FROM v$parameter WHERE UPPER(name)='REMOTE_OS_ROLES'"
+    SQL         = "SELECT UPPER(value) FROM v$parameter WHERE UPPER(name)='OS_ROLES'"
 
     verbose = False
     skip    = False
@@ -22,10 +22,10 @@ class check_configuration_remote_os_roles():
             for row in rows:
                 if 'TRUE' == row[0]:
                     self.result['level']  = 'RED'
-                    self.result['output'] = 'Remote OS Roles is (%s) enabled.' % (row[0])
+                    self.result['output'] = 'OS Roles is (%s) enabled.' % (row[0])
                 else:
                     self.result['level']  = 'GREEN'
-                    self.result['output'] = 'Remote OS Roles is (%s) not enabled.' % (row[0])
+                    self.result['output'] = 'OS Roles is (%s) not enabled.' % (row[0])
 
         return self.result
 

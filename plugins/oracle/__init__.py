@@ -8,6 +8,7 @@ from check_configuration_admin_restrictions_listener import *
 from check_configuration_global_names import *
 from check_configuration_remote_listener import *
 from check_configuration_remote_login_passwordfile import *
+from check_configuration_os_roles import *
 from check_configuration_remote_os_roles import *
 from check_configuration_util_file_dir import *
 from check_configuration_sec_case_sensitive_logon import *
