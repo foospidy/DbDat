@@ -18,6 +18,8 @@ class check_configuration_audit_buffer():
     result  = {}
 
     def do_check(self, *results):
+        match = False
+        
         for line in results[0].split('\n'):
             if '(AUDIT_BUF_SZ)' in line:
                 value                 = line.split('=')[1].strip()
@@ -30,6 +32,10 @@ class check_configuration_audit_buffer():
                 else:
                     self.result['level'] = 'RED'
 
+        if not match:
+            self.result['level']  = 'RED'
+            self.result['output'] = 'Setting not found, default value is 0.'
+        
         return self.result
 
     def __init__(self, parent):
