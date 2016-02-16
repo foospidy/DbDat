@@ -19,16 +19,23 @@ class check_configuration_fed_noauth():
     result  = {}
 
     def do_check(self, *results):
+        match = False
+        
         for line in results[0].split('\n'):
             if '(FED_NOAUTH)' in line:
                 value                 = line.split('=')[1].strip()
                 self.result['output'] = line
+                match                 = True
 
                 if 'NO' == value:
                     self.result['level'] = 'GREEN'
                 else:
                     self.result['level'] = 'RED'
 
+        if not match:
+            self.result['level']  = 'GREEN'
+            self.result['output'] = 'Setting not found, default value is NO.'
+            
         return self.result
 
     def __init__(self, parent):
