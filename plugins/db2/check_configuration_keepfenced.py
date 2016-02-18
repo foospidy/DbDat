@@ -19,16 +19,23 @@ class check_configuration_keepfenced():
     result  = {}
 
     def do_check(self, *results):
+        match = False
+        
         for line in results[0].split('\n'):
             if '(KEEPFENCED)' in line:
                 value                 = line.split('=')[1].strip()
                 self.result['output'] = line
+                match                 = True
 
                 if 'NO' == value:
                     self.result['level'] = 'GREEN'
                 else:
                     self.result['level'] = 'RED'
 
+        if not match:
+            self.result['level']  = 'RED'
+            self.result['output'] = 'Setting not found, default value is YES.'
+            
         return self.result
 
     def __init__(self, parent):
