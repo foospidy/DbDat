@@ -22,16 +22,23 @@ class check_configuration_srvcon_auth():
     result  = {}
 
     def do_check(self, *results):
+        match = False
+        
         for line in results[0].split('\n'):
             if '(SRVCON_AUTH)' in line:
                 value                 = line.split('=')[1].strip()
                 self.result['output'] = line
+                match                 = True
 
                 if value == 'CLIENT':
                     self.result['level'] = 'RED'
                 else:
                     self.result['level'] = 'GREEN'
 
+        if not match:
+            self.result['level']  = 'GREEN'
+            self.result['output'] = 'Setting not found, default is NOT_SPECIFIED.\n\nIf a value is not specified, DB2 uses the value of the authentication database manager configuration parameter.'
+            
         return self.result
 
     def __init__(self, parent):
