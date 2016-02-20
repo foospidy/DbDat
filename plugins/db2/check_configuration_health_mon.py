@@ -25,6 +25,7 @@ class check_configuration_health_mon():
             if '(HEALTH_MON)' in line:
                 value                 = line.split('=')[1].strip()
                 self.result['output'] = line
+                match                 = True
 
                 if 'ON' == value:
                     self.result['level'] = 'GREEN'
