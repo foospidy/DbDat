@@ -5,7 +5,7 @@ class check_configuration_server_audit_specifications():
     is enabled.
     """
     # References:
-    # https://benchmarks.cisecurity.org/downloads/show-single/index.cfm?file=sql2012DB.120
+    # https://blog.netspi.com/sql-server-persistence-part-1-startup-stored-procedures/
 
     TITLE    = 'Server Audit Specifications'
     CATEGORY = 'Configuration'
