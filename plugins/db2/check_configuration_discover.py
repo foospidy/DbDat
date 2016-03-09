@@ -19,16 +19,23 @@ class check_configuration_discover():
     result  = {}
 
     def do_check(self, *results):
+        match = False
+        
         for line in results[0].split('\n'):
             if '(DISCOVER)' in line:
                 value                 = line.split('=')[1].strip()
                 self.result['output'] = line
-
+                match                 = True
+                
                 if 'KNOWN' == value:
                     self.result['level'] = 'GREEN'
                 else:
                     self.result['level'] = 'RED'
 
+        if not match:
+            self.result['level'] = 'RED'
+            self.result['output'] = 'Setting not found, default value is SEARCH'
+        
         return self.result
 
     def __init__(self, parent):

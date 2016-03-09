@@ -19,16 +19,23 @@ class check_configuration_health_mon():
     result  = {}
 
     def do_check(self, *results):
+        match = False
+        
         for line in results[0].split('\n'):
             if '(HEALTH_MON)' in line:
                 value                 = line.split('=')[1].strip()
                 self.result['output'] = line
+                match                 = True
 
                 if 'ON' == value:
                     self.result['level'] = 'GREEN'
                 else:
                     self.result['level'] = 'RED'
 
+        if not match:
+            self.result['level']  = 'GREEN'
+            self.result['output'] = 'Setting not found, default value is ON.'
+        
         return self.result
 
     def __init__(self, parent):

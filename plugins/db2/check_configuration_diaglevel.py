@@ -18,10 +18,13 @@ class check_configuration_diaglevel():
     result  = {}
 
     def do_check(self, *results):
+        match = False
+        
         for line in results[0].split('\n'):
             if '(DIAGLEVEL)' in line:
                 value                 = line.split('=')[1].strip()
                 self.result['output'] = line
+                match = True
 
                 if int(value) >= 3:
                     self.result['level'] = 'GREEN'
@@ -30,6 +33,10 @@ class check_configuration_diaglevel():
                 else:
                     self.result['level'] = 'RED'
 
+        if not match:
+            self.result['level']  = 'GREEN'
+            self.result['output'] = 'Setting not found, default value is 3.'
+        
         return self.result
 
     def __init__(self, parent):
