@@ -43,6 +43,7 @@ from check_privilege_user_history import *
 from check_privilege_link import *
 from check_privilege_user import *
 from check_privilege_dba_ import *
+from check_privilege_sys_inherit_privileges import *
 from check_privilege_sys_scheduler_credential import *
 from check_privilege_sys_user_mig import *
 from check_privilege_any import *
