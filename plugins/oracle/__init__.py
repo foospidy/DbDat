@@ -58,6 +58,7 @@ from check_privilege_java_allpermission import *
 from check_privilege_java_filepermission_write import *
 from check_privilege_java_runtimepermission_loadlibrary import *
 from check_privilege_java_javasyspriv import *
+from check_privilege_select_dynamic_performance_views import *
 from check_user_failed_logins import *
 from check_user_default_credentials import *
 from check_user_weak_password import *
