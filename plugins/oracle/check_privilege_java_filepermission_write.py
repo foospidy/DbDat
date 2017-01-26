@@ -9,7 +9,7 @@ class check_privilege_java_filepermission_write():
     # http://www.davidlitchfield.com/AddendumtotheOracle12cCISGuidelines.pdf
     # https://docs.oracle.com/database/121/JJDEV/chten.htm#CBBIHIGI
 
-    TITLE    = 'java.io.FilePermission.writes'
+    TITLE    = 'java.io.FilePermission.write'
     CATEGORY = 'Privilege'
     TYPE     = 'sql'
     SQL      = "SELECT GRANTEE FROM DBA_JAVA_POLICY WHERE TYPE_NAME = 'java.io.FilePermission' AND ACTION LIKE '%write%' AND NAME='<<ALL FILES>>' AND KIND = 'GRANT' AND ENABLED='ENABLED' AND GRANTEE != 'JAVASYSPRIV'"
