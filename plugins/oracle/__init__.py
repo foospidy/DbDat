@@ -51,7 +51,8 @@ from check_privilege_dba_sys_privs_with_admin_option import *
 from check_privilege_proxy_users_connect import *
 from check_privilege_execute_any_procedure_outln import *
 from check_privilege_execute_any_procedure_dbsnmp import *
-from check_privilege_index_on_sys_system improt *
+from check_privilege_index_on_sys_system import *
+from check_privilege_os_user_java_runtime_sys import *
 from check_user_failed_logins import *
 from check_user_default_credentials import *
 from check_user_weak_password import *
