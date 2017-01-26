@@ -1,6 +1,6 @@
-class check_privilege_java_allpermission_execute():
+class check_privilege_java_allpermission():
     """
-    check_privilege_java_allpermission_execute:
+    check_privilege_java_allpermission:
     Ensure java.security.AllPermission is revoked from unauthorized 'GRANTEE'.
     The java.security.AllPermission grants all permissions and should not be used.
     """
