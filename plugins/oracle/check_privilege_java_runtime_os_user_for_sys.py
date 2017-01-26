@@ -1,6 +1,6 @@
-class check_privilege_os_user_java_runtime_sys():
+class check_privilege_java_runtime_os_user_for_sys():
     """
-    check_privilege_os_user_java_runtime_sys:
+    check_privilege_java_runtime_os_user_for_sys:
     By default, if an OS command is executed from the Java Runtime it executes with the privileges 
     of the process owner, typically oracle on Linux or LocalSystem on Windows. It is possible to 
     set a low privileged OS user instead.
