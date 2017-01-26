@@ -28,7 +28,7 @@ class check_privilege_java_filepermission_execute():
                 output += 'User with execute action for execute action for the java.io.FilePermission: ' + row[0] + '\n'
 
         if 'GREEN' == self.result['level']:
-            output = 'No GRANTEE has the execute action for the java.io.FilePermission.'
+            output = 'No user has the execute action for the java.io.FilePermission.'
 
         self.result['output'] = output
 
