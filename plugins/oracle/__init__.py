@@ -53,6 +53,7 @@ from check_privilege_java_javasyspriv import *
 from check_privilege_link import *
 from check_privilege_proxy_users_connect import *
 from check_privilege_public_dangerous_packages import *
+from check_privilege_public_membership import *
 from check_privilege_select_any_dictionary import *
 from check_privilege_select_any_table import *
 from check_privilege_select_catalog_role import *
