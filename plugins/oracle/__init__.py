@@ -36,6 +36,7 @@ from check_privilege_delete_catalog_role import *
 from check_privilege_execute_any_procedure_outln import *
 from check_privilege_execute_any_procedure_dbsnmp import *
 from check_privilege_execute_catalog_role import *
+from check_privilege_execute_public_dbms_aw import *
 from check_privilege_execute_public_dbms_xmlsave import *
 from check_privilege_execute_public_dbms_xmlstore import *
 from check_privilege_exempt_access_policy import *
