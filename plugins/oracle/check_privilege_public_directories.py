@@ -1,17 +1,17 @@
-class check_privilege_public_system():
+class check_privilege_public_directories():
     """
-    check_privilege_public_system
-    Ensure 'PUBLIC' has not been granted a system privilege. 
-    By default, PUBLIC is not assigned any system privileges. 
-    This check is to ensure this default is still in place.
+    check_privilege_public_directories
+    Ensure 'PUBLIC' does not have write access to any directories. 
+    An Oracle directory object gives a user access to the server's 
+    file system when using UTL_FILE or BFILENAME.
     """
     # References:
     # http://www.davidlitchfield.com/AddendumtotheOracle12cCISGuidelines.pdf
     
-    TITLE    = 'PUBLIC DBA_SYS_PRIVS'
+    TITLE    = 'PUBLIC DBA_TAB_PRIVS'
     CATEGORY = 'Privilege'
     TYPE     = 'sql'
-    SQL      = "SELECT PRIVILEGE FROM DBA_SYS_PRIVS WHERE GRANTEE = 'PUBLIC'"
+    SQL      = "SELECT TABLE_NAME FROM DBA_TAB_PRIVS WHERE GRANTEE = 'PUBLIC' AND PRIVILEGE = 'WRITE'"
 
     verbose = False
     skip    = False
@@ -27,7 +27,7 @@ class check_privilege_public_system():
                 output += 'PUBLIC is granted ' + row[0] + '\n'
 
         if 'GREEN' == self.result['level']:
-            output = 'PUBLIC not granted any DBA_SYS_PRIVS.'
+            output = 'PUBLIC not granted any DBA_TAB_PRIVS.'
 
         self.result['output'] = output
 
