@@ -2,9 +2,9 @@ class check_privilege_revoke_all_rls():
     """
     check_privilege_revoke_all_rls
     Ensure 'ALL' Is Revoked from Unauthorized 'GRANTEE' on FGA$. 
-    The FGA$ table contains columns that contains the schema and name of a procedure to 
-    execute when a table is accessed and that has a Fine Grained Auditing policy defined 
-    for it.
+    The RLS$ table contains columns that contains the schema and name of a 
+    procedure to execute when a table is accessed and that has a Row Level 
+    Security policy defined on it.
     """
     # References:
     # http://www.davidlitchfield.com/AddendumtotheOracle12cCISGuidelines.pdf
