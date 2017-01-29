@@ -58,6 +58,7 @@ from check_privilege_public_links import *
 from check_privilege_public_membership import *
 from check_privilege_public_system import *
 from check_privilege_revoke_all_fga import *
+from check_privilege_revoke_all_rls import *
 from check_privilege_select_any_dictionary import *
 from check_privilege_select_any_table import *
 from check_privilege_select_catalog_role import *
