@@ -6,8 +6,8 @@ class check_privilege_execute_dbms_pdb_exec_sql():
     and executes it.
     """
     # References:
-    # https://benchmarks.cisecurity.org/downloads/show-single/?file=oracle11gR2.210
-
+    # http://www.davidlitchfield.com/AddendumtotheOracle12cCISGuidelines.pdf
+    
     TITLE    = 'Execute on DBMS_PDB_EXEC_SQL'
     CATEGORY = 'Privilege'
     TYPE     = 'sql'
