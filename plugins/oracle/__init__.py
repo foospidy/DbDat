@@ -60,6 +60,7 @@ from check_privilege_public_system import *
 from check_privilege_revoke_all_col import *
 from check_privilege_revoke_all_context import *
 from check_privilege_revoke_all_fga import *
+from check_privilege_revoke_all_obj import *
 from check_privilege_revoke_all_objauth import *
 from check_privilege_revoke_all_radm import *
 from check_privilege_revoke_all_rls import *
