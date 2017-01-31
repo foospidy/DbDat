@@ -18,6 +18,7 @@ from check_configuration_sec_protocol_error_further_action import *
 from check_configuration_sec_protocol_error_trace_action import *
 from check_configuration_sec_return_server_release_banner import *
 from check_configuration_sql92_security import *
+from check_configuration_sys_logon_delay import *
 from check_configuration_trace_files_public import *
 from check_configuration_resource_limit import *
 from check_configuration_audit_option import *
