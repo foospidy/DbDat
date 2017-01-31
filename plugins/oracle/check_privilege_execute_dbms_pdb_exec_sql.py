@@ -1,16 +1,17 @@
 
-class check_privilege_execute_any_procedure_dbsnmp():
+class check_privilege_execute_dbms_pdb_exec_sql():
     """
-    check_privilege_execute_any_procedure_dbsnmp:
-    Remove unneeded privileges from DBSNMP.
+    check_privilege_execute_dbms_pdb_exec_sql.
+    The DBMS_PDB_EXEC_SQL procedure takes an SQL query as a parameter 
+    and executes it.
     """
     # References:
     # https://benchmarks.cisecurity.org/downloads/show-single/?file=oracle11gR2.210
 
-    TITLE    = 'Execute Any Procedure DBSNMP'
+    TITLE    = 'Execute on DBMS_PDB_EXEC_SQL'
     CATEGORY = 'Privilege'
     TYPE     = 'sql'
-    SQL      = "SELECT grantee, privilege FROM dba_sys_privs WHERE privilege='EXECUTE ANY PROCEDURE' AND grantee='DBSNMP'"
+    SQL      = "SELECT GRANTEE FROM DBA_TAB_PRIVS WHERE TABLE_NAME = 'DBMS_PDB_EXEC_SQL' AND PRIVILEGE = 'EXECUTE'"
 
     verbose = False
     skip    = False
@@ -22,11 +23,11 @@ class check_privilege_execute_any_procedure_dbsnmp():
 
         for rows in results:
             for row in rows:
-                self.result['level'] = 'YELLOW'
-                output += 'Execute Any Procedure granted to %s\n' % (row[0])
+                self.result['level'] = 'RED'
+                output += 'Execute on DBMS_PDB_EXEC_SQL granted to %s\n' % (row[0])
 
         if 'GREEN' == self.result['level']:
-            output = 'Execute Any Procedure not granted to user DBSNMP'
+            output = 'Execute on DBMS_PDB_EXEC_SQL not granted to user any user.'
 
         self.result['output'] = output
 

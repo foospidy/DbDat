@@ -35,6 +35,7 @@ from check_privilege_dba_sys_privs_with_admin_option import *
 from check_privilege_delete_catalog_role import *
 from check_privilege_execute_any_procedure_outln import *
 from check_privilege_execute_any_procedure_dbsnmp import *
+from check_privilege_execute_dbms_pdb_exec_sql import *
 from check_privilege_execute_catalog_role import *
 from check_privilege_execute_public_dbms_aw import *
 from check_privilege_execute_public_dbms_xmlsave import *
@@ -60,6 +61,8 @@ from check_privilege_public_system import *
 from check_privilege_revoke_all_col import *
 from check_privilege_revoke_all_context import *
 from check_privilege_revoke_all_fga import *
+from check_privilege_revoke_all_fga_log import *
+from check_privilege_revoke_all_javapolicy import *
 from check_privilege_revoke_all_obj import *
 from check_privilege_revoke_all_objauth import *
 from check_privilege_revoke_all_radm import *
