@@ -62,6 +62,7 @@ from check_privilege_revoke_all_context import *
 from check_privilege_revoke_all_fga import *
 from check_privilege_revoke_all_radm import *
 from check_privilege_revoke_all_rls import *
+from check_privilege_revoke_all_source import *
 from check_privilege_revoke_all_trigger import *
 from check_privilege_select_any_dictionary import *
 from check_privilege_select_any_table import *
