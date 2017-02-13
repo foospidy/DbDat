@@ -214,3 +214,4 @@ class check_configuration_evaluate_something():
 - SQLMap - https://github.com/sqlmapproject
 - NoSQLMap - https://github.com/tcstool/NoSQLMap
 - Audit CouchDB - https://github.com/iriscouch/audit_couchdb
+- mongoaudit - https://github.com/stampery/mongoaudit
