@@ -34,44 +34,44 @@ The report organizes results by levels, which are RED, YELLOW, ORANGE, GRAY, and
 
 So far DbDat has been tested on Debian Linux, CentOS Linux, and Windows 7 with Python 2.7
 
-#####MySQL support
+##### MySQL support
 
 Run: `pip install MySQL-python`
 
 Or on Debian, run: `apt-get install python-mysqldb`
 
-#####PostgreSQL support
+##### PostgreSQL support
 
 Run: `pip install psycopg2`
 
-#####Oracle support
+##### Oracle support
 
 Run: `pip install cx_Oracle`
 - https://cx-oracle.readthedocs.org/en/latest/index.html
 
 _Note: you will need to install Oracle client libraries for this to work._
 
-#####MS SQL support
+##### MS SQL support
 
 Run: `pip install pymssql`
 - https://pymssql.readthedocs.org/en/latest/index.html
 
-#####Sybase support
+##### Sybase support
 - todo
 
-#####DB2 support
+##### DB2 support
 
 Run: `pip install ibm_db` or `easy_install ibm_db`
 
 _Note: you will need to ensure the user running DbDat has access to execute DB2 CLP commands (e.g. db2 and db2level)._
 
-#####MongoDB support
+##### MongoDB support
 
 Run: `pip install pymongo`
 
 To support MongoDB YAML config files run: `pip install pyyaml`
 
-#####CouchDB support
+##### CouchDB support
 
 Run: `pip install couchdb`
 
