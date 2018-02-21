@@ -145,7 +145,7 @@ Every check must have a category specified using the `CATEGORY` variable. The ca
 #### Outline of Check File
 This is a rough example demontrate the pattern a check file should follow:
 
-```
+```python
 # (OPTIONAL): Add import statements, include any necessary modules to support this check
 import helper
 
@@ -211,7 +211,8 @@ class check_configuration_evaluate_something():
 
 ## Other Database Security Tools
 
-- SQLMap - https://github.com/sqlmapproject
-- NoSQLMap - https://github.com/tcstool/NoSQLMap
-- Audit CouchDB - https://github.com/iriscouch/audit_couchdb
-- mongoaudit - https://github.com/stampery/mongoaudit
+- [SQLMap](https://github.com/sqlmapproject)
+- [NoSQLMap](https://github.com/tcstool/NoSQLMap)
+- [Audit CouchDB](https://github.com/iriscouch/audit_couchdb)
+- [MongoAudit](https://github.com/stampery/mongoaudit)
+- [MSDAT](https://github.com/quentinhardy/msdat)
