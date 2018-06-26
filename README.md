@@ -216,3 +216,4 @@ class check_configuration_evaluate_something():
 - [Audit CouchDB](https://github.com/iriscouch/audit_couchdb)
 - [MongoAudit](https://github.com/stampery/mongoaudit)
 - [MSDAT](https://github.com/quentinhardy/msdat)
+- [ODAT](https://github.com/quentinhardy/odat)
